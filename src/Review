@@ -14,21 +14,21 @@ public class Review {
 	 * @return
 	 */
 	public int getStars() {
-
+  return stars;
 	}
 	/**
 	 * gets the reviews for each show
 	 * @return
 	 */
 	public String getReviews() {
-
+  return reviews;
 	}
 	/**
 	 * sets the star ratings for each show
 	 * @return
 	 */
 	public int setStars() {
-
+  return stars;
 	}
 	/**
 	 * sorts reviews
@@ -41,7 +41,7 @@ public class Review {
 	 * @return
 	 */
 	public String writeReview() {
-
+  return reviews;
 	}
 	/**
 	 * deletes a listing
@@ -54,6 +54,6 @@ public class Review {
 	 * @return
 	 */
 	public String editReview() {
-
+  return reviews;
 	}
 }
