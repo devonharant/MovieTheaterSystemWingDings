@@ -36,7 +36,7 @@ public class ConcertHall extends Venue{
 	}
 	
 	/*public Review getReview() {
-		
+		return null;
 	}*/
 	
 	/**
@@ -44,7 +44,7 @@ public class ConcertHall extends Venue{
 	 * @param name
 	 */
 	public void setName(String name) {
-		
+		this.name = name;
 	}
 	
 	/**
@@ -52,11 +52,12 @@ public class ConcertHall extends Venue{
 	 * @param location
 	 */
 	public void setLocation(String location) {
-		
+		this.location = location;
 	}
 	
 	/**
 	 * printShows method that prints the shows that are showing at this venue
+	 * using the show iterator
 	 * @return shows currently viewing
 	 */
 	public void printShows() {
@@ -65,6 +66,7 @@ public class ConcertHall extends Venue{
 	
 	/**
 	 * printFood method that prints the food currently available at this venue
+	 * using the food iterator
 	 * @return food at venue
 	 */
 	public void printFood() {
