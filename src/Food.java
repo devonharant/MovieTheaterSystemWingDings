@@ -18,12 +18,16 @@ public class Food {
 		return cost;
 	}
 	public void setName(String name) {
-
+		this.name = name;
 	}
 	public void setCost(double cost) {
-
+		this.cost = cost;
 	}
 	public void setQuantity(int quantity) {
-
+		this.quantity = quantity;
+	}
+	
+	public String toString() {
+		return "Name: " + name + "\nQuantity: " + quantity + "\nCost: " + cost;
 	}
 }

@@ -26,4 +26,8 @@ public abstract class Venue{
 	public abstract void setLocation(String location);
 	public abstract void printShows();
 	public abstract void printFood();
+	
+	public String toString() {
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location;
+	}
 }

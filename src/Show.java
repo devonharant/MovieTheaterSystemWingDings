@@ -58,5 +58,7 @@ public class Show {
 		this.review = review;
 	}
 	
-	
+	public String toString() {
+		return "Name: " + name + "\nDescription: " + description + "\nTime: " + time + "\nReview" + review;
+	}
 }

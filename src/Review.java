@@ -1,14 +1,13 @@
 
 /**
- *
- * @author Wingdings
  * This class sets up the base for all show reviews
- *
+ * @author Wingdings
  */
 public class Review {
 
 	protected int stars;
 	protected String review;
+	
 	/**
 	 * gets the star ratings for each show
 	 * @return
@@ -16,20 +15,23 @@ public class Review {
 	public int getStars() {
   return stars;
 	}
+	
 	/**
 	 * gets the reviews for each show
 	 * @return
 	 */
 	public String getReviews() {
-  return reviews;
+		return null;
 	}
+	
 	/**
 	 * sets the star ratings for each show
 	 * @return
 	 */
 	public int setStars() {
-  return stars;
+		return stars;
 	}
+	
 	/**
 	 * sorts reviews
 	 */
@@ -41,7 +43,7 @@ public class Review {
 	 * @return
 	 */
 	public String writeReview() {
-  return reviews;
+		return null;
 	}
 	/**
 	 * deletes a listing
@@ -54,6 +56,10 @@ public class Review {
 	 * @return
 	 */
 	public String editReview() {
-  return reviews;
+		return null;
+	}
+	
+	public String toString() {
+		return "Stars: " + stars + "\nReview: " + review; 
 	}
 }

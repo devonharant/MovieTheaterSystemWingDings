@@ -11,7 +11,7 @@ public class Ticket {
 	protected Food[] food;
 	
 	public Ticket() {
-		
+		this.time = show.getTime();
 	}
 	
 	public Show getShow() {
@@ -44,5 +44,9 @@ public class Ticket {
 	
 	public void setFood(Food[] food) {
 		this.food = food;
+	}
+	
+	public String toString() {
+		return "Show: " + show + "\nTime: " + time + "\nPrice: " + price + "\nFood: " + food;
 	}
 }
