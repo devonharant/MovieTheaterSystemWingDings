@@ -1,5 +1,7 @@
 /**
- * 
+ * Ticket class to be had by User that 
+ * holds all the show information as well as
+ * food information
  * @author WingDings
  */
 public class Ticket {

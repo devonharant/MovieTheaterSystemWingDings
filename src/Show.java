@@ -1,4 +1,7 @@
-
+/**
+ * 
+ * @author WingDings
+ */
 public class Show {
 
 	private String name;
