@@ -95,3 +95,6 @@
 
 
 
+	 public String toString () {
+			 return name + dateOfBirth + email + userName + password + age;
+		 }
