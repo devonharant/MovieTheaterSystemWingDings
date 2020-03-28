@@ -2,9 +2,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class sql {
-
+ 
 	static Connection connection = null;
 	static String databaseName = "movietest";
 	static String url = "jdbc:mysql://localhost:3306/movietest";
@@ -15,15 +16,26 @@ public class sql {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
-		String query = "insert into movie(name)" + " values (?)";
+		String query = "insert into movie(name,age)" + " values (?,?)";
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("please enter your name");
+		String name = keyboard.nextLine();
+		System.out.println("please enter your age");
+		int age = keyboard.nextInt();
+		if(age <= 0) {
+			System.out.println("youre not even alive yet");
+		}
+		else {
 		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setString(1, "alex");
+		ps.setString(1,name);
+		ps.setInt(2, age);
 		int status = ps.executeUpdate();
 		
 		if(status != 0) {
-			System.out.println("database was connection");
+			System.out.println("database weas connection");
 			System.out.println("ok");
 		}
 	}
 }
 
+}
