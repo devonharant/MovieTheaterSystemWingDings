@@ -9,21 +9,31 @@ public abstract class Venue{
 	protected String name;
 	protected String location;
 	protected String type;
-	//protected Show[] shows;
-	//protected Food[] food;
-	//protected Review review;
+	protected ShowIterator[] shows;
+	protected FoodIterator food;
+	protected Review review;
+	protected ShowFactory factory;
 	
 	public Venue() {
 		name = "";
 		location = "";
 		type = "";
+		shows = new ShowIterator();
+		factory = new ShowFactory();
 	}
 	public abstract String getName();
 	public abstract String getLocation();
 	public abstract String getType();
-	//public abstract Review getReview();
+	public abstract Review getReview();
 	public abstract void setName(String name);
 	public abstract void setLocation(String location);
 	public abstract void printShows();
 	public abstract void printFood();
+	
+	//creates a show with the show factory and adds it to the iterator
+	public abstract createShow();
+	
+	public String toString() {
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location;
+	}
 }

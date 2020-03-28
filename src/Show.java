@@ -1,4 +1,7 @@
-
+/**
+ * 
+ * @author WingDings
+ */
 public class Show {
 
 	private String name;
@@ -12,8 +15,11 @@ public class Show {
 		this.setDescription(description);
 		this.setTime(time);
 		this.seats = new boolean[theaterRows][theaterColumns];
-		//todo set all seats to true
-		
+		for(int i = 0; i < theaterRows; i++) {
+			for(int j = 0; j < theaterColumns; j++) {
+				seats[i][j]= true;
+			}
+		}
 		this.setReview(review);
 		
 	}
@@ -44,6 +50,7 @@ public class Show {
 	}
 
 	public void setTime(String time) {
+		//sanitize to real time
 		this.time = time;
 	}
 
@@ -55,5 +62,7 @@ public class Show {
 		this.review = review;
 	}
 	
-	
+	public String toString() {
+		return "Name: " + name + "\nDescription: " + description + "\nTime: " + time + "\nReview" + review;
+	}
 }
