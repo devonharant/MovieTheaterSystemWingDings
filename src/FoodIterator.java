@@ -10,5 +10,6 @@ public class FoodIterator {
 	}
 	public Food next() {
 		//todo fill functionality
+
 	}
 }

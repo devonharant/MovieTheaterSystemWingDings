@@ -2,3 +2,11 @@
 /ConcertHall.class
 /PlayHouse.class
 /Cineplex.class
+/Ticket.class
+/Iterator.class
+/Show.class
+/ShowIterator.class
+/ShowFactory.class
+/Food.class
+/FoodIterator.class
+/Review.class

@@ -31,8 +31,8 @@ public abstract class Venue{
 	public abstract void printFood();
 	
 	//creates a show with the show factory and adds it to the iterator
-	public abstract createShow();
-	
+	//public abstract createShow();
+
 	public String toString() {
 		return "Name: " + name + "\nType: " + type + "\nLocation: " + location;
 	}

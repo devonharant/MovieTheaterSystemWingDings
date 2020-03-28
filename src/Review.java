@@ -7,6 +7,7 @@ public class Review {
 
 	protected int stars;
 	protected String review;
+
 	protected User reviewer;
 	
 	public Review(int stars, String review, User user) {
@@ -26,7 +27,9 @@ public class Review {
 	 * gets the reviews for each show
 	 * @return
 	 */
+
 	public String getReview() {
+
 		return null;
 	}
 	
@@ -49,9 +52,9 @@ public class Review {
 	 * writes the reviews for a listing
 	 * @return
 	 */
-	
-	
+
 	// these three functions should be moved to user class
+
 	public String writeReview() {
 		return null;
 	}
