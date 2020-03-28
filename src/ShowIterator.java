@@ -8,8 +8,12 @@ public class ShowIterator implements Iterator{
 	 * constructor
 	 * @param hashmap of shows denoted by show times
 	 */
-	public ShowIterator(HashMap<String, Show> shows){
-		//todo fill
+	public ShowIterator(){
+		shows = new HashMap<>();
+	}
+	
+	public addShow(Show show) {
+		shows.put(show.getTime(), show)
 	}
 	
 	/**

@@ -6,9 +6,10 @@ public class FoodIterator {
 	public void Fooditerator(Food[]);
 
 	public boolean hasNext(){
-
+		//todo fill functionality
 	}
 	public Food next() {
+		//todo fill functionality
 
 	}
 }
