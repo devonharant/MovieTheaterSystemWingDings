@@ -7,6 +7,13 @@ public class Review {
 
 	protected int stars;
 	protected String review;
+
+	protected User reviewer;
+	
+	public Review(int stars, String review, User user) {
+		this.setStars(stars);
+		this.setReview(review);
+	}
 	
 	/**
 	 * gets the star ratings for each show
@@ -20,7 +27,9 @@ public class Review {
 	 * gets the reviews for each show
 	 * @return
 	 */
-	public String getReviews() {
+
+	public String getReview() {
+
 		return null;
 	}
 	
@@ -28,8 +37,9 @@ public class Review {
 	 * sets the star ratings for each show
 	 * @return
 	 */
-	public int setStars() {
-		return stars;
+	public int setStars(int stars) {
+		//sanitize to 1-5 stars
+		this.stars = stars;
 	}
 	
 	/**
@@ -42,6 +52,9 @@ public class Review {
 	 * writes the reviews for a listing
 	 * @return
 	 */
+
+	// these three functions should be moved to user class
+
 	public String writeReview() {
 		return null;
 	}
@@ -60,6 +73,6 @@ public class Review {
 	}
 	
 	public String toString() {
-		return "Stars: " + stars + "\nReview: " + review; 
+		return "Stars: " + stars + "\nReviewer: " + reviewer +"\nReview: " + review; 
 	}
 }
