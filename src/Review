@@ -1,0 +1,46 @@
+public class Review {
+private int stars;
+private String review;
+
+public Review() {
+	stars = 0;
+	review = "you havent reviewed this yet";
+}
+public Review(int stars, String review) {
+	this.stars = stars;
+	this.review = review;
+	
+}
+public int getStars() {
+	return stars;
+}
+public void setStars(int stars) {
+	if(stars < 1 || stars > 5) {
+		System.out.println("thats not a valid rating");
+	}
+	else {
+		this.stars = stars; 
+	}
+}
+public String getReview() {
+	return review;
+}
+public void setReview(String review) {
+	this.review = review;
+}
+public void sortStars() {
+	
+}
+public String writeReview() {
+	
+}
+public void deleteReview() {
+	
+
+}
+public String editReview() {
+	
+}
+}
+
+
