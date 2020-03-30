@@ -12,8 +12,8 @@ public class ShowIterator implements Iterator{
 		shows = new HashMap<>();
 	}
 	
-	public addShow(Show show) {
-		shows.put(show.getTime(), show)
+	public void addShow(Show show) {
+		shows.put(show.getTime(), show);
 	}
 	
 	/**

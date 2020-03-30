@@ -35,9 +35,12 @@ public class Cineplex extends Venue{
 		return type;
 	}
 	
-	/*public Review getReview() {
+	/**
+	 * returns the review
+	 */
+	public Review getReview() {
 		return null;
-	}*/
+	}
 	
 	/**
 	 * setName method that sets the name of the specified venue
