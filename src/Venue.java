@@ -9,7 +9,7 @@ public abstract class Venue{
 	protected String name;
 	protected String location;
 	protected String type;
-	protected ShowIterator[] shows;
+	protected ShowIterator shows;
 	protected FoodIterator food;
 	protected Review review;
 	protected ShowFactory factory;

@@ -34,10 +34,17 @@ public class Review {
 	}
 	
 	/**
+	 * 
+	 */
+	public void setReview(String review) {
+		this.review = review;
+	}
+	
+	/**
 	 * sets the star ratings for each show
 	 * @return
 	 */
-	public int setStars(int stars) {
+	public void setStars(int stars) {
 		//sanitize to 1-5 stars
 		this.stars = stars;
 	}
