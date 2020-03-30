@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import com.mysql.cj.xdevapi.Statement;
 import java.sql.*;
-public class sql {
+
+public class SQLServerConnection {
+
 
 	static Connection connection = null;
 	static String databaseName = "movietest";
