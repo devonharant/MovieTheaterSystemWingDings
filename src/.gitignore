@@ -10,3 +10,15 @@
 /Food.class
 /FoodIterator.class
 /Review.class
+/Admin.class
+/GuestUser.class
+/RegularUser.class
+/TestDriver.class
+/User.class
+/sql.class
+/UserDecorator.class
+/Student.class
+/Teacher.class
+/Elderly.class
+/Veteran.class
+/Disabled.class
