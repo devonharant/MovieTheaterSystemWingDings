@@ -8,7 +8,7 @@ public abstract class User {
 		private String password;
 		private int age;
 		private Ticket ticket;
-		
+
 		public User() {
 			this.name = "user";
 			this.dateOfBirth = "09/09/1999";
@@ -27,7 +27,7 @@ public abstract class User {
 			this.setAge(age);
 			this.ticket = null;
 		}
-		
+
 		public String getName() {
 			return name;
 		}
@@ -80,8 +80,8 @@ public abstract class User {
 				this.age = age;
 			}
 		}
-		
-		
+
+
 		/**
 		 * creates a ticket based on the show
 		 * @param show
@@ -89,6 +89,7 @@ public abstract class User {
 		public void createTicket(Show show) {
 			Scanner keyboard = new Scanner(System.in);
 			double price;
+
 			System.out.println("what time would you like see?\n"+show.showTimes());
 			String time = keyboard.nextLine();
 			/*
@@ -97,6 +98,7 @@ public abstract class User {
 			
 			System.out.println("what seats would you like to reserve?");
 			show.printSeats(time);
+
 			System.out.println("Enter seats in AA AB AC format");
 			boolean q = false;
 			String[] seats = null;
@@ -131,7 +133,7 @@ public abstract class User {
 				show.getVenue().printFood();
 				//TODO finish ability to add food to ticket
 			}
-			else 
+			else
 				food = null;
 			Ticket t = new Ticket(show,time,seats,food,price);
 			this.ticket = t;
@@ -146,23 +148,29 @@ public abstract class User {
 			if(this.ticket == null) {
 				System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
 			}
-			
+			// Not sure exactly how to do this? chris
+			if(this.ticket == true) {
+				//if(user == true) for logged in, 5 points per dollar, multiply cost x 5 and show on ticket
+				printTicket();
+
+			}
+
 		}
-		
+
 		/**
 		 * Xavier
 		 * calls the toString of the ticket saved to the user
-		 * 
+		 *
 		 */
 		public void printTicket() {
-			this.ticket.toString();
+			System.out.println(this.ticket.toString());
 		}
-		
-		
+
+
 		public void generateETicket(Ticket ticket) {
-	
+			System.out.println(this.ticket.toString());
 		}
-		
+
 		/**
 		 * Xavier
 		 * removes a generated ticket from the user and frees up the reserved seats
