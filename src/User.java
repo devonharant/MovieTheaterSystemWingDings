@@ -77,23 +77,35 @@ public abstract class User {
 				this.age = age;
 			}
 		}
-
-
+		
+		
+		/**
+		 * creates a ticket based on the show
+		 * @param show
+		 */
+		public void createTicket(Show show) {
+			
+		}
 
 		public void purchaseTicket(Ticket ticket) {
 	
 		}
-
-		public Ticket printTicket(Ticket ticket) {
-			return ticket;
+		/**
+		 * calls the toString of the ticket
+		 * @param ticket
+		 */
+		public void printTicket(Ticket ticket) {
+			ticket.toString();
 		}
-		public Ticket generateETicket(Ticket ticket) {
-			return ticket;
+		
+		
+		public void generateETicket(Ticket ticket) {
 	
 		}
+		
 		public void CancelTicket(Ticket ticket) {
-	
-}
+			
+		}
 
 
 

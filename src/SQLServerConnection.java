@@ -1,3 +1,4 @@
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -5,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import com.mysql.cj.xdevapi.Statement;
-import java.sql.*;
+
 
 public class SQLServerConnection {
 
@@ -25,13 +26,12 @@ public class SQLServerConnection {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("would you like to truncate or print table press 1 to truncate 2 to print");
 		int choice = keyboard.nextInt();
-		if(choice == 1)
-		{
-		truncate();
+		if(choice == 1){
+			truncate();
 			
 		}
 		else if(choice ==2) {
-		print();
+			print();
 		}
 		else if(choice == 3) {
 			addUser();
@@ -94,7 +94,7 @@ public class SQLServerConnection {
 	        System.out.println("");  
 	      }
 	}
-public static void findandremove() throws SQLException {
+	public static void findandremove() throws SQLException {
 	Scanner keyboard = new Scanner(System.in);
 	System.out.println("put their id in");
 	int id = keyboard.nextInt();

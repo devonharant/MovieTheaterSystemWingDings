@@ -4,13 +4,16 @@
  */
 public class Show {
 
+	private Venue venue;
 	private String name;
 	private String description;
 	private String time;
 	private boolean[][] seats;
 	private Review review;
+	private double price;
 	
-	public Show(String name, String description, String time, Review review, int theaterRows, int theaterColumns) {
+	public Show(Venue venue, String name, String description, String time, Review review, int theaterRows, int theaterColumns, double price) {
+		this.setVenue(venue);
 		this.setName(name);
 		this.setDescription(description);
 		this.setTime(time);
@@ -21,14 +24,21 @@ public class Show {
 			}
 		}
 		this.setReview(review);
-		
 	}
 
 	/*
 	 * getters and setters, no sanitization is done here
 	 * 
-	 * todo sanitize setters.
+	 * TODO sanitize setters.
 	 */
+	public Venue getVenue() {
+		return venue;
+	}
+	
+	public void setVenue(Venue venue) {
+		this.venue = venue;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -50,7 +60,7 @@ public class Show {
 	}
 
 	public void setTime(String time) {
-		//sanitize to real time
+		//TODO sanitize to real time
 		this.time = time;
 	}
 

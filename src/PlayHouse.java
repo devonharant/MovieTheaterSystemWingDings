@@ -5,7 +5,6 @@
  */
 public class PlayHouse extends Venue{
 
-	//public ShowFactory showFactory;
 	
 	public PlayHouse() {
 		type = "Play House";

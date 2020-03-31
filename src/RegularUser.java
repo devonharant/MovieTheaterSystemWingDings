@@ -6,7 +6,7 @@ public class RegularUser extends User {
 		
 	}
 	public void spendPoints() {
-		
+		//TODO enable points to be used to cheapen ticket
 	}
 }
 
