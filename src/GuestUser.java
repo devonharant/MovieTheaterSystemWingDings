@@ -3,6 +3,7 @@ public class GuestUser extends User {
 private double discount;
 
 	public GuestUser() {
+		//TODO create discount
 		this.discount = 0.0;
 	}
 
@@ -11,6 +12,7 @@ private double discount;
 		this.discount = discount;
 	}
 	public double enterDiscount() {
+		//TODO have this discount the ticket
 		return discount;
 	}
 
@@ -22,7 +24,7 @@ private double discount;
 		this.discount = discount;
 	}
 	public void createAccount() {
-		
+		//TODO
 	}
 	
 }

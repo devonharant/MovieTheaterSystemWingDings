@@ -1,7 +1,5 @@
 
 public class Elderly extends UserDecorator{
-	
-	private User user;
 	protected double discount;
 	
 	public void addDiscount() {

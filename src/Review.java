@@ -45,6 +45,7 @@ public class Review {
 	 * @return
 	 */
 	public void setStars(int stars) {
+		//TODO
 		//sanitize to 1-5 stars
 		this.stars = stars;
 	}

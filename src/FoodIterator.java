@@ -8,11 +8,11 @@ public class FoodIterator {
 	}
 
 	public boolean hasNext(){
-		//todo fill functionality
+		//TODO fill functionality
 		return true;
 	}
 	public Food next() {
-		//todo fill functionality
+		//TODO fill functionality
 		return null;
 
 	}

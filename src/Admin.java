@@ -19,6 +19,8 @@ public class Admin extends User {
 		String name = keyboard.nextLine();
 		System.out.println("Whats the show description");
 		String description = keyboard.nextLine();
+		System.out.println("Whats the show price");
+		double price = keyboard.nextDouble();
 		System.out.println("how many show times are there for this show?");
 		int numOfTimes = keyboard.nextInt();
 		keyboard.nextLine();
@@ -51,7 +53,7 @@ public class Admin extends User {
 		 * adds a new show to the show iterator for each entered time
 		 */
 		for(int i=0; i<times.length;i++) {
-			Show newShow = venue.factory.createShow(this.venue, name, description, times[i], review, theaterRows, theaterColumns);
+			Show newShow = venue.factory.createShow(this.venue, name, description, times[i], review, theaterRows, theaterColumns, price);
 			venue.shows.addShow(newShow);
 		}
 		

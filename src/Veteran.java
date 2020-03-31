@@ -1,13 +1,9 @@
 
 public class Veteran extends UserDecorator{
-	
-	private User user;
-	protected double discount;
-	
 	public void addDiscount() {
 		
 	}
-	
+
 	public double getDiscount() {
 		return discount;
 	}

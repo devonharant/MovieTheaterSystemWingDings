@@ -15,8 +15,9 @@ public class ShowFactory {
 	 * @param theaterColumns, the seats in each row
 	 * @return the newly created show
 	 */
-	public Show createShow(Venue venue, String name, String description, String time, Review review, int theaterRows, int theaterColumns) {
-		Show newShow = new Show(venue, name, description, time, review, theaterRows, theaterColumns);
+	public Show createShow(Venue venue, String name, String description, String time,
+				Review review, int theaterRows, int theaterColumns, double price) {
+		Show newShow = new Show(venue, name, description, time, review, theaterRows, theaterColumns, price);
 		return newShow;
 	}
 }

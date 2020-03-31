@@ -1,9 +1,5 @@
 
 public class Disabled extends UserDecorator{
-	
-	private User user;
-	protected double discount;
-	
 	public void addDiscount() {
 		
 	}

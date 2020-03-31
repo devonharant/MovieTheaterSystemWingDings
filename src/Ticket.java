@@ -9,6 +9,7 @@ public class Ticket {
 	protected String time;
 	protected double price;
 	protected Food[] food;
+	protected String[] seats;
 	
 	public Ticket() {
 		this.time = show.getTime();
