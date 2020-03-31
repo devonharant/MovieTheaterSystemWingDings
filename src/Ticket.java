@@ -13,9 +13,10 @@ public class Ticket {
 	protected int points;
 
 
-	public Ticket(Show show, String[] seats, Food[] food, double price, int points) {
+	public Ticket(Show show,String time, String[] seats, Food[] food, double price, int points) {
+
 		this.setShow(show);
-		this.setTime(show.getTime());
+		this.setTime(time);
 		this.setSeats(seats);
 		this.setFood(food);
 		this.setPrice(price);

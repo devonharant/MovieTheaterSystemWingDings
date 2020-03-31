@@ -17,7 +17,7 @@ public class ShowIterator implements Iterator{
 	 * @param show
 	 */
 	public void addShow(Show show) {
-		shows.put(show.getTime(), show);
+		shows.put(show.getName(), show);
 	}
 	
 	/**
