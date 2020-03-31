@@ -10,7 +10,8 @@ public class Admin extends User {
 	}
 	
 	/**
-	 * 
+	 * adds a show to the show iterator of a venue after querying the user for the information, takes in
+	 * multiple showtimes to create a list of the same show at different times.
 	 */
 	public void addShow() {
 		//user input data.
@@ -69,7 +70,7 @@ public class Admin extends User {
 	
 	/**
 	 * 
-	 * @param food
+	 *
 	 */
 	public void addFood() {
 		

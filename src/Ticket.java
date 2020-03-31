@@ -7,14 +7,28 @@
 public class Ticket {
 	protected Show show;
 	protected String time;
+	protected String[] seats;
 	protected double price;
 	protected Food[] food;
-	protected String[] seats;
 	
-	public Ticket() {
-		this.time = show.getTime();
+	
+	public Ticket(Show show, String[] seats, Food[] food, double price) {
+		this.setShow(show);
+		this.setTime(show.getTime());
+		this.setSeats(seats);
+		this.setFood(food);
+		this.setPrice(price);
+		
 	}
 	
+	public String[] getSeats() {
+		return seats;
+	}
+
+	public void setSeats(String[] seats) {
+		this.seats = seats;
+	}
+
 	public Show getShow() {
 		return show;
 	}
@@ -48,6 +62,6 @@ public class Ticket {
 	}
 	
 	public String toString() {
-		return "Show: " + show + "\nTime: " + time + "\nPrice: " + price + "\nFood: " + food;
+		return "Show: " + show + "\nTime: " + time + "\nSeats" + seats.toString() +"\nPrice: " + price + "\nFood: " + food.toString();
 	}
 }

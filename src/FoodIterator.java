@@ -16,4 +16,9 @@ public class FoodIterator {
 		return null;
 
 	}
+	
+	public String toString() {
+		//TODO fill functionality
+		return null;
+	}
 }
