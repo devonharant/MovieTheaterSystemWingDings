@@ -100,7 +100,8 @@ _ _____  _ _ _  ___ __________/ /              \ \_____________________________
             / /   ,-',-'                               `-.`-.   \ \
            / / ,-',-'                                     `-.`-. \ \
           / /-',-'                                           `-.`-\ \
-         /_,-'`                                                 `'-._\" +
-				 "Show: " + show + "\nTime: " + time + "\nSeats" + seats.toString() +"\nPrice: " + price + "\nFood: " + food.toString() + "\nPoints: " +points;
+         /_,-'`                                                 `'-._\"
+				 + "Show: " + show + "\nTime: " + time + "\nSeats" + seats.toString() +"\nPrice: " + price
+				 + "\nFood: " + food.toString() + "\nPoints: " +points;
 	}
 }
