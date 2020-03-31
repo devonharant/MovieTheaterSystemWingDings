@@ -89,9 +89,6 @@ public abstract class User {
 		public void createTicket(Show show) {
 			Scanner keyboard = new Scanner(System.in);
 			double price;
-			System.out.println("how many tickets for:\n" + show.toStringShort());
-			int numOfTickets = keyboard.nextInt();
-			keyboard.nextLine();
 			System.out.println("what seats would you like to reserve?\n");
 			show.printSeats();
 			System.out.println("Enter seats in AA AB AC format");

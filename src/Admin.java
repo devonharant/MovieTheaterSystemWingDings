@@ -65,7 +65,7 @@ public class Admin extends User {
 	 * @param show
 	 */
 	public void removeShow(String show) {
-		
+		//TODO
 	}
 	
 	/**
@@ -73,14 +73,14 @@ public class Admin extends User {
 	 *
 	 */
 	public void addFood() {
-		
+		//TODO
 	}
 	/**
 	 * 
 	 * @param food
 	 */
 	public void removeFood(String food) {
-		
+	//TODO
 	}
 }
 
