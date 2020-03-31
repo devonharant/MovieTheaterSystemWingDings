@@ -12,9 +12,9 @@ public class Ticket {
 	protected Food[] food;
 	
 	
-	public Ticket(Show show, String[] seats, Food[] food, double price) {
+	public Ticket(Show show, String time, String[] seats, Food[] food, double price) {
 		this.setShow(show);
-		this.setTime(show.getTime());
+		this.setTime(time);
 		this.setSeats(seats);
 		this.setFood(food);
 		this.setPrice(price);

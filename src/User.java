@@ -89,8 +89,14 @@ public abstract class User {
 		public void createTicket(Show show) {
 			Scanner keyboard = new Scanner(System.in);
 			double price;
-			System.out.println("what seats would you like to reserve?\n");
-			show.printSeats();
+			System.out.println("what time would you like see?\n"+show.showTimes());
+			String time = keyboard.nextLine();
+			/*
+			 * TODO entered time check logic
+			 */
+			
+			System.out.println("what seats would you like to reserve?");
+			show.printSeats(time);
 			System.out.println("Enter seats in AA AB AC format");
 			boolean q = false;
 			String[] seats = null;
@@ -98,7 +104,7 @@ public abstract class User {
 				String seatString = keyboard.nextLine();
 				seats = seatString.split(" ");
 				q = true;
-				// checks if the string is formatted correctly else returns user to enter the seats correctly
+				//checks if the string is formatted correctly else returns user to enter the seats correctly
 				boolean formatted = false;
 				for(int i=0; i < seats.length; i++) {
 					if(seats[i].length()!=2) {
@@ -110,7 +116,7 @@ public abstract class User {
 						formatted = true;
 				}
 				//if formatted correctly and the seats arent reseverd, reserves the seats, else returns user to reenter unreserved seats
-				if(formatted&&!show.reserveSeats(seats)) {
+				if(formatted&&!show.reserveSeats(time, seats)) {
 					q = false;
 					System.out.println("Some of those seats are already reserved, please enter a new batch of seats that are unreserved.");
 				}
@@ -127,7 +133,7 @@ public abstract class User {
 			}
 			else 
 				food = null;
-			Ticket t = new Ticket(show,seats,food,price);
+			Ticket t = new Ticket(show,time,seats,food,price);
 			this.ticket = t;
 		}
 
@@ -166,7 +172,7 @@ public abstract class User {
 			if(this.ticket == null) {
 				System.out.println("There is nothing in your ticket.");
 			}
-			this.ticket.show.cancelSeatReservation(ticket.seats);
+			this.ticket.show.cancelSeatReservation(ticket.time, ticket.seats);
 			this.ticket = null;
 		}
 

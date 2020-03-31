@@ -53,10 +53,8 @@ public class Admin extends User {
 		/*
 		 * adds a new show to the show iterator for each entered time
 		 */
-		for(int i=0; i<times.length;i++) {
-			Show newShow = venue.factory.createShow(this.venue, name, description, times[i], review, theaterRows, theaterColumns, price);
-			venue.shows.addShow(newShow);
-		}
+		Show newShow = venue.factory.createShow(this.venue, name, description, times, review, theaterRows, theaterColumns, price);
+		venue.shows.addShow(newShow);
 		
 	}
 	

@@ -1,36 +1,66 @@
+import java.util.*;
+import java.util.Map.Entry;
+
+
 /**
  * 
  * @author WingDings
  */
 public class Show {
+	private class Theater {
+		private String time;
+		private boolean [][] seats;
+		
+		private Theater(int rows, int cols, String time) {
+			this.seats = new boolean[rows][cols];
+			for(int i = 0; i < rows; i++) {
+				for(int j = 0; j < cols; j++) {
+					seats[i][j]= true;
+				}
+			}
+		}
+		// getters and setters
+		private String getTime() {
+			return time;
+		}
+
+		private void setTime(String time) {
+			this.time = time;
+		}
+
+		private boolean[][] getSeats() {
+			return seats;
+		}
+
+		private void setSeats(boolean[][] seats) {
+			this.seats = seats;
+		}
+		
+	}
 
 	private Venue venue;
 	private String name;
 	private String description;
-	private String time;
-	private boolean[][] seats;
+	private Map<String, Theater> theaters = new HashMap<String, Theater>();
 	private int rows;
 	private int cols;
 	private Review review;
 	private double price;
 	
-	public Show(Venue venue, String name, String description, String time, Review review, int theaterRows, int theaterColumns, double price) {
+	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
 		this.setVenue(venue);
 		this.setName(name);
 		this.setDescription(description);
-		this.setTime(time);
 		this.setRows(theaterRows);
 		this.setCol(theaterColumns);
-		this.seats = new boolean[rows][cols];
-		for(int i = 0; i < theaterRows; i++) {
-			for(int j = 0; j < theaterColumns; j++) {
-				seats[i][j]= true;
-			}
+		for(int i = 0; i < time.length; i++) {
+			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
+			this.theaters.put(t.getTime(),t);
 		}
 		this.setReview(review);
 	}
 	/*
-	 * getters and setters, no sanitization is done here
+	 * getters and setters, no sanitization is done her
 	 * 
 	 * TODO sanitize setters.
 	 */
@@ -89,15 +119,6 @@ public class Show {
 		this.description = description;
 	}
 
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		//TODO sanitize to real time
-		this.time = time;
-	}
-
 	public Review getReview() {
 		return review;
 	}
@@ -106,18 +127,33 @@ public class Show {
 		this.review = review;
 	}
 	
+	/**
+	 * prints the show times
+	 * @return all the show times of this show
+	 */
+	public String showTimes() {
+		String ret = "";
+		for(Entry<String, Theater> t:theaters.entrySet()) {
+			ret = ret + t.getKey() + " ";
+		}
+		return ret;
+	}
+	
 	
 	/**Xavier
 	 * takes a string seat array and updates the shows seat array to reserve those seats
 	 * @param reservation
 	 */
-	public boolean reserveSeats(String[] reservation) {
+	public boolean reserveSeats(String time, String[] reservation) {
+		//retrieves the current seat reservation
+		boolean seats[][] = theaters.get(time).getSeats();
 		for(String string:reservation) {
 			//splits String of AA into r and c
 			char charR = string.charAt(0);
 			char charC = string.charAt(1);
 			int r = ((int) charR)-41;
 			int c = ((int) charC)-41;
+			
 			if(seats[r][c]==false) {
 				return false;
 			}
@@ -130,6 +166,8 @@ public class Show {
 			int c = ((int) charC)-41;
 			seats[r][c]=false;
 		}
+		//sets the seats in the theater at this show time to the updated array
+		theaters.get(time).setSeats(seats);
 		return true;
 		
 	}
@@ -138,7 +176,9 @@ public class Show {
 	 * Takes in a seat reservation and frees up the shows seats at that area
 	 * @param reservation
 	 */
-	public void cancelSeatReservation(String [] reservation) {
+	public void cancelSeatReservation(String time, String [] reservation) {
+		//retrieves the current seat reservations
+		boolean seats[][] = theaters.get(time).getSeats();
 		for(String string:reservation) {
 			//splits String of AA into r and c
 			char charR = string.charAt(0);
@@ -147,12 +187,15 @@ public class Show {
 			int c = ((int) charC)-41;
 			seats[r][c]=false;
 		}
+		//sets the seats in the theater at this show time to the updated array
+		theaters.get(time).setSeats(seats);
 	}
 	
 	/**Xavier
 	 * prints the available seats to the console using unicode character to denote column and row of the theater
 	 */
-	public void printSeats() {
+	public void printSeats(String time) {
+		boolean seats[][] = theaters.get(time).getSeats();
 		//preps the column to be a name space
 		System.out.print(" ");
 		//prints the row names
@@ -179,10 +222,10 @@ public class Show {
 	
 	
 	public String toStringShort() {
-		return "Name: " + name +  "\nTime: " + time;
+		return "Name: " + name +  "\nTimes: " + showTimes();
 	}
 	
 	public String toString() {
-		return "Name: " + name + "\nDescription: " + description + "\nTime: " + time + "\nReview" + review;
+		return "Name: " + name + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReview" + review;
 	}
 }
