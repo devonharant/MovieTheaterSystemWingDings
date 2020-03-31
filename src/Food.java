@@ -5,8 +5,10 @@ public class Food {
 	public double cost;
 	public int quantity;
 
-	public void Food() {
-
+	public Food(String name, double cost, int quantity) {
+		this.setName(name);
+		this.setCost(cost);
+		this.setQuantity(quantity);
 	}
 	public String getName() {
 		return name;

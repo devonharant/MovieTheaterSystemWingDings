@@ -20,7 +20,7 @@ public class Review {
 	 * @return
 	 */
 	public int getStars() {
-  return stars;
+		return stars;
 	}
 	
 	/**
