@@ -1,4 +1,5 @@
 
+import java.util.Scanner;
 public abstract class User {
 		private String  name;
 		private String dateOfBirth;
@@ -15,14 +16,16 @@ public abstract class User {
 			this.userName = "stupid";
 			this.password = "not supid";
 			this.age = 12;
+			this.ticket = null;
 		}
 		public User(String name, String dateOfBirth, String email, String userName, String password, int age) {
-			this.name = name;
-			this.dateOfBirth = dateOfBirth;
-			this.email = email;
-			this.userName = userName;
-			this.password = password;
-			this.age = age;
+			this.setName(name);
+			this.setDateOfBirth(dateOfBirth);
+			this.setEmail(email);
+			this.setUserName(userName);
+			this.setPassword(password);
+			this.setAge(age);
+			this.ticket = null;
 		}
 		
 		public String getName() {
@@ -84,18 +87,72 @@ public abstract class User {
 		 * @param show
 		 */
 		public void createTicket(Show show) {
-			
+			Scanner keyboard = new Scanner(System.in);
+			double price;
+			System.out.println("how many tickets for:\n" + show.toStringShort());
+			int numOfTickets = keyboard.nextInt();
+			keyboard.nextLine();
+			System.out.println("what seats would you like to reserve?\n");
+			show.printSeats();
+			System.out.println("Enter seats in AA AB AC format");
+			boolean q = false;
+			String[] seats = null;
+			while(!q) {
+				String seatString = keyboard.nextLine();
+				seats = seatString.split(" ");
+				q = true;
+				// checks if the string is formatted correctly else returns user to enter the seats correctly
+				boolean formatted = false;
+				for(int i=0; i < seats.length; i++) {
+					if(seats[i].length()!=2) {
+					System.out.println("Make sure its in AA BB CC format with no space after the last seat");
+					q = false;
+					break;
+					}
+					if( i == seats.length - 1)
+						formatted = true;
+				}
+				//if formatted correctly and the seats arent reseverd, reserves the seats, else returns user to reenter unreserved seats
+				if(formatted&&!show.reserveSeats(seats)) {
+					q = false;
+					System.out.println("Some of those seats are already reserved, please enter a new batch of seats that are unreserved.");
+				}
+			}
+			price = seats.length*show.getPrice();//price of ticket logic
+			System.out.println("Would you like to pre buy popcorn or other food from this venue");
+			String response = keyboard.nextLine();
+			Food[] food = null;
+			//TODO response logic
+			if(response.contains("y")) {
+				System.out.println("Foods available at " +show.getVenue().getName()+ " are:");
+				show.getVenue().printFood();
+				//TODO finish ability to add food to ticket
+			}
+			else 
+				food = null;
+			Ticket t = new Ticket(show,seats,food,price);
+			this.ticket = t;
 		}
 
-		public void purchaseTicket(Ticket ticket) {
-	
-		}
 		/**
-		 * calls the toString of the ticket
-		 * @param ticket
+		 * Xavier
+		 * Purchases the ticket currently in the user ticket space
 		 */
-		public void printTicket(Ticket ticket) {
-			ticket.toString();
+		public void purchaseTicket() {
+			//null check
+			if(this.ticket == null) {
+				System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
+			}
+			
+		}
+		
+		/**
+		 * Xavier
+		 * calls the toString of the ticket saved to the user
+		 * 
+		 */
+		public void printTicket() {
+			this.ticket.toString();
 		}
 		
 		
@@ -103,8 +160,17 @@ public abstract class User {
 	
 		}
 		
-		public void CancelTicket(Ticket ticket) {
-			
+		/**
+		 * Xavier
+		 * removes a generated ticket from the user and frees up the reserved seats
+		 */
+		public void CancelTicket() {
+			//null check
+			if(this.ticket == null) {
+				System.out.println("There is nothing in your ticket.");
+			}
+			this.ticket.show.cancelSeatReservation(ticket.seats);
+			this.ticket = null;
 		}
 
 
