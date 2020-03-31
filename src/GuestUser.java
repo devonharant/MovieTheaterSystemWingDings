@@ -12,8 +12,8 @@ private double discount;
 		this.discount = discount;
 	}
 	public double enterDiscount() {
-		//TODO have this discount the ticket
-		return discount;
+		//no discount on guest users
+		return null;
 	}
 
 	public double getDiscount() {
@@ -26,6 +26,5 @@ private double discount;
 	public void createAccount() {
 		//TODO
 	}
-	
-}
 
+}
