@@ -1,8 +1,8 @@
 
 import java.util.*;
 public class ShowIterator implements Iterator{
-	private HashMap<String, Show> shows;
 	
+	private HashMap<String, Show> shows;
 	
 	/**
 	 * constructor
@@ -22,7 +22,8 @@ public class ShowIterator implements Iterator{
 	
 	/**
 	 * checks if there is another show in the hashmap 
-	 * @returns wether the hashmap has a next
+	 * not really used, hashmaps are iterable by themselves
+	 * @returns whether the hashmap has a next
 	 */
 	public boolean hasNext() {
 		return true;
@@ -34,6 +35,12 @@ public class ShowIterator implements Iterator{
 	 */
 	public Show next() {
 		return null;
+	}
+	
+	public void printShows() {
+		for(HashMap.Entry<String, Show> entry : shows.entrySet()) {
+			System.out.println(entry.getValue().toStringShort());
+		}
 	}
 	
 }
