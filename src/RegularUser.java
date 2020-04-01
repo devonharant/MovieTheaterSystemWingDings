@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class RegularUser extends User {
 	protected int points;
@@ -19,6 +19,8 @@ public class RegularUser extends User {
 		this.password = "null";
 		this.age = 12;
 		this.points = 0;
+		this.purchaseHistory = new HashMap<>();
+		this.reviewHistory = new HashMap<>();
 	}
 	
 	public RegularUser(String name, String dateOfBirth, String email, String userName, String password, int age) {
@@ -29,6 +31,8 @@ public class RegularUser extends User {
 		this.setUserName(userName);
 		this.setPassword(password);
 		this.setAge(age);
+		this.purchaseHistory = new HashMap<>();
+		this.reviewHistory = new HashMap<>();
 	}
 	
 	public String getName() {
@@ -90,19 +94,55 @@ public class RegularUser extends User {
 	 * sets current ticket to null
 	 */
 	public void purchaseTicket() {
-		//null check
-		if(this.ticket == null) {
-			System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
-		}
-
+		//super call to User purchase ticket function
+		super.purchaseTicket();
 	}
 	
-	
-	
+	/**
+	 * spends the accumulated points on ticket price
+	 * meant to be a helper function
+	 */
 	public void spendPoints() {
 		//TODO enable points to be used to cheapen ticket
 	}
 	
+	/**
+	 * takes in a venue and allows a regular user to create a review for that venue
+	 * @param venue
+	 */
+	public void createVenueReview(Venue venue) {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("How would you rate this venue from 1-5");
+		//TODO sanitize input
+		int stars = keyboard.nextInt();
+		keyboard.nextLine();
+		System.out.println("Tell us about your experience there");
+		//TODO sanitize input
+		String response =  keyboard.nextLine();
+		Review r = new Review(stars, response, this);
+		venue.addReview(this.getUserName(), r);
+	}
+	
+	/**
+	 * takes in a show and allow the user to create a review for that show
+	 * @param show
+	 */
+	public void createShowReview(Show show) {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("How would you rate this show from 1-5");
+		//TODO sanitize input
+		int stars = keyboard.nextInt();
+		keyboard.nextLine();
+		System.out.println("Tell us about your experience there");
+		//TODO sanitize input
+		String response =  keyboard.nextLine();
+		Review r = new Review(stars, response, this);
+		show.addReview(this.getUserName(), r);
+	}
+	
+	/**
+	 * create a string representation of the object
+	 */
 	public String toString () {
 		return "Name: " +name + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
 	password + "\nAge: " +age;

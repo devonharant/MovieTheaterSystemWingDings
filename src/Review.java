@@ -8,9 +8,9 @@ public class Review {
 	protected int stars;
 	protected String review;
 
-	protected User reviewer;
+	protected RegularUser reviewer;
 	
-	public Review(int stars, String review, User user) {
+	public Review(int stars, String review, RegularUser user) {
 		this.setStars(stars);
 		this.setReview(review);
 	}
@@ -81,6 +81,6 @@ public class Review {
 	}
 	
 	public String toString() {
-		return "Stars: " + stars + "\nReviewer: " + reviewer +"\nReview: " + review; 
+		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 
 	}
 }

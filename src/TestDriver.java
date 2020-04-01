@@ -15,5 +15,9 @@ public class TestDriver {
         Xavier.printTicket();
         Xavier.createTicket(show);
         Xavier.printTicket();
+        Xavier.createShowReview(show);
+        Xavier.createVenueReview(Nickelodeon);
+        System.out.print(show.toString());
+        System.out.print(Nickelodeon.toString());
     }
 }

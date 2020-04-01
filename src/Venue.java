@@ -5,6 +5,8 @@
  * @author WingDings
  */
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class Venue{
 	
@@ -13,7 +15,7 @@ public abstract class Venue{
 	protected String type;
 	protected ShowIterator shows;
 	protected FoodIterator food;
-	protected Review review;
+	private HashMap<String, Review> reviews = new HashMap<String, Review>();
 	protected ShowFactory factory;
 	
 	public Venue() {
@@ -32,8 +34,9 @@ public abstract class Venue{
 	public String getLocation() {
 		return location;
 	}
-	public Review getReview() {
-		return review;
+	public Review getReviews() {
+		//TODO get specific review
+		return null;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -53,8 +56,28 @@ public abstract class Venue{
 	public void printFood() {
 		
 	}
+	
+	/**
+	 * adds a Review to the venue
+	 * @param stars, stars given the venue
+	 * @param review, review itself
+	 */
+	public void addReview(String userName, Review review) {
+		this.reviews.put(userName, review);
+	}
+	
+	/**
+	 * creates a string of all the reviews of the venue
+	 */
+	public String getAllReviews() {
+		String ret = "";
+		for(Entry<String, Review> r:reviews.entrySet()) {
+			 ret = ret + r.getValue().toString() +"\n\n";
+		}
+		return ret;
+	}
 
 	public String toString() {
-		return "Name: " + name + "\nType: " + type + "\nLocation: " + location;
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews: " + this.getAllReviews();
 	}
 }
