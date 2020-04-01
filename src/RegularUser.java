@@ -1,11 +1,87 @@
 import java.util.HashMap;
 
 public class RegularUser extends User {
-	private int points;
-	private HashMap<String, Ticket> purchaseHistory = new HashMap<>();
+	protected int points;
+	protected HashMap<String, Ticket> purchaseHistory = new HashMap<>();
+	protected HashMap<String, Review> reviewHistory = new HashMap<>();
+	protected String name;
+	protected String dateOfBirth;
+	protected String email;
+	protected String userName;
+	protected String password;
+	protected int age;
+	
+	public RegularUser() {
+		this.name = "annon";
+		this.dateOfBirth = "09/09/1999";
+		this.email = "no email yet";
+		this.userName = "Guest";
+		this.password = "null";
+		this.age = 12;
+		this.points = 0;
+	}
+	
 	public RegularUser(String name, String dateOfBirth, String email, String userName, String password, int age) {
-		super(name,dateOfBirth,email,userName,password,age);
-		points = 0;
+		super();
+		this.setName(name);
+		this.setDateOfBirth(dateOfBirth);
+		this.setEmail(email);
+		this.setUserName(userName);
+		this.setPassword(password);
+		this.setAge(age);
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		if(age <0) {
+			System.out.println("invalid age");
+		}
+		else {
+			this.age = age;
+		}
 	}
 	
 	/**@Overrides user purchase ticket
@@ -21,8 +97,15 @@ public class RegularUser extends User {
 
 	}
 	
+	
+	
 	public void spendPoints() {
 		//TODO enable points to be used to cheapen ticket
+	}
+	
+	public String toString () {
+		return "Name: " +name + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
+	password + "\nAge: " +age;
 	}
 }
 

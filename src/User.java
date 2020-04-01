@@ -1,86 +1,13 @@
 
 import java.util.Scanner;
 public class User {
-		protected String name;
-		protected String dateOfBirth;
-		protected String email;
-		protected String userName;
-		protected String password;
-		protected int age;
+		
 		protected Ticket ticket;
 
 		public User() {
-			this.name = "annon";
-			this.dateOfBirth = "09/09/1999";
-			this.email = "no email yet";
-			this.userName = "Guest";
-			this.password = "null";
-			this.age = 12;
+			
 			this.ticket = null;
 		}
-		public User(String name, String dateOfBirth, String email, String userName, String password, int age) {
-			this.setName(name);
-			this.setDateOfBirth(dateOfBirth);
-			this.setEmail(email);
-			this.setUserName(userName);
-			this.setPassword(password);
-			this.setAge(age);
-			this.ticket = null;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getDateOfBirth() {
-			return dateOfBirth;
-		}
-
-		public void setDateOfBirth(String dateOfBirth) {
-			this.dateOfBirth = dateOfBirth;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-		public String getUserName() {
-			return userName;
-		}
-
-		public void setUserName(String userName) {
-			this.userName = userName;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
-		public int getAge() {
-			return age;
-		}
-
-		public void setAge(int age) {
-			if(age <0) {
-				System.out.println("invalid age");
-			}
-			else {
-				this.age = age;
-			}
-		}
-
 
 		/**
 		 * creates a ticket based on the show
@@ -150,7 +77,14 @@ public class User {
 			if(this.ticket == null) {
 				System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
 			}
-
+			
+			/*
+			 * TODO grab the driver function that creates a regular user and upgrade guest user to regular user
+			 * 
+			 * 
+			 * SUPER IMPORTANT TODO
+			 * 
+			 */
 		}
 
 		/**
@@ -180,10 +114,4 @@ public class User {
 			this.ticket = null;
 		}
 
-
-
-		public String toString () {
-			return "Name: " +name + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
-		password + "\nAge: " +age;
-		}
 }
