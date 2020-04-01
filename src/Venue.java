@@ -78,6 +78,6 @@ public abstract class Venue{
 	}
 
 	public String toString() {
-		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews: " + this.getAllReviews();
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getAllReviews();
 	}
 }
