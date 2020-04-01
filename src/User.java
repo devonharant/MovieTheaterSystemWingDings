@@ -1,13 +1,13 @@
 
 import java.util.Scanner;
 public abstract class User {
-		private String  name;
-		private String dateOfBirth;
-		private String email;
-		private String userName;
-		private String password;
-		private int age;
-		private Ticket ticket;
+		protected String name;
+		protected String dateOfBirth;
+		protected String email;
+		protected String userName;
+		protected String password;
+		protected int age;
+		protected Ticket ticket;
 
 		public User() {
 			this.name = "user";
@@ -147,12 +147,6 @@ public abstract class User {
 			//null check
 			if(this.ticket == null) {
 				System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
-			}
-			// Not sure exactly how to do this? chris
-			if(this.ticket == true) {
-				//if(user == true) for logged in, 5 points per dollar, multiply cost x 5 and show on ticket
-				printTicket();
-
 			}
 
 		}
