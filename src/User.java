@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-public abstract class User {
+public class User {
 		protected String name;
 		protected String dateOfBirth;
 		protected String email;
@@ -10,11 +10,11 @@ public abstract class User {
 		protected Ticket ticket;
 
 		public User() {
-			this.name = "user";
+			this.name = "annon";
 			this.dateOfBirth = "09/09/1999";
 			this.email = "no email yet";
-			this.userName = "stupid";
-			this.password = "not supid";
+			this.userName = "Guest";
+			this.password = "null";
 			this.age = 12;
 			this.ticket = null;
 		}
