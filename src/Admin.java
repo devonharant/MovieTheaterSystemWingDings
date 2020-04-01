@@ -1,7 +1,7 @@
 
 
 import java.util.Scanner;
-public class Admin extends User {
+public class Admin extends RegularUser {
 	private Venue venue;
 	
 	public Admin(String name, String dateOfBirth, String email, String userName, String password, int age, Venue venue) {
@@ -13,7 +13,7 @@ public class Admin extends User {
 	 * adds a show to the show iterator of a venue after querying the user for the information, takes in
 	 * multiple showtimes to create a list of the same show at different times.
 	 */
-	public void addShow() {
+	public void addShowListing() {
 		//user input data.
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Whats the show name");
@@ -22,6 +22,8 @@ public class Admin extends User {
 		String description = keyboard.nextLine();
 		System.out.println("Whats the show price");
 		double price = keyboard.nextDouble();
+		
+		//TODO fix this logic
 		System.out.println("how many show times are there for this show?");
 		int numOfTimes = keyboard.nextInt();
 		keyboard.nextLine();
