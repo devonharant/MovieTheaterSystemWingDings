@@ -16,9 +16,9 @@ public abstract class Venue{
 	protected Review review;
 	protected ShowFactory factory;
 	
-	public Venue() {
-		name = "";
-		location = "";
+	public Venue(String name, String location) {
+		this.name = name;
+		this.location = location;
 		type = "";
 		shows = new ShowIterator();
 		factory = new ShowFactory();

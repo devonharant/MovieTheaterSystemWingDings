@@ -1,4 +1,4 @@
-
+import java.io.*;
 import java.util.Scanner;
 public class User {
 		
@@ -93,7 +93,26 @@ public class User {
 		 *
 		 */
 		public void printTicket() {
-			System.out.println(this.ticket.toString());
+			try {
+				FileWriter writer = new FileWriter("Ticket.txt");
+				writer.write("******" + ticket.getShow().getVenue().getName() + "******\n");
+				writer.write("*     " + ticket.getShow().getName() + "     *\n");
+				writer.write("*     " + ticket.getTime() + "     *\n");
+				writer.write("*     " + ticket.seatsToString() + "     *\n");
+				writer.write("*     " + ticket.getFood() + "     *\n");
+				writer.write("*                *\n" );
+				writer.write("*                *\n");
+				writer.write("*     Total: " + ticket.getPrice() + "     *");
+				writer.write("*                *\n");
+				writer.write("*                *\n");
+				writer.write("*   Thank you for your business!!   *");
+				writer.write("*************************************");
+				writer.close();
+				System.out.println("Your ticket has been generated!");
+			}catch(IOException e) {
+				System.out.println("an error occurred");
+				e.printStackTrace();
+			}
 		}
 
 

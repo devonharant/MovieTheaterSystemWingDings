@@ -7,7 +7,8 @@ public class ConcertHall extends Venue{
 	
 	//public ShowFactory showFactory;
 	
-	public ConcertHall() {
+	public ConcertHall(String name, String location) {
+		super(name, location);
 		type = "Concert Hall";
 	}
 	
