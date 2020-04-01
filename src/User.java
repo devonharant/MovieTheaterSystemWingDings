@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 public class User {
 		
 		protected Ticket ticket;
@@ -90,22 +90,29 @@ public class User {
 		/**
 		 * Xavier
 		 * calls the toString of the ticket saved to the user
-		 *
+		 * generates the ticket and writes it to a text file
 		 */
 		public void printTicket() {
+			Random rand = new Random();
+			int rando = rand.nextInt(1000000000);
 			try {
 				FileWriter writer = new FileWriter("Ticket.txt");
-				writer.write("******" + ticket.getShow().getVenue().getName() + "******\n");
-				writer.write("*     " + ticket.getShow().getName() + "     *\n");
-				writer.write("*     " + ticket.getTime() + "     *\n");
-				writer.write("*     " + ticket.seatsToString() + "     *\n");
-				writer.write("*     " + ticket.getFood() + "     *\n");
-				writer.write("*                *\n" );
-				writer.write("*                *\n");
-				writer.write("*     Total: " + ticket.getPrice() + "     *");
-				writer.write("*                *\n");
-				writer.write("*                *\n");
-				writer.write("*   Thank you for your business!!   *");
+				writer.write("*************************************\n");
+				writer.write("*            " + ticket.getShow().getVenue().getName() + "            *\n");
+				writer.write("*              " + ticket.getShow().getName() + "               *\n");
+				writer.write("*        Time: " + ticket.getTime() + "        *\n");
+				writer.write("*             Seats: " + ticket.seatsToString() + "            *\n");
+				writer.write("*        Food: " + ticket.getFood() + "                 *\n");
+				writer.write("*                                   *\n" );
+				writer.write("*                                   *\n");
+				writer.write("*            Total: " + ticket.getPrice() + "            *\n");
+				writer.write("*                                   *\n");
+				writer.write("*                                   *\n");
+				writer.write("*                                   *\n");
+				writer.write("*      Ticket ID: " + rando + "        *\n");
+				writer.write("*                                   *\n");
+				writer.write("*   Thank you for your business!!   *\n");
+				writer.write("*  C: C: C: C: C: C: C: C: C: C: C: *\n");
 				writer.write("*************************************");
 				writer.close();
 				System.out.println("Your ticket has been generated!");
