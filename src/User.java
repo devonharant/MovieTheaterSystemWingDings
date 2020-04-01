@@ -133,11 +133,12 @@ public class User {
 				System.out.println("Foods available at " +show.getVenue().getName()+ " are:");
 				show.getVenue().printFood();
 				//TODO finish ability to add food to ticket
+				Ticket t = new Ticket(show,time,seats,food,price);
+				this.ticket = t;			}
+			else {
+				Ticket t = new Ticket(show,time,seats,price);
+				this.ticket = t;
 			}
-			else
-				food = null;
-			Ticket t = new Ticket(show,time,seats,food,price);
-			this.ticket = t;
 		}
 
 		/**

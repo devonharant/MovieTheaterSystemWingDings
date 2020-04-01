@@ -129,7 +129,7 @@ _ _____  _ _ _  ___ __________/ /              \ \_____________________________
            / / ,-',-'                                     `-.`-. \ \
           / /-',-'                                           `-.`-\ \
          /_,-'`                                                 `'-._\"
-				 + */"Show: " + show.getName() + "\nTime: " + time + "\nSeats" + seatsToString() +"\nPrice: " + price;
+				 + */"Show: " + show.getName() + "\nTime: " + time + "\nSeats: " + seatsToString() +"\nPrice: " + price;
 				 //+ "\nFood: " + food.toString();
 	}
 }

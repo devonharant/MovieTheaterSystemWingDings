@@ -13,5 +13,7 @@ public class TestDriver {
         //Show seeShow = Nickelodeon.shows.shows.get("frozen");
         Xavier.createTicket(show);
         Xavier.printTicket();
+        Xavier.createTicket(show);
+        Xavier.printTicket();
     }
 }
