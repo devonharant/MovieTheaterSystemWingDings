@@ -90,7 +90,8 @@ public class User {
 			Scanner keyboard = new Scanner(System.in);
 			double price;
 
-			System.out.println("what time would you like see?\n"+show.showTimes());
+			System.out.println("what time would you like see?");
+			show.showTimes();
 			String time = keyboard.nextLine();
 			/*
 			 * TODO entered time check logic
@@ -181,6 +182,7 @@ public class User {
 
 
 		public String toString () {
-			return name + dateOfBirth + email + userName + password + age;
+			return "Name: " +name + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
+		password + "\nAge: " +age;
 		}
 }

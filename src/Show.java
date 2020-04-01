@@ -7,6 +7,8 @@ import java.util.Map.Entry;
  * @author WingDings
  */
 public class Show {
+	private static final double DEFAULT_PRICE = 12.00;
+	private static final int UNICODE_OFFSET= 65;
 	private class Theater {
 		private String time;
 		private boolean [][] seats;
@@ -18,6 +20,7 @@ public class Show {
 					seats[i][j]= true;
 				}
 			}
+			this.setTime(time);
 		}
 		// getters and setters
 		private String getTime() {
@@ -58,6 +61,7 @@ public class Show {
 			this.theaters.put(t.getTime(),t);
 		}
 		this.setReview(review);
+		this.setPrice(price);
 	}
 	/*
 	 * getters and setters, no sanitization is done her
@@ -91,7 +95,10 @@ public class Show {
 	}
 
 	public void setPrice(double price) {
-		this.price = price;
+		if(price > 0)
+			this.price = price;
+		else
+			this.price = DEFAULT_PRICE;
 	}
 
 	
@@ -134,7 +141,7 @@ public class Show {
 	public String showTimes() {
 		String ret = "";
 		for(Entry<String, Theater> t:theaters.entrySet()) {
-			ret = ret + t.getKey() + " ";
+			ret = ret + t.getKey() + ". ";
 		}
 		return ret;
 	}
@@ -151,8 +158,8 @@ public class Show {
 			//splits String of AA into r and c
 			char charR = string.charAt(0);
 			char charC = string.charAt(1);
-			int r = ((int) charR)-41;
-			int c = ((int) charC)-41;
+			int r = ((int) charR)-UNICODE_OFFSET;
+			int c = ((int) charC)-UNICODE_OFFSET;
 			
 			if(seats[r][c]==false) {
 				return false;
@@ -162,8 +169,8 @@ public class Show {
 			//splits String of AA into r and c
 			char charR = string.charAt(0);
 			char charC = string.charAt(1);
-			int r = ((int) charR)-41;
-			int c = ((int) charC)-41;
+			int r = ((int) charR)-UNICODE_OFFSET;
+			int c = ((int) charC)-UNICODE_OFFSET;
 			seats[r][c]=false;
 		}
 		//sets the seats in the theater at this show time to the updated array
@@ -183,8 +190,8 @@ public class Show {
 			//splits String of AA into r and c
 			char charR = string.charAt(0);
 			char charC = string.charAt(1);
-			int r = ((int) charR)-41;
-			int c = ((int) charC)-41;
+			int r = ((int) charR)-UNICODE_OFFSET;
+			int c = ((int) charC)-UNICODE_OFFSET;
 			seats[r][c]=false;
 		}
 		//sets the seats in the theater at this show time to the updated array
@@ -197,17 +204,17 @@ public class Show {
 	public void printSeats(String time) {
 		boolean seats[][] = theaters.get(time).getSeats();
 		//preps the column to be a name space
-		System.out.print(" ");
+		System.out.print("  ");
 		//prints the row names
-		for(int i = 0; i < rows; i++ ) {
-			char c =  (char) (i+41);
+		for(int i = 0; i < cols; i++ ) {
+			char c =  (char) (i+UNICODE_OFFSET);
 			System.out.print(c+" ");
 		}
 		//prints the seats as (O)pen or (x)occupied, prints the row label first.
 		System.out.println();
 		for(int i = 0; i < rows; i++) {
-			char c =  (char) (i+41);
-			System.out.print(c);
+			char c =  (char) (i+UNICODE_OFFSET);
+			System.out.print(c+ " ");
 			for (int j = 0; j < cols; j++) {
 				if(seats[i][j]==true)
 					System.out.print("O ");
@@ -226,6 +233,6 @@ public class Show {
 	}
 	
 	public String toString() {
-		return "Name: " + name + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReview" + review;
+		return "Name: " + name + "\nPrice: "+ price + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReview: " + review;
 	}
 }

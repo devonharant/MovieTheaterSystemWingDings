@@ -1,8 +1,8 @@
 
 import java.util.*;
 public class ShowIterator implements Iterator{
-	
-	private HashMap<String, Show> shows;
+	//TODO create public accessors and change shows to private
+	public HashMap<String, Show> shows;
 	
 	/**
 	 * constructor
@@ -39,7 +39,7 @@ public class ShowIterator implements Iterator{
 	
 	public void printShows() {
 		for(HashMap.Entry<String, Show> entry : shows.entrySet()) {
-			System.out.println(entry.getValue().toStringShort());
+			System.out.println(entry.getValue().toString());
 		}
 	}
 	
