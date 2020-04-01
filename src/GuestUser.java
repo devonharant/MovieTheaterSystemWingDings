@@ -13,7 +13,7 @@ private double discount;
 	}
 	public double enterDiscount() {
 		//no discount on guest users
-		return null;
+		return 0.0;
 	}
 
 	public double getDiscount() {

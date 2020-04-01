@@ -10,24 +10,17 @@ public class Ticket {
 	protected String[] seats;
 	protected double price;
 	protected Food[] food;
-	protected int points;
 
 
-	public Ticket(Show show,String time, String[] seats, Food[] food, double price, int points) {
+	public Ticket(Show show,String time, String[] seats, Food[] food, double price) {
 
 		this.setShow(show);
 		this.setTime(time);
 		this.setSeats(seats);
 		this.setFood(food);
 		this.setPrice(price);
-		this.setPoints(points);
+		
 
-	}
-	public int getPoints() {
-		return points;
-	}
-	public void setPoints(int points){
-		this.points = points;
 	}
 
 	public String[] getSeats() {
@@ -71,7 +64,7 @@ public class Ticket {
 	}
 
 	public String toString() {
-		return                           " /\
+		return                        "/\
                                       /  \
                                      / /\ \
                                     / /  \ \
