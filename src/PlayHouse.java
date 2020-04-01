@@ -5,7 +5,8 @@
  */
 public class PlayHouse extends Venue{
 
-	public PlayHouse() {
+	public PlayHouse(String name, String location) {
+		super(name, location);
 		type = "Play House";
 	}
 	

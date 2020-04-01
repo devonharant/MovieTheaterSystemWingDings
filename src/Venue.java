@@ -18,9 +18,9 @@ public abstract class Venue{
 	private HashMap<String, Review> reviews = new HashMap<String, Review>();
 	protected ShowFactory factory;
 	
-	public Venue() {
-		name = "";
-		location = "";
+	public Venue(String name, String location) {
+		this.name = name;
+		this.location = location;
 		type = "";
 		shows = new ShowIterator();
 		factory = new ShowFactory();

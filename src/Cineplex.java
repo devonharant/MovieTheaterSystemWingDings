@@ -7,7 +7,8 @@ public class Cineplex extends Venue{
 
 	//public ShowFactory showFactory;
 	
-	public Cineplex() {
+	public Cineplex(String name, String location) {
+		super(name, location);
 		type = "Cineplex";
 	}
 	
