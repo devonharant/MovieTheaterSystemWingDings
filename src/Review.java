@@ -13,6 +13,7 @@ public class Review {
 	public Review(int stars, String review, RegularUser user) {
 		this.setStars(stars);
 		this.setReview(review);
+		this.reviewer = user;
 	}
 	
 	/**

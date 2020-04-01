@@ -274,6 +274,6 @@ public class Show {
 	}
 	
 	public String toString() {
-		return "Name: " + name + "\nPrice: "+ price + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReviews: " + this.getAllReviews();
+		return "Name: " + name + "\nPrice: "+ price + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReviews:\n" + this.getAllReviews();
 	}
 }
