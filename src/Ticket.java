@@ -11,17 +11,39 @@ public class Ticket {
 	protected double price;
 	protected Food[] food;
 
-
+	/**
+	 * Ticket with food constructor
+	 * @param show
+	 * @param time
+	 * @param seats
+	 * @param food
+	 * @param price
+	 */
 	public Ticket(Show show,String time, String[] seats, Food[] food, double price) {
 
 		this.setShow(show);
 		this.setTime(time);
 		this.setSeats(seats);
-		this.setFood(food);
+		this.setFood(null);
 		this.setPrice(price);
-		
-
 	}
+	
+	/**
+	 * Ticket without food constructor
+	 * @param show
+	 * @param time
+	 * @param seats
+	 * @param price
+	 */
+	public Ticket(Show show,String time, String[] seats, double price) {
+
+		this.setShow(show);
+		this.setTime(time);
+		this.setSeats(seats);
+		this.setFood(null);
+		this.setPrice(price);
+	}
+	
 
 	public String[] getSeats() {
 		return seats;
@@ -62,9 +84,21 @@ public class Ticket {
 	public void setFood(Food[] food) {
 		this.food = food;
 	}
+	
+	/**
+	 * returns the seats array as a string
+	 * @return the seats array as a string
+	 */
+	public String seatsToString() {
+		String ret = "";
+		for(int i = 0; i < seats.length; i++) {
+			ret = ret + seats[i] + " ";
+		}
+		return ret;
+	}
 
 	public String toString() {
-		return                        "/\
+		return                   /*   "/\
                                       /  \
                                      / /\ \
                                     / /  \ \
@@ -95,7 +129,7 @@ _ _____  _ _ _  ___ __________/ /              \ \_____________________________
            / / ,-',-'                                     `-.`-. \ \
           / /-',-'                                           `-.`-\ \
          /_,-'`                                                 `'-._\"
-				 + "Show: " + show + "\nTime: " + time + "\nSeats" + seats.toString() +"\nPrice: " + price
-				 + "\nFood: " + food.toString() + "\nPoints: " +points;
+				 + */"Show: " + show.getName() + "\nTime: " + time + "\nSeats" + seatsToString() +"\nPrice: " + price;
+				 //+ "\nFood: " + food.toString();
 	}
 }
