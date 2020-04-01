@@ -47,7 +47,7 @@ public class Show {
 	private Map<String, Theater> theaters = new HashMap<String, Theater>();
 	private int rows;
 	private int cols;
-	private Review review;
+	private Map<String, Review> reviews = new HashMap<String, Review>();
 	private double price;
 	
 	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
@@ -60,7 +60,6 @@ public class Show {
 			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
 			this.theaters.put(t.getTime(),t);
 		}
-		this.setReview(review);
 		this.setPrice(price);
 	}
 	/*
@@ -126,12 +125,54 @@ public class Show {
 		this.description = description;
 	}
 
+	
 	public Review getReview() {
-		return review;
+		//TODO get specific review
+		return null;
+	}
+	
+	/**
+	 * adds a batch of show times given an array of show times and dimensions of the theater
+	 * @param array of show times in string format 00/00 00:00AM
+	 * @param theaterRows
+	 * @param theaterColumns
+	 */
+	public void addShowTimes(String[] time, int theaterRows, int theaterColumns) {
+		for(int i = 0; i < time.length; i++) {
+			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
+			this.theaters.put(t.getTime(),t);
+		}
+	}
+	
+	/**
+	 * adds a batch of show times given an array of show times and dimensions of the theater
+	 * @param time show time in string format 00/00 00:00AM
+	 * @param theaterRows
+	 * @param theaterColumns
+	 */
+	public void addShowTime(String time, int theaterRows, int theaterColumns) {
+		Theater t = new Theater(theaterRows, theaterColumns, time);
+		this.theaters.put(time,t);
 	}
 
-	public void setReview(Review review) {
-		this.review = review;
+	/**
+	 * adds a Review to the show
+	 * @param stars, stars given the show
+	 * @param review, review itself
+	 */
+	public void addReview(String userName, Review review) {
+		this.reviews.put(userName, review);
+	}
+	
+	/**
+	 * creates a string of all the reviews of the show
+	 */
+	public String getAllReviews() {
+		String ret = "";
+		for(Entry<String, Review> r:reviews.entrySet()) {
+			 ret = ret + r.getValue().toString() +"\n\n";
+		}
+		return ret;
 	}
 	
 	/**
@@ -233,6 +274,6 @@ public class Show {
 	}
 	
 	public String toString() {
-		return "Name: " + name + "\nPrice: "+ price + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReview: " + review;
+		return "Name: " + name + "\nPrice: "+ price + "\nDescription: " + description + "\nTimes: " + showTimes() + "\nReviews: " + this.getAllReviews();
 	}
 }
