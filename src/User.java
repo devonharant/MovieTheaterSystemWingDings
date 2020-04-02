@@ -15,23 +15,30 @@ public class User {
 		 */
 		public void createTicket(Show show) {
 			Scanner keyboard = new Scanner(System.in);
-			double price;
-
 			System.out.println("what time would you like see?");
 			show.showTimes();
-			String time = keyboard.nextLine();
-			/*
-			 * TODO entered time check logic
-			 */
-			
+			//time validitiy check
+			boolean q = false;
+			String time = "";
+			while(!q) {
+				q =true;
+				time = keyboard.nextLine();
+				if(time.length()!=13) {
+					System.out.println("Please enter a time that is in mm/dd 00:00am format");
+					q = false;
+				}
+				else {
+					
+				}
+			}
 			System.out.println("what seats would you like to reserve?");
 			show.printSeats(time);
 
 			System.out.println("Enter seats in AA AB AC format");
-			boolean q = false;
+			q = false;
 			String[] seats = null;
 			while(!q) {
-				String seatString = keyboard.nextLine();
+				String seatString = keyboard.nextLine().toUpperCase();
 				seats = seatString.split(" ");
 				q = true;
 				//checks if the string is formatted correctly else returns user to enter the seats correctly
@@ -51,7 +58,9 @@ public class User {
 					System.out.println("Some of those seats are already reserved, please enter a new batch of seats that are unreserved.");
 				}
 			}
-			price = seats.length*show.getPrice();//price of ticket logic
+			double price = seats.length*show.getPrice();//price of ticket logic
+			
+			/*
 			System.out.println("Would you like to pre buy popcorn or other food from this venue");
 			String response = keyboard.nextLine();
 			Food[] food = null;
@@ -62,15 +71,14 @@ public class User {
 				//TODO finish ability to add food to ticket
 				Ticket t = new Ticket(show,time,seats,food,price);
 				this.ticket = t;			}
-			else {
+			else { */  //food to ticket logic commentted out till food implemented
 				Ticket t = new Ticket(show,time,seats,price);
 				this.ticket = t;
-			}
+			//}
 		}
 
 		/**
-		 * Xavier
-		 * Purchases the ticket currently in the user ticket space
+		 * Purchases the ticket currently in the user ticket space and prints it
 		 */
 		public void purchaseTicket() {
 			//null check
@@ -85,10 +93,11 @@ public class User {
 			 * SUPER IMPORTANT TODO
 			 * 
 			 */
+			
+			this.printTicket();
 		}
 
 		/**
-		 * Xavier
 		 * calls the toString of the ticket saved to the user
 		 * generates the ticket and writes it to a text file
 		 */
@@ -135,6 +144,7 @@ public class User {
 			//null check
 			if(this.ticket == null) {
 				System.out.println("There is nothing in your ticket.");
+				return;
 			}
 			this.ticket.show.cancelSeatReservation(ticket.time, ticket.seats);
 			this.ticket = null;

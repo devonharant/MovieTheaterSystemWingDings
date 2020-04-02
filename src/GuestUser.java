@@ -8,7 +8,7 @@ private double discount;
 	}
 
 	public GuestUser(String name, String dateOfBirth, String email, String userName, String password, int age, double discount) {
-		super(name,dateOfBirth,email,userName,password,age);
+		super();
 		this.discount = discount;
 	}
 	public double enterDiscount() {

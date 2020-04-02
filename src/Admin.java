@@ -42,6 +42,7 @@ public class Admin extends RegularUser {
 			}
 		}
 		//TODO review logic to go here
+		//search sql for same show and copy review over else review is set to empty
 		Review review = null;
 		
 		/*
