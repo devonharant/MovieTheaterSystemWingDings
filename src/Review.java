@@ -57,29 +57,8 @@ public class Review {
 	public void sortReview() {
 
 	}
-	/**
-	 * writes the reviews for a listing
-	 * @return
-	 */
-
-	// these three functions should be moved to user class
-
-	public String writeReview() {
-		return null;
-	}
-	/**
-	 * deletes a listing
-	 */
-	public void deleteReview() {
-
-	}
-	/**
-	 * edits a listing
-	 * @return
-	 */
-	public String editReview() {
-		return null;
-	}
+	
+	
 	
 	public String toString() {
 		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 

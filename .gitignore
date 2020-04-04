@@ -4,3 +4,4 @@ src/Admin.class
 src/GuestUser.class
 src/User.class
 src/Admin.class
+*.class

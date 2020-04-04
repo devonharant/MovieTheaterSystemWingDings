@@ -141,6 +141,20 @@ public class RegularUser extends User {
 	}
 	
 	/**
+	 * deletes a listing
+	 */
+	public void deleteReview() {
+
+	}
+	/**
+	 * edits a listing
+	 * @return
+	 */
+	public String editReview() {
+		return null;
+	}
+	
+	/**
 	 * create a string representation of the object
 	 */
 	public String toString () {
