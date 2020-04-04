@@ -6,20 +6,30 @@ public class TheaterDriver {
 	private static Scanner key = new Scanner(System.in);
 	private static String response;
 	private static int numberResponse;
-	private static HashMap<User, Venue> userVenue;
+	private static HashMap<String, Show> shows;
 	private static RegularUser testUser = new RegularUser();
 	
 	//hardcode test variables
-	static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
-	static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
-	static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
-	static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
-	static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
-	static Review testReview = new Review(5, "Test", testUser);
+	private static HashMap<String, Venue> venue;
+	private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
+	private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
+	private static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
+	private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
+	private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
+	private static Review testReview = new Review(5, "Test", testUser);
+	private static Admin admin = new Admin("devon", "11/16/1998", "devharant@gmail.com", "garth", "nuts", 21, venue3);
+	
 	
 	public static void main(String[] args) {
-		venue1.shows.addShow(new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99));
-		venue2.shows.addShow(new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00));
+		/*(venue.put("Nickelodeon", venue1);
+		venue.put("Koger", venue2);
+		venue.put("PlaysRUs", venue3);*/
+		Show show1 = new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99);
+		Show show2 = new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00);
+		venue1.shows.addShow(show1);
+		venue2.shows.addShow(show2);
+		shows.put("Frozen 2", show1);
+		shows.put("Dead and Company", show2);
 		run();
 	}
 	
@@ -73,7 +83,7 @@ public class TheaterDriver {
 				numberResponse = key.nextInt();
 			}
 			
-			showCheck(numberResponse);
+			showCheck(numberResponse, user);
 		}
 	}
 	
@@ -90,7 +100,7 @@ public class TheaterDriver {
 			numberResponse = key.nextInt();
 		}
 		
-		showCheck(numberResponse);
+		showCheck(numberResponse, user);
 	}
 	
 	private static void adminPage() {
@@ -104,7 +114,7 @@ public class TheaterDriver {
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
 			Venue venue = new Cineplex("george", "george"); //test stuff
-			Admin user = new Admin("garth", "11/16/1998", "devharant@gmail.com", "garth", "nuts", 21, venue); //test stuff
+			Admin user = admin;
 			System.out.println("Welcome " + user.getName() + "!\n");
 			System.out.println("What would you like to do?\n" + 
 							   "Add show (1)\n" + 
@@ -130,11 +140,14 @@ public class TheaterDriver {
 		return false;
 	}*/
 	
-	private static void showCheck(int choice) {
+	private static void showCheck(int choice, User user) {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
 			venue1.shows.printShows();
+			String show = key.next();
+			Show tempShow = shows.get(show);
+			user.createTicket(tempShow);
 			break;
 		case 2:
 			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
