@@ -28,17 +28,21 @@ public class Admin extends RegularUser {
 		int numOfTimes = keyboard.nextInt();
 		keyboard.nextLine();
 		String times[] = new String[numOfTimes];
-		System.out.println("What are the show times in format mm/dd 00:00am");
-		for(int i = 0; i < numOfTimes; i++) {
+
+		System.out.println("What are the show times in format mm/dd 00:00am, enter them one at time");
+		int count = 0;
+		while (count < numOfTimes) {
+
 			String time = keyboard.nextLine();
-			//TODO
-			//needs better sanitization check
 			if(time.length() != 13) {
 				System.out.println("Make sure the time is correctly formated as mm/dd 00:00am");
 			}
 			else {
+				//TODO
+				//call is valid date function here
 				//adds new string to the times array
-				times[i] = time;
+				times[count] = time.toUpperCase();
+				count++;
 			}
 		}
 		//TODO review logic to go here
