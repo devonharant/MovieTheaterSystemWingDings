@@ -1,16 +1,16 @@
 *************************************
 *            Nickelodeon            *
-*              Frozen               *
-*        Time: 12/01 01:00PM        *
-*             Seats: KK KL             *
+*              Frozen 2               *
+*        Time: 12/12 12:00PM        *
+*             Seats: EF EG EH EI EJ EK             *
 *        Food: null                 *
 *                                   *
 *                                   *
-*            Total: 24.0            *
+*            Total: 77.94            *
 *                                   *
 *                                   *
 *                                   *
-*      Ticket ID: 57496685        *
+*      Ticket ID: 106829990        *
 *                                   *
 *   Thank you for your business!!   *
 *  C: C: C: C: C: C: C: C: C: C: C: *

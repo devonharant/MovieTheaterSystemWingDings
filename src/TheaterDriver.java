@@ -6,11 +6,13 @@ public class TheaterDriver {
 	private static Scanner key = new Scanner(System.in);
 	private static String response;
 	private static int numberResponse;
-	private static HashMap<String, Show> shows;
-	private static RegularUser testUser = new RegularUser();
+	private static Map<String, Show> shows = new HashMap<>();
+	private static Map<String, Venue> venue = new HashMap<>();
+	private static Map<String, RegularUser> users = new HashMap<>();
 	
 	//hardcode test variables
-	private static HashMap<String, Venue> venue;
+	private static RegularUser testUser = new RegularUser();
+	
 	private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
 	private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
 	private static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
@@ -61,6 +63,9 @@ public class TheaterDriver {
 		}
 	}
 	
+	/**
+	 * contains the user splash page with choices for printing show types for purchasing purposes or leaving a review
+	 */
 	private static void userPage() {
 		String username;
 		String password;
@@ -71,22 +76,30 @@ public class TheaterDriver {
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
-			user = new RegularUser();
+			RegularUser user = new RegularUser();
 			System.out.println("What kind of shows would you like to see?\n" + 
 					   "Movies (1)\n" +
 					   "Plays (2)\n" +
-					   "Concerts (3)\n");
-			
+					   "Concerts (3)\n"+
+					   "or would you like to leave a review for a show or venue (4)");
 			numberResponse = key.nextInt();
-			while(numberResponse < 0 || numberResponse > 3) {
+			key.nextLine();
+			while(numberResponse < 0 || numberResponse > 4) {
 				System.out.println("Invalid input, try again");
 				numberResponse = key.nextInt();
+				key.nextLine();
 			}
-			
-			showCheck(numberResponse, user);
+			if(numberResponse == 4) {
+				reviewCheck(user);
+			}
+			else
+				showCheck(numberResponse, user);
+			}	
 		}
-	}
 	
+	/**
+	 * contains logic for just printing show types and purchasing ticket, base user purchase will prompt the guest to create a profile
+	 */
 	private static void guestPage() {
 		user = new User();
 		System.out.println("Welcome Guest!");
@@ -95,6 +108,7 @@ public class TheaterDriver {
 						   "Plays (2)\n" +
 						   "Concerts (3)\n");
 		numberResponse = key.nextInt();
+		key.nextLine();
 		while(numberResponse < 0 || numberResponse > 3) {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
@@ -103,15 +117,18 @@ public class TheaterDriver {
 		showCheck(numberResponse, user);
 	}
 	
+	/**
+	 * contains the logic for the admin page, will eventually need to extend to regular user unless we wish to do further splits
+	 */
 	private static void adminPage() {
 		String username;
 		String password;
 		System.out.println("Admin");
 		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
-		username = key.next();
+		username = key.nextLine();
 		System.out.println("Password: ");
-		password = key.next();
+		password = key.nextLine();
 		if(true /*loginCheck(username, password)*/) {
 			Venue venue = new Cineplex("george", "george"); //test stuff
 			Admin user = admin;
@@ -140,14 +157,21 @@ public class TheaterDriver {
 		return false;
 	}*/
 	
+	
+	/**
+	 * contains logic for printing out the show hashmaps contents and allowing users to create and purchase a ticket from that information
+	 * @param choice (the number relating to movie(1), play(2) or concert(3)
+	 * @param user the user profile making this choice, passed through for ticket generation reasons
+	 */
 	private static void showCheck(int choice, User user) {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
 			venue1.shows.printShows();
-			String show = key.next();
+			String show = key.nextLine();
 			Show tempShow = shows.get(show);
 			user.createTicket(tempShow);
+			user.purchaseTicket();
 			break;
 		case 2:
 			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
@@ -161,10 +185,23 @@ public class TheaterDriver {
 		}
 	}
 	
+	/**
+	 * contains logic for users to leave reviews for venue or show
+	 * @param user the user object being used to create a review
+	 */
+	private static void reviewCheck(RegularUser user) {
+		System.out.println("");
+	}
+	
+	/**
+	 * contains the logic for admin functions
+	 * @param choice, int representing what the admin would like to do add a show(1) remove a show(2) add food (3) remove food (4)
+	 * @param user, the admin making the changes
+	 */
 	private static void adminFunctions(int choice, Admin user) {
 		switch(choice) {
 		case 1:
-			user.addShowListing();
+			System.out.print("Created show:\n" + user.addShowListing().toStringShort());
 			break;
 		case 2:
 			System.out.println("Removing show");
