@@ -6,6 +6,18 @@ public class TheaterDriver {
 	private static Scanner key = new Scanner(System.in);
 	private static String response;
 	private static int numberResponse;
+	private static HashMap<User, Venue> userVenue;
+	private static RegularUser testUser = new RegularUser();
+	
+	//hardcode test variables
+	static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
+	static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
+	static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
+	static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
+	static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
+	static Review testReview = new Review(5, "Test", testUser);
+	venue1.shows.addShow(new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99));
+	venue2.shows.addShow(new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00));
 	
 	public static void main(String[] args) {
 		run();
@@ -43,12 +55,13 @@ public class TheaterDriver {
 		String username;
 		String password;
 		System.out.println("Registered User");
-		System.out.println("Please sign in\n" +
+		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
 		username = key.next();
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
+			user = new RegularUser();
 			System.out.println("What kind of shows would you like to see?\n" + 
 					   "Movies (1)\n" +
 					   "Plays (2)\n" +
@@ -65,7 +78,8 @@ public class TheaterDriver {
 	}
 	
 	private static void guestPage() {
-		System.out.println("Guest");
+		user = new User();
+		System.out.println("Welcome Guest!");
 		System.out.println("What kind of shows would you like to see?\n" + 
 						   "Movies (1)\n" +
 						   "Plays (2)\n" +
@@ -83,12 +97,15 @@ public class TheaterDriver {
 		String username;
 		String password;
 		System.out.println("Admin");
-		System.out.println("Please sign in\n" +
+		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
 		username = key.next();
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
+			Venue venue = new Cineplex("george", "george"); //test stuff
+			Admin user = new Admin("garth", "11/16/1998", "devharant@gmail.com", "garth", "nuts", 21, venue); //test stuff
+			System.out.println("Welcome " + user.getName() + "!\n");
 			System.out.println("What would you like to do?\n" + 
 							   "Add show (1)\n" + 
 							   "Remove show (2)\n" +
@@ -100,7 +117,7 @@ public class TheaterDriver {
 				numberResponse = key.nextInt();
 			}
 			
-			adminFunctions(numberResponse);
+			adminFunctions(numberResponse, user);
 		}
 	}
 	
@@ -117,7 +134,7 @@ public class TheaterDriver {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
-			//print shows
+			venue1.shows.printShows();
 			break;
 		case 2:
 			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
@@ -131,10 +148,10 @@ public class TheaterDriver {
 		}
 	}
 	
-	private static void adminFunctions(int choice) {
+	private static void adminFunctions(int choice, Admin user) {
 		switch(choice) {
 		case 1:
-			System.out.println("Adding show");
+			user.addShowListing();
 			break;
 		case 2:
 			System.out.println("Removing show");

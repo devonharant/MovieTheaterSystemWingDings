@@ -1,6 +1,6 @@
 
-
 import java.util.Scanner;
+
 public class Admin extends RegularUser {
 	private Venue venue;
 	
@@ -28,7 +28,7 @@ public class Admin extends RegularUser {
 		int numOfTimes = keyboard.nextInt();
 		keyboard.nextLine();
 		String times[] = new String[numOfTimes];
-		System.out.println("What are the show times in format mm/dd 00:00am type q when done");
+		System.out.println("What are the show times in format mm/dd 00:00am");
 		for(int i = 0; i < numOfTimes; i++) {
 			String time = keyboard.nextLine();
 			//TODO
@@ -82,6 +82,10 @@ public class Admin extends RegularUser {
 	 */
 	public void removeFood(String food) {
 	//TODO
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
 
