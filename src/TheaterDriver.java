@@ -21,9 +21,9 @@ public class TheaterDriver {
 	
 	
 	public static void main(String[] args) {
-		/*(venue.put("Nickelodeon", venue1);
+		venue.put("Nickelodeon", venue1);
 		venue.put("Koger", venue2);
-		venue.put("PlaysRUs", venue3);*/
+		venue.put("PlaysRUs", venue3);
 		Show show1 = new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99);
 		Show show2 = new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00);
 		venue1.shows.addShow(show1);
