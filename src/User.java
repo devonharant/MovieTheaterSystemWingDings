@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 public class User {
 		
 		protected Ticket ticket;
@@ -15,9 +16,7 @@ public class User {
 		 */
 		public void createTicket(Show show) {
 			Scanner keyboard = new Scanner(System.in);
-			System.out.println("what time would you like see?");
-			show.showTimes();
-			//time validitiy check
+			System.out.println("what time would you like see?\n" + show.showTimes());
 			boolean q = false;
 			String time = "";
 			while(!q) {
@@ -28,7 +27,13 @@ public class User {
 					q = false;
 				}
 				else {
-					
+					if(show.showTimes().contains(time.toUpperCase())){
+						
+					}
+					else {
+						System.out.println("Please enter an avaliable show time");
+						System.out.println(show.showTimes());
+					}
 				}
 			}
 			System.out.println("what seats would you like to reserve?");
@@ -71,7 +76,7 @@ public class User {
 				//TODO finish ability to add food to ticket
 				Ticket t = new Ticket(show,time,seats,food,price);
 				this.ticket = t;			}
-			else { */  //food to ticket logic commentted out till food implemented
+			else { */  //food to ticket logic commented out till food implemented
 				Ticket t = new Ticket(show,time,seats,price);
 				this.ticket = t;
 			//}

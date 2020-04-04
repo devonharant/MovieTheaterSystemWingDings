@@ -97,6 +97,10 @@ public class Ticket {
 		return ret;
 	}
 
+	/**
+	 * returns the string of a foodless ticket
+	 * @return the ticket to string without the food item
+	 */
 	public String toString() {
 		return                   /*   "/\
                                       /  \
@@ -130,6 +134,15 @@ _ _____  _ _ _  ___ __________/ /              \ \_____________________________
           / /-',-'                                           `-.`-\ \
          /_,-'`                                                 `'-._\"
 				 + */"Show: " + show.getName() + "\nTime: " + time + "\nSeats: " + seatsToString() +"\nPrice: " + price;
-				 //+ "\nFood: " + food.toString();
+				 
+	}
+	
+	/**
+	 * returns the string of a ticket with food
+	 * @returns the values of a ticket with a food object
+	 */
+	public String toStringWithFood() {
+		return "Show: " + show.getName() + "\nTime: " + time + "\nSeats: " + seatsToString() +"\nPrice: " + price
+		 + "\nFood: " + food.toString();
 	}
 }
