@@ -16,10 +16,10 @@ public class TheaterDriver {
 	static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
 	static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
 	static Review testReview = new Review(5, "Test", testUser);
-	venue1.shows.addShow(new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99));
-	venue2.shows.addShow(new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00));
 	
 	public static void main(String[] args) {
+		venue1.shows.addShow(new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99));
+		venue2.shows.addShow(new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00));
 		run();
 	}
 	
