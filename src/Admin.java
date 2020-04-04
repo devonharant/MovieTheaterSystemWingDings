@@ -13,7 +13,7 @@ public class Admin extends RegularUser {
 	 * adds a show to the show iterator of a venue after querying the user for the information, takes in
 	 * multiple showtimes to create a list of the same show at different times.
 	 */
-	public void addShowListing() {
+	public Show addShowListing() {
 		//user input data.
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Whats the show name");
@@ -62,7 +62,7 @@ public class Admin extends RegularUser {
 		 */
 		Show newShow = venue.factory.createShow(this.venue, name, description, times, review, theaterRows, theaterColumns, price);
 		venue.shows.addShow(newShow);
-		
+		return newShow;
 	}
 	
 	/**
