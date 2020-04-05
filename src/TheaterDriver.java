@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.Map.Entry;
+
+import Show.Theater;
 
 public class TheaterDriver {
 	
@@ -214,7 +217,24 @@ public class TheaterDriver {
 	 * @param user the user object being used to create a review
 	 */
 	private static void reviewCheck(RegularUser user) {
-		System.out.println("");
+		System.out.println("What would you like to leave a review for? \nVenue (1) \nShow (2)");
+		int reviewchoice = key.nextInt();
+		switch(reviewchoice) {
+		case 1:
+			System.out.println("Which venue would you like to leave a review for?\n");
+			System.out.println(Arrays.asList(venue)); // method 1
+			String venuechoice = key.nextLine();
+			break;
+		case 2:
+			System.out.println("Which show would you like to leave a review for?\n");
+			System.out.println(Arrays.asList(shows)); // method 1
+			String showchoice = key.nextLine();
+			break;
+		default:
+			System.out.println("Please enter a proper choice");
+			break;
+		}
+		
 	}
 	
 	/**
