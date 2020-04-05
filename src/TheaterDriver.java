@@ -32,6 +32,7 @@ public class TheaterDriver {
 		venue2.shows.addShow(show2);
 		shows.put("Frozen 2", show1);
 		shows.put("Dead and Company", show2);
+		
 		run();
 	}
 	
@@ -42,20 +43,20 @@ public class TheaterDriver {
 						   "Do you wish to continue as a guest? (2)\n\n" +
 						   "Admin login (3)\n");
 		numberResponse = key.nextInt();
-		while(numberResponse < 0 || numberResponse > 3) {
+		while((numberResponse < 0 || numberResponse > 3)) {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 		}
 		
 		switch(numberResponse) {
 		case 1:
-			userPage();
+			userSignIn();
 			break;
 		case 2:
 			guestPage();
 			break;
 		case 3:
-			adminPage();
+			adminSignIn();
 			break;
 		default:
 			System.out.println("Invalid choice, try again");
@@ -66,7 +67,7 @@ public class TheaterDriver {
 	/**
 	 * contains the user splash page with choices for printing show types for purchasing purposes or leaving a review
 	 */
-	private static void userPage() {
+	private static void userSignIn() {
 		String username;
 		String password;
 		System.out.println("Registered User");
@@ -76,26 +77,30 @@ public class TheaterDriver {
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
-			RegularUser user = new RegularUser();
-			System.out.println("What kind of shows would you like to see?\n" + 
-					   "Movies (1)\n" +
-					   "Plays (2)\n" +
-					   "Concerts (3)\n"+
-					   "or would you like to leave a review for a show or venue (4)");
+			userLandingPage();	
+		}
+	}
+	private static void userLandingPage() {
+		RegularUser user = new RegularUser();
+		System.out.println("What kind of shows would you like to see?\n" + 
+				   "Movies (1)\n" +
+				   "Plays (2)\n" +
+				   "Concerts (3)\n"+
+				   "or would you like to leave a review for a show or venue (4)");
+		numberResponse = key.nextInt();
+		key.nextLine();
+		while(numberResponse < 0 || numberResponse > 4) {
+			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 			key.nextLine();
-			while(numberResponse < 0 || numberResponse > 4) {
-				System.out.println("Invalid input, try again");
-				numberResponse = key.nextInt();
-				key.nextLine();
-			}
-			if(numberResponse == 4) {
-				reviewCheck(user);
-			}
-			else
-				showCheck(numberResponse, user);
-			}	
 		}
+		if(numberResponse == 4) {
+			reviewCheck(user);
+		}
+		else {
+			showCheck(numberResponse, user);
+		}
+	}
 	
 	/**
 	 * contains logic for just printing show types and purchasing ticket, base user purchase will prompt the guest to create a profile
@@ -120,31 +125,33 @@ public class TheaterDriver {
 	/**
 	 * contains the logic for the admin page, will eventually need to extend to regular user unless we wish to do further splits
 	 */
-	private static void adminPage() {
+	private static void adminSignIn() {
 		String username;
 		String password;
 		System.out.println("Admin");
 		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
-		username = key.nextLine();
+		username = key.next();
 		System.out.println("Password: ");
-		password = key.nextLine();
+		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
-			Venue venue = new Cineplex("george", "george"); //test stuff
-			Admin user = admin;
-			System.out.println("Welcome " + user.getName() + "!\n");
-			System.out.println("What would you like to do?\n" + 
-							   "Add show (1)\n" + 
-							   "Remove show (2)\n" +
-							   "Add food (3) \n" + 
-							   "Remove food (4)\n");
+			adminLandingPage();
+		}
+	}
+	
+	private static void adminLandingPage() {
+		Venue venue = new Cineplex("george", "george"); //test stuff
+		Admin user = admin;
+		System.out.println("Welcome " + user.getName() + "!\n");
+		System.out.println("What would you like to do?\n" + 
+						   "Add show (1)\n" + 
+						   "Remove show (2)\n" +
+						   "Add food (3) \n" + 
+						   "Remove food (4)\n");
+		numberResponse = key.nextInt();
+		while(numberResponse < 0 || numberResponse > 4) {
+			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
-			while(numberResponse < 0 || numberResponse > 4) {
-				System.out.println("Invalid input, try again");
-				numberResponse = key.nextInt();
-			}
-			
-			adminFunctions(numberResponse, user);
 		}
 	}
 	
@@ -213,7 +220,7 @@ public class TheaterDriver {
 			System.out.println("Removing food");
 			break;
 		default:
-			System.out.println("Go away, how did you find me?");
+			System.out.println("????");
 			break;
 		}
 	}
