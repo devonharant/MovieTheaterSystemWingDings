@@ -160,9 +160,10 @@ public class TheaterDriver {
 						   "Add show (1)\n" + 
 						   "Remove show (2)\n" +
 						   "Add food (3) \n" + 
-						   "Remove food (4)\n");
+						   "Remove food (4)\n" +
+						   "Quit (5)");
 		numberResponse = key.nextInt();
-		while(numberResponse < 0 || numberResponse > 4) {
+		while(numberResponse < 0 || numberResponse > 5) {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 		}
@@ -199,8 +200,11 @@ public class TheaterDriver {
 		case 3:
 			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
 			break;
-		default:
+		case 5:
 			userQuit = true;
+			break;
+		default:
+			System.out.println("How are you here bro wtf");
 			break;
 		}
 	}
@@ -231,6 +235,9 @@ public class TheaterDriver {
 			break;
 		case 4:
 			System.out.println("Removing food");
+			break;
+		case 5:
+			userQuit = true;
 			break;
 		default:
 			System.out.println("????");
