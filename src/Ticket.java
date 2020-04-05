@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Ticket class to be had by User that
  * holds all the show information as well as
@@ -102,38 +104,22 @@ public class Ticket {
 	 * @return the ticket to string without the food item
 	 */
 	public String toString() {
-		return                   /*   "/\
-                                      /  \
-                                     / /\ \
-                                    / /  \ \
-                                   / /    \ \
-                                  / /      \ \
-                                 / /        \ \
-                                / /          \ \
-                               / /            \ \
-_ _____  _ _ _  ___ __________/ /              \ \_____________________________
-`|_   _|| |_| || __|___________/                \________________________  ,-'
-   | |`-|  _  || _|                                                  ,-',-'
-   |_|`-|_| |_||___|                                             _,-',-'
-  ____    `-.`-____        ____        ___      ___  ___  _____,-_,-'________
- |    \      `/    |    ,-'    `-.    |   |    |   ||   ||        | /        |
- |     \     /     |-.,'  __  __  `.  |   |    |   ||   ||    ____||    _____|
- |      \   /      |-/   /  \/  \   \ |   |    |   ||   ||   |____ |   (____
- |       \_/       ||    \      /    ||   |    |   ||   ||        ||        \
- |   |\       /|   ||     |     ]    | \   \  /   / |   ||    ____| \____    |
- |   | \     / |   |/\    |____|    /   \   \/   /  |   ||   |____  _____)   |
- |   |  \   /  |   | / .  ,' | `. ,'   , \      /   |   ||        ||         |
- |___|   \_/   |___|/   `-.____,-'  ,-',`-\____/    |___||________||________/
-                 / /             ,-',-' `-.`-.             \ \
-                / /           ,-',-'       `-.`-.           \ \
-               / /         ,-',-'             `-.`-.         \ \
-              / /       ,-',-'                   `-.`-.       \ \
-            / /     ,-',-'                         `-.`-.     \ \
-            / /   ,-',-'                               `-.`-.   \ \
-           / / ,-',-'                                     `-.`-. \ \
-          / /-',-'                                           `-.`-\ \
-         /_,-'`                                                 `'-._\"
-				 + */"Show: " + show.getName() + "\nTime: " + time + "\nSeats: " + seatsToString() +"\nPrice: " + price;
+		Random rand = new Random();
+		int rando = rand.nextInt(1000000000);
+		return "*            " + getShow().getVenue().getName() + "            \n" +
+		"             " + getShow().getName() + "               \n" +
+		"         Time: " + getTime() + "        \n" +
+		"             Seats: " + seatsToString() + "            \n" +
+		"                                   \n" +
+		"                                   \n" +
+		"            Total: " + getPrice() + "            *\n" +
+		"                                   \n" +
+		"                                   \n" +
+		"                                   \n" +
+		"      Ticket ID: " + rando + "        \n" +
+		"                                   \n" +
+		"   Thank you for your business!!   \n" +
+		"  C: C: C: C: C: C: C: C: C: C: C: \n";
 				 
 	}
 	
@@ -142,7 +128,22 @@ _ _____  _ _ _  ___ __________/ /              \ \_____________________________
 	 * @returns the values of a ticket with a food object
 	 */
 	public String toStringWithFood() {
-		return "Show: " + show.getName() + "\nTime: " + time + "\nSeats: " + seatsToString() +"\nPrice: " + price
-		 + "\nFood: " + food.toString();
+		Random rand = new Random();
+		int rando = rand.nextInt(1000000000);
+		return "            " + getShow().getVenue().getName() + "            \n" +
+		"              " + getShow().getName() + "               \n" +
+		"        Time: " + getTime() + "        \n" +
+		"             Seats: " + seatsToString() + "            \n" +
+		"        Food: " + getFood() + "                 \n" +
+		"                                   \n" +
+		"                                   \n" +
+		"            Total: " + getPrice() + "            \n" +
+		"                                   \n" +
+		"                                   \n" +
+		"                                   \n" +
+		"      Ticket ID: " + rando + "        \n" +
+		"                                   \n" +
+		"   Thank you for your business!!   \n" +
+		"  C: C: C: C: C: C: C: C: C: C: C: \n";
 	}
 }

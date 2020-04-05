@@ -9,6 +9,7 @@ public class TheaterDriver {
 	private static Map<String, Show> shows = new HashMap<>();
 	private static Map<String, Venue> venue = new HashMap<>();
 	private static Map<String, RegularUser> users = new HashMap<>();
+	private static boolean userQuit = false;
 	
 	//hardcode test variables
 	private static RegularUser testUser = new RegularUser();
@@ -51,12 +52,15 @@ public class TheaterDriver {
 		switch(numberResponse) {
 		case 1:
 			userSignIn();
+			System.out.println("Thank you for using PORTIA'S PICS & FLICKS!");
 			break;
 		case 2:
 			guestPage();
+			System.out.println("Thank you for using PORTIA'S PICS & FLICKS!");
 			break;
 		case 3:
 			adminSignIn();
+			System.out.println("Thank you for using PORTIA'S PICS & FLICKS!");
 			break;
 		default:
 			System.out.println("Invalid choice, try again");
@@ -77,7 +81,9 @@ public class TheaterDriver {
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
-			userLandingPage();	
+			while(userQuit == false) {
+				userLandingPage();
+			}
 		}
 	}
 	private static void userLandingPage() {
@@ -85,14 +91,18 @@ public class TheaterDriver {
 		System.out.println("What kind of shows would you like to see?\n" + 
 				   "Movies (1)\n" +
 				   "Plays (2)\n" +
-				   "Concerts (3)\n"+
-				   "or would you like to leave a review for a show or venue (4)");
+				   "Concerts (3)\n" +
+				   "Or leave a review for a show or venue (4)\n" +
+				   "Quit (5)");
 		numberResponse = key.nextInt();
 		key.nextLine();
-		while(numberResponse < 0 || numberResponse > 4) {
+		while(numberResponse < 0 || numberResponse > 5) {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 			key.nextLine();
+		}
+		if(numberResponse == 5) {
+			userQuit = true;
 		}
 		if(numberResponse == 4) {
 			reviewCheck(user);
@@ -118,8 +128,9 @@ public class TheaterDriver {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 		}
-		
-		showCheck(numberResponse, user);
+		while(userQuit == false) {
+			showCheck(numberResponse, user);
+		}
 	}
 	
 	/**
@@ -135,7 +146,9 @@ public class TheaterDriver {
 		System.out.println("Password: ");
 		password = key.next();
 		if(true /*loginCheck(username, password)*/) {
-			adminLandingPage();
+			while(userQuit == false) {
+				adminLandingPage();
+			}
 		}
 	}
 	
@@ -187,7 +200,7 @@ public class TheaterDriver {
 			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
 			break;
 		default:
-			System.out.println("How did you get here?");
+			userQuit = true;
 			break;
 		}
 	}
