@@ -222,13 +222,26 @@ public class TheaterDriver {
 		switch(reviewchoice) {
 		case 1:
 			System.out.println("Which venue would you like to leave a review for?\n");
-			System.out.println(Arrays.asList(venue)); // method 1
+			System.out.println(Arrays.asList(venue)); 
 			String venuechoice = key.nextLine();
+			//Review testReview = new Review(5, "Test", testUser);
+			System.out.println("Please enter the star rating for the venue (1-5)\n");
+			int stars = key.nextInt();
+			System.out.println("Please enter any comments for the venue\n");
+			String review = key.nextLine();
+			Review venueReview = new Review(stars, review, testUser);
+
 			break;
 		case 2:
 			System.out.println("Which show would you like to leave a review for?\n");
-			System.out.println(Arrays.asList(shows)); // method 1
+			System.out.println(Arrays.asList(shows)); 
 			String showchoice = key.nextLine();
+			//Review testReview = new Review(5, "Test", testUser);
+			System.out.println("Please enter the star rating for the show (1-5)\n");
+			int showstars = key.nextInt();
+			System.out.println("Please enter any comments for the show\n");
+			String showreview = key.nextLine();
+			Review showReview = new Review(showstars, showreview, testUser);
 			break;
 		default:
 			System.out.println("Please enter a proper choice");
