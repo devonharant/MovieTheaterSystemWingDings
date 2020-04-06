@@ -40,7 +40,7 @@ public class sql  {
 	static Scanner keyboard;
 	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
 	// public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
-	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
+	public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
@@ -117,7 +117,7 @@ public static void venueHash() throws SQLException {
 				String dateofbirth = rs.getString("dateofbirth");
 				String username = rs.getString("User_name");
 				String Password = rs.getString("Password");
-				u = new User(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
+				u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
 				map.put(UserID, u);
 			}
 			for(Integer i : map.keySet()) {
@@ -380,10 +380,11 @@ public static void sortvenuereviewdsc() throws SQLException {
 		String dateofbirth = rs.getString("dateofbirth");
 		String username = rs.getString("User_name");
 		String Password = rs.getString("Password");
-		u = new User(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
+		u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
 		map.put(UserID, u);
 		System.out.print("ID: " + UserID);
 		System.out.print(", Age: " + age);
+		
 		System.out.print(", First: " + first_name);
 		System.out.println(", Last: " + last_name);
 		

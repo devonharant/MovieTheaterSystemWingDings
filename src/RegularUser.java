@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class RegularUser extends User {
+	protected Integer id;
 	protected int points;
 	protected HashMap<String, Ticket> purchaseHistory = new HashMap<>();
 	protected HashMap<String, Review> reviewHistory = new HashMap<>();
@@ -23,8 +24,9 @@ public class RegularUser extends User {
 		this.reviewHistory = new HashMap<>();
 	}
 	
-	public RegularUser(String name, String dateOfBirth, String email, String userName, String password, int age) {
+	public RegularUser(Integer userID, String name, String dateOfBirth, String email, String userName, String password, int age) {
 		super();
+		this.id = userID;
 		this.setName(name);
 		this.setDateOfBirth(dateOfBirth);
 		this.setEmail(email);
