@@ -1,3 +1,4 @@
+
 /**
  * This class sets up the base for all show reviews
  * @author Wingdings
@@ -7,11 +8,13 @@ public class Review {
 	protected int stars;
 	protected String review;
 
-	protected User reviewer;
+	protected RegularUser reviewer;
 	
-	public Review(int stars, String review, User user) {
+	public Review(int stars, String review, RegularUser user) {
 		this.setStars(stars);
-		this.review = review;
+		this.setReview(review);
+		this.reviewer = user;
+
 	}
 	
 	/**
@@ -33,9 +36,18 @@ public class Review {
 	}
 	
 	/**
+	 * 
+	 */
+	public void setReview(String review) {
+		this.review = review;
+	}
+	
+	/**
 	 * sets the star ratings for each show
+	 * @return
 	 */
 	public void setStars(int stars) {
+		//TODO
 		//sanitize to 1-5 stars
 		this.stars = stars;
 	}
@@ -46,7 +58,8 @@ public class Review {
 	public void sortReview() {
 
 	}
-	/**
+
+  /**
 	 * writes the reviews for a listing
 	 * @return
 	 */
@@ -77,5 +90,9 @@ public class Review {
 	public static Venue getVenueReview(Integer i) {
 		// TODO Auto-generated method stub
 		return null;
+	
+	public String toString() {
+		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 
+
 	}
 }
