@@ -35,12 +35,14 @@ public class sql  {
 	static String sortasc = "select * from moviereview order by rating asc";
 	static String sortdsc = "select * from moviereview order by rating desc";
 	static String sortvenueasc = "select * from venuereview order by rating asc";
-	static String sortvenuedsc = "select * from user order by age desc";
+	static String sortvenuedsc = "select * from venuereview order by rating desc";
 	static String newthing = "select * from venuereview where venue_id=?";
+	static String newthing2 = "select * from moviereview where movie_id=?";
 	static Scanner keyboard;
 	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
-	// public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
-	public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
+
+	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
+	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
@@ -56,13 +58,11 @@ public class sql  {
 			print();
 
 		System.out.println("hello");
-		System.out.println("printing venue hash with reviews");
-		venueHash();
-
+	venueHash();
 		
 	}
 	public static void showhash() throws SQLException {
-	//	Show s;
+		Show s;
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(thing1);
 		while(rs.next()) {
@@ -73,8 +73,17 @@ public class sql  {
 			String moviedate = rs.getString("moviedate");
 			String movietime = rs.getString("movietime");
 			Integer venueid = rs.getInt("venueid");
-			//s = new Show(movieid,name,description,price,moviedate,movietime,venueid);
-			//moviehash.put(movieid, s);
+			s = new Show(movieid,name,description,price,moviedate,movietime,venueid);
+			moviehash.put(movieid, s);
+			PreparedStatement ps = connection.prepareStatement(newthing2);
+			ps.setInt(1, movieid);
+			ResultSet rs2 = ps.executeQuery();
+			while(rs2.next()) {
+				String review = rs2.getString("review");
+				int rating = rs2.getInt("rating");
+				int id = rs2.getInt("Mreview_id");
+				s.addingreview(id,review,rating);
+			}
 
 		}
 	}
@@ -354,45 +363,54 @@ public static void findandremovemoviereview() throws SQLException {
 }
 public static void sortmoviereviewasc() throws SQLException {
 	stmt = connection.createStatement();
-	int status = stmt.executeUpdate(sortasc);
-	System.out.println("your reviews have been sorted by the best first");
+	ResultSet rs = stmt.executeQuery(sortasc);
+		while(rs.next()) {
+			Integer reviewid = rs.getInt("Mreview_id");
+			String review = rs.getString("review");
+			int rating = rs.getInt("rating");
+		System.out.print("ID: " +rating);
+		System.out.print(", review: " + review);
+		System.out.println(", rating: " + rating);
+	}
 }
 public static void sortmoviereviewdsc() throws SQLException {
 	stmt = connection.createStatement();
-	int status = stmt.executeUpdate(sortdsc);
-	System.out.println("your reviews have been sorted by the best first");
+	ResultSet rs = stmt.executeQuery(sortdsc);
+		while(rs.next()) {
+			Integer reviewid = rs.getInt("Mreview_id");
+			String review = rs.getString("review");
+			int rating = rs.getInt("rating");
+		System.out.print("ID: " +rating);
+		System.out.print(", review: " + review);
+		System.out.println(", rating: " + rating);
+	}
 }
 public static void sortvenuereviewasc() throws SQLException {
 	stmt = connection.createStatement();
-	int status = stmt.executeUpdate(sortvenueasc);
-	System.out.println("your reviews have been sorted by the best first");
+	ResultSet rs = stmt.executeQuery(sortvenueasc);
+		while(rs.next()) {
+			Integer reviewid = rs.getInt("review_id");
+			String review = rs.getString("review");
+			int rating = rs.getInt("rating");
+		System.out.print("ID: " +rating);
+		System.out.print(", review: " + review);
+		System.out.println(", rating: " + rating);
+	}
+	
 }
 public static void sortvenuereviewdsc() throws SQLException {
-	User u;
 	stmt = connection.createStatement();
 	ResultSet rs = stmt.executeQuery(sortvenuedsc);
-	while(rs.next()) {
-		Integer UserID = rs.getInt("UserID");
-		String first_name = rs.getString("first_name");
-		String last_name = rs.getString("last_name");
-		String email = rs.getString("email");
-		int age = rs.getInt("age");
-		String dateofbirth = rs.getString("dateofbirth");
-		String username = rs.getString("User_name");
-		String Password = rs.getString("Password");
-		u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
-		map.put(UserID, u);
-		System.out.print("ID: " + UserID);
-		System.out.print(", Age: " + age);
-		
-		System.out.print(", First: " + first_name);
-		System.out.println(", Last: " + last_name);
-		
-	
 
-	}
-	
-	
+		while(rs.next()) {
+			Integer reviewid = rs.getInt("review_id");
+			String review = rs.getString("review");
+			int rating = rs.getInt("rating");
+		System.out.print("ID: " +rating);
+		System.out.print(", review: " + review);
+		System.out.println(", rating: " + rating);
+		}
 	}
 }
+
 
