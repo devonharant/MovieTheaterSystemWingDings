@@ -1,5 +1,5 @@
 
-public class GuestUser extends User {
+public class GuestUser extends Guest {
 private double discount;
 
 	public GuestUser() {

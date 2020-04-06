@@ -1,6 +1,6 @@
 
-public abstract class UserDecorator extends User{
-	protected User user;
+public abstract class UserDecorator extends Guest{
+	protected Guest user;
 	protected double discount;
 	public abstract void addDiscount();
 }

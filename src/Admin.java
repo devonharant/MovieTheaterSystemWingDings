@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Admin extends RegularUser {
+public class Admin extends User {
 	private Venue venue;
 	
 	public Admin(Integer id, String name, String dateOfBirth, String email, String userName, String password, int age, Venue venue) {

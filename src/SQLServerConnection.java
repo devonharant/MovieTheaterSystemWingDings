@@ -114,7 +114,7 @@ public static void venueHash() throws SQLException {
 		}
 	}
 		public static void printuserhash() throws SQLException {
-			User u;
+			RegularUser u;
 			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(thing);
 			while(rs.next()) {

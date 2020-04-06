@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class Venue{
+public class Venue{
 	
   protected int venueid;
 	protected String name;
@@ -17,7 +17,7 @@ public abstract class Venue{
 	protected String type;
 	protected ShowIterator shows;
 	protected FoodIterator food;
-	private HashMap<String, Review> reviews = new HashMap<String, Review>();
+	private HashMap<Integer, Review> reviews = new HashMap<Integer, Review>();
 	protected ShowFactory factory;
 	
 	public Venue(String name, String location) {
@@ -28,7 +28,9 @@ public abstract class Venue{
 		factory = new ShowFactory();
 	}
 	
-	public abstract String getType();
+	public String getType() {
+		return type;
+	}
 	
 	public String getName() {
 		return name;
@@ -58,10 +60,10 @@ public abstract class Venue{
 	public void printFood() {
 		
 	}
-	public void addingreview( int id,String review, int rating) {
-		Review.put(id,new Review(rating, review, null));
+	public void addReview( int id,String review, int rating, User user) {
+		reviews.put(id,new Review(rating, review, user));
 	}
-	public String getvenueReveiew(String review) {
+	public String getVenueReview(String review) {
 		return review;
 	}
 	/**

@@ -1,21 +1,19 @@
 import java.util.*;
 import java.util.Map.Entry;
 
-import Show.Theater;
-
 public class TheaterDriver {
 	
-	private static User user;
+	private static Guest user;
 	private static Scanner key = new Scanner(System.in);
 	private static String response;
 	private static int numberResponse;
 	private static Map<String, Show> shows = new HashMap<>();
 	private static Map<String, Venue> venue = new HashMap<>();
-	private static Map<String, RegularUser> users = new HashMap<>();
+	private static Map<String, User> users = new HashMap<>();
 	private static boolean userQuit = false;
 	
 	//hardcode test variables
-	private static RegularUser testUser = new RegularUser();
+	private static User testUser = new User();
 	
 	private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
 	private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
@@ -90,7 +88,7 @@ public class TheaterDriver {
 		}
 	}
 	private static void userLandingPage() {
-		RegularUser user = new RegularUser();
+		User user = new User();
 		System.out.println("What kind of shows would you like to see?\n" + 
 				   "Movies (1)\n" +
 				   "Plays (2)\n" +
@@ -119,7 +117,7 @@ public class TheaterDriver {
 	 * contains logic for just printing show types and purchasing ticket, base user purchase will prompt the guest to create a profile
 	 */
 	private static void guestPage() {
-		user = new User();
+		user = new Guest();
 		System.out.println("Welcome Guest!");
 		System.out.println("What kind of shows would you like to see?\n" + 
 						   "Movies (1)\n" +
@@ -187,7 +185,7 @@ public class TheaterDriver {
 	 * @param choice (the number relating to movie(1), play(2) or concert(3)
 	 * @param user the user profile making this choice, passed through for ticket generation reasons
 	 */
-	private static void showCheck(int choice, User user) {
+	private static void showCheck(int choice, Guest user) {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
@@ -216,7 +214,7 @@ public class TheaterDriver {
 	 * contains logic for users to leave reviews for venue or show
 	 * @param user the user object being used to create a review
 	 */
-	private static void reviewCheck(RegularUser user) {
+	private static void reviewCheck(User user) {
 		System.out.println("What would you like to leave a review for? \nVenue (1) \nShow (2)");
 		int reviewchoice = key.nextInt();
 		switch(reviewchoice) {

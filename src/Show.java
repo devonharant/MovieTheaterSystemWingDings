@@ -42,10 +42,10 @@ public class Show {
 	private Venue venue;
 	private String name;
 	private String description;
-	private Map<String, Theater> theaters = new HashMap<String, Theater>();
+	private Map<Integer, Theater> theaters = new HashMap<Integer, Theater>();
 	private int rows;
 	private int cols;
-	private Map<String, Review> reviews = new HashMap<String, Review>();
+	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private double price;
 	
 	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
@@ -124,7 +124,7 @@ public class Show {
 	}
   
   public void addingReview( int id,String review, int rating) {
-		MReview.put(id,new Review(rating, review, null));
+		reviews.put(id,new Review(rating, review, null));
   }
 	
 	public Review getReview() {
@@ -170,7 +170,7 @@ public class Show {
 	 */
 	public String getAllReviews() {
 		String ret = "";
-		for(Entry<String, Review> r:reviews.entrySet()) {
+		for(Entry<Integer, Review> r:reviews.entrySet()) {
 			 ret = ret + r.getValue().toString() +"\n\n";
 		}
 		return ret;
@@ -182,7 +182,7 @@ public class Show {
 	 */
 	public String showTimes() {
 		String ret = "";
-		for(Entry<String, Theater> t:theaters.entrySet()) {
+		for(Entry<Integer, Theater> t:theaters.entrySet()) {
 			ret = ret + t.getKey() + ". ";
 		}
 		return ret;
