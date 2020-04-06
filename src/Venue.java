@@ -1,3 +1,4 @@
+
 /**
  * Venue abstract class to be implemented by children
  * forcing characteristics and methods to be used
@@ -8,14 +9,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class Venue{
+public class Venue{
 	
+  protected int venueid;
 	protected String name;
 	protected String location;
 	protected String type;
 	protected ShowIterator shows;
 	protected FoodIterator food;
-	private HashMap<String, Review> reviews = new HashMap<String, Review>();
+	private HashMap<Integer, Review> reviews = new HashMap<Integer, Review>();
 	protected ShowFactory factory;
 	
 	public Venue(String name, String location) {
@@ -26,7 +28,9 @@ public abstract class Venue{
 		factory = new ShowFactory();
 	}
 	
-	public abstract String getType();
+	public String getType() {
+		return type;
+	}
 	
 	public String getName() {
 		return name;
@@ -56,28 +60,20 @@ public abstract class Venue{
 	public void printFood() {
 		
 	}
-	
+	public void addReview( int id,String review, int rating, User user) {
+		reviews.put(id,new Review(rating, review, user));
+	}
+	public String getVenueReview(String review) {
+		return review;
+	}
 	/**
 	 * adds a Review to the venue
 	 * @param stars, stars given the venue
 	 * @param review, review itself
 	 */
-	public void addReview(String userName, Review review) {
-		this.reviews.put(userName, review);
-	}
 	
-	/**
-	 * creates a string of all the reviews of the venue
-	 */
-	public String getAllReviews() {
-		String ret = "";
-		for(Entry<String, Review> r:reviews.entrySet()) {
-			 ret = ret + r.getValue().toString() +"\n\n";
-		}
-		return ret;
-	}
 
 	public String toString() {
 		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getAllReviews();
-	}
+  }
 }

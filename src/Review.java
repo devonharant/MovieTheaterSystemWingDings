@@ -8,12 +8,13 @@ public class Review {
 	protected int stars;
 	protected String review;
 
-	protected RegularUser reviewer;
+	protected User reviewer;
 	
-	public Review(int stars, String review, RegularUser user) {
+	public Review(int stars, String review, User user) {
 		this.setStars(stars);
 		this.setReview(review);
 		this.reviewer = user;
+
 	}
 	
 	/**
@@ -21,7 +22,7 @@ public class Review {
 	 * @return
 	 */
 	public int getStars() {
-		return stars;
+  return stars;
 	}
 	
 	/**
@@ -57,10 +58,38 @@ public class Review {
 	public void sortReview() {
 
 	}
+
+  /**
+	 * writes the reviews for a listing
+	 * @return
+	 */
+
+	// these three functions should be moved to user class
+
+	public String writeReview() {
+		return null;
+	}
+	/**
+	 * deletes a listing
+	 */
+	public void deleteReview() {
+
+	}
+	/**
+	 * edits a listing
+	 * @return
+	 */
+	public String editReview() {
+		return null;
+	}
 	
-	
+	public static Venue getVenueReview(Integer i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	public String toString() {
 		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 
+
 	}
 }
