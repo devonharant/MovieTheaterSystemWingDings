@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.Map.Entry;
-
 
 /**
  * 
@@ -124,7 +122,10 @@ public class Show {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+  
+  public void addingReview( int id,String review, int rating) {
+		MReview.put(id,new Review(rating, review, null));
+  }
 	
 	public Review getReview() {
 		//TODO get specific review

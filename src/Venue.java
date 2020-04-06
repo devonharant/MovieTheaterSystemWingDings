@@ -1,3 +1,4 @@
+
 /**
  * Venue abstract class to be implemented by children
  * forcing characteristics and methods to be used
@@ -10,6 +11,7 @@ import java.util.Map.Entry;
 
 public abstract class Venue{
 	
+  protected int venueid;
 	protected String name;
 	protected String location;
 	protected String type;
@@ -56,28 +58,20 @@ public abstract class Venue{
 	public void printFood() {
 		
 	}
-	
+	public void addingreview( int id,String review, int rating) {
+		Review.put(id,new Review(rating, review, null));
+	}
+	public String getvenueReveiew(String review) {
+		return review;
+	}
 	/**
 	 * adds a Review to the venue
 	 * @param stars, stars given the venue
 	 * @param review, review itself
 	 */
-	public void addReview(String userName, Review review) {
-		this.reviews.put(userName, review);
-	}
 	
-	/**
-	 * creates a string of all the reviews of the venue
-	 */
-	public String getAllReviews() {
-		String ret = "";
-		for(Entry<String, Review> r:reviews.entrySet()) {
-			 ret = ret + r.getValue().toString() +"\n\n";
-		}
-		return ret;
-	}
 
 	public String toString() {
 		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getAllReviews();
-	}
+  }
 }

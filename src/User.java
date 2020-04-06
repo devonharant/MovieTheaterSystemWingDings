@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 
@@ -146,5 +147,4 @@ public class User {
 			this.ticket.show.cancelSeatReservation(ticket.time, ticket.seats);
 			this.ticket = null;
 		}
-
 }

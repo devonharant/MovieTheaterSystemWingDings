@@ -2,6 +2,12 @@
 /ConcertHall.class
 /PlayHouse.class
 /Cineplex.class
+
+/Review.class
+/Show.class
+/User.class
+/sql.class
+
 /Ticket.class
 /Iterator.class
 /Show.class
@@ -27,3 +33,4 @@
 
 /Theater.class
 /Show$Theater.class
+
