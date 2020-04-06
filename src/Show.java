@@ -56,7 +56,7 @@ public class Show {
 		this.setCol(theaterColumns);
 		for(int i = 0; i < time.length; i++) {
 			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
-			this.theaters.put(t.getTime(),t);
+			this.theaters.put(i,t);
 		}
 		this.setPrice(price);
 	}
@@ -139,9 +139,9 @@ public class Show {
 	 * @param theaterColumns
 	 */
 	public void addShowTimes(String[] time, int theaterRows, int theaterColumns) {
-		for(int i = 0; i < time.length; i++) {
+		for(int i = theaters.size(); i < theaters.size() + time.length; i++) {
 			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
-			this.theaters.put(t.getTime(),t);
+			this.theaters.put(i,t);
 		}
 	}
 	
@@ -153,7 +153,7 @@ public class Show {
 	 */
 	public void addShowTime(String time, int theaterRows, int theaterColumns) {
 		Theater t = new Theater(theaterRows, theaterColumns, time);
-		this.theaters.put(time,t);
+		this.theaters.put(theaters.size(),t);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class Show {
 	 * @param review, review itself
 	 */
 	public void addReview(String userName, Review review) {
-		this.reviews.put(userName, review);
+		this.reviews.put(reviews.size(), review);
 	}
 	
 	/**

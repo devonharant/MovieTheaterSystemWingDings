@@ -114,7 +114,7 @@ public static void venueHash() throws SQLException {
 		}
 	}
 		public static void printuserhash() throws SQLException {
-			RegularUser u;
+			User u;
 			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(thing);
 			while(rs.next()) {
@@ -126,7 +126,7 @@ public static void venueHash() throws SQLException {
 				String dateofbirth = rs.getString("dateofbirth");
 				String username = rs.getString("User_name");
 				String Password = rs.getString("Password");
-				u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
+				u = new User(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
 				map.put(UserID, u);
 			}
 			for(Integer i : map.keySet()) {
