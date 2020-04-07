@@ -21,7 +21,7 @@ public class TheaterDriver {
 	private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
 	private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
 	private static Review testReview = new Review(5, "Test", testUser);
-	private static Admin admin = new Admin("devon", "11/16/1998", "devharant@gmail.com", "garth", "nuts", 21, venue3);
+	private static Admin admin = new Admin(numberResponse, "devon", "11/16/1998", "devharant@gmail.com", "garth", "nuts", response, 21, venue3);
 	
 	
 	public static void main(String[] args) {
@@ -117,7 +117,7 @@ public class TheaterDriver {
 	 * contains logic for just printing show types and purchasing ticket, base user purchase will prompt the guest to create a profile
 	 */
 	private static void guestPage() {
-		user = new Guest();
+		user = new GuestUser();
 		System.out.println("Welcome Guest!");
 		System.out.println("What kind of shows would you like to see?\n" + 
 						   "Movies (1)\n" +
@@ -219,6 +219,7 @@ public class TheaterDriver {
 		int reviewchoice = key.nextInt();
 		switch(reviewchoice) {
 		case 1:
+			/*
 			System.out.println("Which venue would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(venue)); 
 			String venuechoice = key.nextLine();
@@ -228,9 +229,11 @@ public class TheaterDriver {
 			System.out.println("Please enter any comments for the venue\n");
 			String review = key.nextLine();
 			Review venueReview = new Review(stars, review, testUser);
-
+			*/
+			User.createVenueReview(venue);
 			break;
 		case 2:
+			/*
 			System.out.println("Which show would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(shows)); 
 			String showchoice = key.nextLine();
@@ -240,7 +243,8 @@ public class TheaterDriver {
 			System.out.println("Please enter any comments for the show\n");
 			String showreview = key.nextLine();
 			Review showReview = new Review(showstars, showreview, testUser);
-			break;
+			break;*/
+			User.createShowReview(shows);
 		default:
 			System.out.println("Please enter a proper choice");
 			break;
