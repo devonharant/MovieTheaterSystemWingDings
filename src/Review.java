@@ -8,9 +8,9 @@ public class Review {
 	protected int stars;
 	protected String review;
 
-	protected User reviewer;
+	protected RegularUser reviewer;
 	
-	public Review(int stars, String review, User user) {
+	public Review(int stars, String review, RegularUser user) {
 		this.setStars(stars);
 		this.setReview(review);
 		this.reviewer = user;
@@ -82,14 +82,13 @@ public class Review {
 	public String editReview() {
 		return null;
 	}
-	
+
 	public static Venue getVenueReview(Integer i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 	public String toString() {
-		return "Stars: " + stars + "\nReviewer: " + reviewer.getUsername() +"\nReview: " + review; 
+		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 
 
 	}
 }
