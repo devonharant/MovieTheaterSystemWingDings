@@ -1,9 +1,15 @@
 
 public class Theater {
+	
+		private Integer theaterid;
+		private Integer showid;
 		private String time;
 		private boolean [][] seats;
 		
-		public Theater(Integer show, int rows, int cols, String time, String seats) {
+		public Theater(Integer theaterid, Integer show, int rows, int cols, String time, String seats) {
+			
+			this.theaterid = theaterid;
+			this.showid = show;
 			this.seats = new boolean[rows][cols];
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < cols; j++) 
@@ -16,7 +22,10 @@ public class Theater {
 			this.setTime(time);
 		}
 		
-		public Theater(Integer show, int rows, int cols, String time) {
+		public Theater(Integer theaterid, Integer show, int rows, int cols, String time) {
+			
+			this.theaterid = theaterid;
+			this.showid = show;
 			this.seats = new boolean[rows][cols];
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < cols; j++) 
@@ -39,6 +48,10 @@ public class Theater {
 
 		public void setSeats(boolean[][] seats) {
 			this.seats = seats;
+		}
+
+		public Integer getShowID() {
+			return showid;
 		}
 		
 	}

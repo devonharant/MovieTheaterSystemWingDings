@@ -13,7 +13,7 @@ public class Show {
 	private int venueid;
 	private String name;
 	private String description;
-	private Map<Integer, Theater> theaters = new HashMap<Integer, Theater>();
+	public Map<Integer, Theater> theaters = new HashMap<Integer, Theater>();
 	private int rows;
 	private int cols;
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
@@ -109,24 +109,26 @@ public class Show {
 	 * @param theaterRows
 	 * @param theaterColumns
 	 */
+	/*
 	public void addShowTimes(String[] time, int theaterRows, int theaterColumns) {
 		for(int i = theaters.size(); i < theaters.size() + time.length; i++) {
 			Theater t = new Theater(this.getShowID(), theaterRows, theaterColumns, time[i]);
 			this.theaters.put(i,t);
 		}
 	}
-	
+	*/
 	/**
 	 * adds a batch of show times given an array of show times and dimensions of the theater
 	 * @param time show time in string format 00/00 00:00AM
 	 * @param theaterRows
 	 * @param theaterColumns
 	 */
+	/*
 	public void addShowTime(String time, int theaterRows, int theaterColumns) {
 		Theater t = new Theater(this.getShowID(), theaterRows, theaterColumns, time);
 		this.theaters.put(theaters.size(),t);
 	}
-
+*/
 	/**
 	 * adds a Review to the show
 	 * @param stars, stars given the show
@@ -242,7 +244,7 @@ public class Show {
 	
 	
 	public String toStringShort() {
-		return "ID:" + showId + "Name: " + name +  "\nTimes: " + showTimes() + " \n";
+		return "ID:" + venueid + "Name: " + name +  "\nTimes: " + showTimes() + " \n";
 	}
 	
 	public String toString() {

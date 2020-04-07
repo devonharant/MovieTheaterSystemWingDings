@@ -12,20 +12,12 @@ public class TheaterDriver {
 	private static Map<Integer, Show> shows = new HashMap<>();
 	private static Map<Integer, Venue> venues = new HashMap<>();
 	private static Map<Integer, User> users = new HashMap<>();
+	public static HashMap<Integer, Food> foods = new HashMap<Integer, Food>();
+	 public static HashMap<Integer, Theater> theaters = new HashMap<Integer, Theater>();
 	private static boolean userQuit = false;
 	
 	//hardcode test variables
 	private static User testUser = new User();
-	
-
-	//private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
-	//private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
-	//private static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
-	//private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
-	//private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
-	//private static Review testReview = new Review(5, "Test", testUser);
-	
-
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -34,6 +26,8 @@ public class TheaterDriver {
 		venues = SQLServerConnection.venueHash(); 
 		shows = SQLServerConnection.showhash();
 		users = SQLServerConnection.printuserhash();
+		foods = SQLServerConnection.foodhash();
+		theaters = SQLServerConnection.theaterHash();
 		run();
 	}
 	
@@ -100,7 +94,7 @@ public class TheaterDriver {
 			}
 		}
 	}
-	private static void userLandingPage() {
+	private static void userLandingPage() throws SQLException {
 		User user = new User();
 		System.out.println("What kind of shows would you like to see?\n" + 
 				   "Movies (1)\n" +
@@ -187,12 +181,18 @@ public class TheaterDriver {
 						   "Quit (5)");
 		numberResponse = key.nextInt();
 		key.nextLine();
+		if(numberResponse == 5) {
+			userQuit = true;
+		}
 		while(numberResponse < 0 || numberResponse > 5) {
 			
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
+			key.nextLine();
 		}
+		while(userQuit == false) {
 		adminFunctions(numberResponse, user);
+		}
 	}
 	
 	private static User loginCheck(String username, String password) throws SQLException {
@@ -217,9 +217,11 @@ public class TheaterDriver {
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
 
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="Cineplex");
-				System.out.println(v.getValue().name);
+				if(v.getValue().getType()=="cineplex") {
+									System.out.println(v.getValue().toString());
+			}
 				v.getValue().printShows();
+				
 			}
 			show = key.nextInt();
 			key.nextLine();
@@ -263,8 +265,9 @@ public class TheaterDriver {
 	/**
 	 * contains logic for users to leave reviews for venue or show
 	 * @param user the user object being used to create a review
+	 * @throws SQLException 
 	 */
-	private static void reviewCheck(User user) {
+	private static void reviewCheck(User user) throws SQLException {
 		System.out.println("What would you like to leave a review for? \nVenue (1) \nShow (2)");
 		int reviewchoice = key.nextInt();
 		key.nextLine();
@@ -272,27 +275,21 @@ public class TheaterDriver {
 		case 1:
 			System.out.println("Which venue would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(venues)); 
-			String venuechoice = key.nextLine();
+			int venueid = key.nextInt();
+					key.nextLine();
+					Venue venue = SQLServerConnection.venuehash.get(venueid);
 			//Review testReview = new Review(5, "Test", testUser);
-			System.out.println("Please enter the star rating for the venue (1-5)\n");
-			int stars = key.nextInt();
-			key.nextLine();
-			System.out.println("Please enter any comments for the venue\n");
-			String review = key.nextLine();
-			Review venueReview = new Review(stars, review, user);
+			user.createVenueReview(venue);
 
 			break;
 		case 2:
 			System.out.println("Which show would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(shows)); 
-			String showchoice = key.nextLine();
-			//Review testReview = new Review(5, "Test", testUser);
-			System.out.println("Please enter the star rating for the show (1-5)\n");
-			int showstars = key.nextInt();
-			key.nextLine();
-			System.out.println("Please enter any comments for the show\n");
-			String showreview = key.nextLine();
-			Review showReview = new Review(showstars, showreview, user);
+			int showid = key.nextInt(); 
+					key.nextLine();
+			Show show = SQLServerConnection.moviehash.get(showid);
+			user.createShowReview(show);
+			
 			break;
 		default:
 			System.out.println("Please enter a proper choice");
@@ -314,19 +311,26 @@ public class TheaterDriver {
 		SQLServerConnection.printvenues();
 		System.out.println("please enter the venue id that you want to work in");
 		Integer vChoice = keyboard.nextInt();
+		keyboard.nextLine();
 		Venue venue = venues.get(vChoice);
 		switch(choice) {
 		case 1:
 			System.out.print("Created show:\n" + user.addShowListing(venue).toStringShort());
+			SQLServerConnection.showhash();
+			SQLServerConnection.theaterHash();
 			break;
 		case 2:
 			System.out.println("Removing show:\n" + user.removeShow(venue));
+			SQLServerConnection.showhash();
+			SQLServerConnection.theaterHash();
 			break;
 		case 3:
 			System.out.println("Adding food\n" +user.addFood(venue).toString());
+			SQLServerConnection.foodhash();
 			break;
 		case 4:
 			System.out.println("Removing food\n" + user.removeFood(venue));
+			SQLServerConnection.foodhash();
 			break;
 		case 5:
 			userQuit = true;
