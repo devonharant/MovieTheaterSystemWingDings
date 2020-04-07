@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Scanner;
 import com.mysql.cj.xdevapi.Statement;
-import com.sun.org.glassfish.external.statistics.Stats;
+
 
 import java.sql.*;
 public class SQLServerConnection  {
