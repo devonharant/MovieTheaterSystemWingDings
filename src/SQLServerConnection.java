@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Scanner;
 import com.mysql.cj.xdevapi.Statement;
-
-
-
+import com.sun.org.glassfish.external.statistics.Stats;
 
 import java.sql.*;
 public class SQLServerConnection  {
@@ -261,7 +259,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			System.out.println("database was connected correctly");
 			}
 	}
-	public static void addfood(Venue venue) throws SQLException {
+	public static Food addfood(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into food(name,cost,quantity,venueid)" + " values (?,?,?,?)";
 		System.out.println("enter the foods name");
@@ -278,12 +276,13 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		ps.setDouble(2, cost);
 		ps.setInt(3, quantity);
 		ps.setInt(4, venueid);
-int status = ps.executeUpdate();
+		int status = ps.executeUpdate();
+		return new Food(status, name, cost, quantity, venueid);
 	}
 		
 		
 	
-	public static void addmovie(Venue venue) throws SQLException {
+	public static Show addmovie(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 
 		String query = "insert into movie(name,description,price,venueid)" + " values (?,?,?,?)";
@@ -304,11 +303,10 @@ int status = ps.executeUpdate();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1,name);
 		ps.setString(2, description);
-		ps.setString(3, date);
-		ps.setString(3, time);
-		ps.setDouble(5, price);
-		ps.setInt(6, venueid);
+		ps.setDouble(3, price);
+		ps.setInt(4, venueid);
 		int status = ps.executeUpdate();
+		return new Show(status, name, description, price, venueid);
 	}
 
 	public static Theater addtheater(Show show) throws SQLException {
