@@ -106,7 +106,7 @@ public class Ticket {
 	public String toString() {
 		Random rand = new Random();
 		int rando = rand.nextInt(1000000000);
-		return "*            " + getShow().getVenue().getName() + "            \n" +
+		return "*            " + SQLServerConnection.venuehash.get(this.getShow().getVenueID()).getName() + "            \n" +
 		"             " + getShow().getName() + "               \n" +
 		"         Time: " + getTime() + "        \n" +
 		"             Seats: " + seatsToString() + "            \n" +
@@ -130,7 +130,7 @@ public class Ticket {
 	public String toStringWithFood() {
 		Random rand = new Random();
 		int rando = rand.nextInt(1000000000);
-		return "            " + getShow().getVenue().getName() + "            \n" +
+		return "            " + SQLServerConnection.venuehash.get(this.getShow().getVenueID()).getName() + "            \n" +
 		"              " + getShow().getName() + "               \n" +
 		"        Time: " + getTime() + "        \n" +
 		"             Seats: " + seatsToString() + "            \n" +

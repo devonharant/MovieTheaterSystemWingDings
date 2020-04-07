@@ -10,7 +10,7 @@ public class Show {
 	private static final int UNICODE_OFFSET= 65;
 
 	private int showId;
-	private Venue venue;
+	private int venueid;
 	private String name;
 	private String description;
 	private Map<Integer, Theater> theaters = new HashMap<Integer, Theater>();
@@ -69,13 +69,11 @@ public class Show {
 	}
 
 	
-	public Venue getVenue() {
-		return venue;
+	public int getVenueID() {
+		return venueid;
 	}
 	
-	public void setVenue(Venue venue) {
-		this.venue = venue;
-	}
+	
 	
 	public String getName() {
 		return name;
