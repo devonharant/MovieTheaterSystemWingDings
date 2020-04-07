@@ -156,7 +156,7 @@ public class Show {
 	public String showTimes() {
 		String ret = "";
 		for(Entry<Integer, Theater> t:theaters.entrySet()) {
-			ret = ret + t.getKey() + ". ";
+			ret = ret + t.getValue().toString() + ". ";
 		}
 		return ret;
 	}
@@ -168,30 +168,35 @@ public class Show {
 	 */
 	public boolean reserveSeats(String time, String[] reservation) {
 		//retrieves the current seat reservation
-		boolean seats[][] = theaters.get(time).getSeats();
-		for(String string:reservation) {
-			//splits String of AA into r and c
-			char charR = string.charAt(0);
-			char charC = string.charAt(1);
-			int r = ((int) charR)-UNICODE_OFFSET;
-			int c = ((int) charC)-UNICODE_OFFSET;
-			
-			if(seats[r][c]==false) {
-				return false;
+		for(Entry<Integer, Theater> t:theaters.entrySet()) {
+			if(time == t.getValue().getTime()) {
+				boolean seats[][] = theaters.get(time).getSeats();
+				for(String string:reservation) {
+				//splits String of AA into r and c
+					char charR = string.charAt(0);
+					char charC = string.charAt(1);
+					int r = ((int) charR)-UNICODE_OFFSET;
+					int c = ((int) charC)-UNICODE_OFFSET;
+				
+					if(seats[r][c]==false) {
+						return false;
+					}
+				}
+		
+				for(String string:reservation) {
+				//splits String of AA into r and c
+				char charR = string.charAt(0);
+				char charC = string.charAt(1);
+				int r = ((int) charR)-UNICODE_OFFSET;
+				int c = ((int) charC)-UNICODE_OFFSET;
+				seats[r][c]=false;
+				}
+		
+		//sets the seats in the theater at this show time to the updated array
+			theaters.get(t.getKey()).setSeats(seats);	
 			}
 		}
-		for(String string:reservation) {
-			//splits String of AA into r and c
-			char charR = string.charAt(0);
-			char charC = string.charAt(1);
-			int r = ((int) charR)-UNICODE_OFFSET;
-			int c = ((int) charC)-UNICODE_OFFSET;
-			seats[r][c]=false;
-		}
-		//sets the seats in the theater at this show time to the updated array
-		theaters.get(time).setSeats(seats);
 		return true;
-		
 	}
 	
 	/**
@@ -200,43 +205,52 @@ public class Show {
 	 */
 	public void cancelSeatReservation(String time, String [] reservation) {
 		//retrieves the current seat reservations
-		boolean seats[][] = theaters.get(time).getSeats();
-		for(String string:reservation) {
-			//splits String of AA into r and c
-			char charR = string.charAt(0);
-			char charC = string.charAt(1);
-			int r = ((int) charR)-UNICODE_OFFSET;
-			int c = ((int) charC)-UNICODE_OFFSET;
-			seats[r][c]=false;
+		for(Entry<Integer, Theater> t:theaters.entrySet()) {
+			if(time == t.getValue().getTime()) {
+				boolean seats[][] = theaters.get(time).getSeats();
+				for(String string:reservation) {
+					//splits String of AA into r and c
+					char charR = string.charAt(0);
+					char charC = string.charAt(1);
+					int r = ((int) charR)-UNICODE_OFFSET;
+					int c = ((int) charC)-UNICODE_OFFSET;
+					seats[r][c]=false;
+				}
+				//sets the seats in the theater at this show time to the updated array
+				theaters.get(time).setSeats(seats);
+			}
 		}
-		//sets the seats in the theater at this show time to the updated array
-		theaters.get(time).setSeats(seats);
+		
 	}
 	
 	/**
 	 * prints the available seats to the console using unicode character to denote column and row of the theater
 	 */
 	public void printSeats(String time) {
-		boolean seats[][] = theaters.get(time).getSeats();
-		//preps the column to be a name space
-		System.out.print("  ");
-		//prints the row names
-		for(int i = 0; i < cols; i++ ) {
-			char c =  (char) (i+UNICODE_OFFSET);
-			System.out.print(c+" ");
-		}
-		//prints the seats as (O)pen or (x)occupied, prints the row label first.
-		System.out.println();
-		for(int i = 0; i < rows; i++) {
-			char c =  (char) (i+UNICODE_OFFSET);
-			System.out.print(c+ " ");
-			for (int j = 0; j < cols; j++) {
-				if(seats[i][j]==true)
-					System.out.print("O ");
-				else
-					System.out.print("X ");
+		for(Entry<Integer, Theater> t:theaters.entrySet()) {
+			if(time == t.getValue().getTime()) {
+				boolean seats[][] = theaters.get(time).getSeats();
+				//preps the column to be a name space
+				System.out.print("  ");
+				//prints the row names
+				for(int i = 0; i < cols; i++ ) {
+					char c =  (char) (i+UNICODE_OFFSET);
+					System.out.print(c+" ");
+				}
+				//prints the seats as (O)pen or (x)occupied, prints the row label first.
+				System.out.println();
+				for(int i = 0; i < rows; i++) {
+					char c =  (char) (i+UNICODE_OFFSET);
+					System.out.print(c+ " ");
+					for (int j = 0; j < cols; j++) {
+						if(seats[i][j]==true)
+							System.out.print("O ");
+						else
+							System.out.print("X ");
+					}
+					System.out.println();
+				}
 			}
-			System.out.println();
 		}
 		
 	}
