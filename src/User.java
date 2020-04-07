@@ -133,7 +133,7 @@ public class User extends Guest {
 	 * @throws SQLException 
 	 */
 	public void createVenueReview(Venue venue) throws SQLException {
-		SQLServerConnection.addVenueReview(venue);
+		SQLServerConnection.addVenuereview(venue);
 	}
 	
 	/**
