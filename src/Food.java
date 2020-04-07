@@ -1,15 +1,28 @@
 
 public class Food {
 
-	public String name;
-	public double cost;
-	public int quantity;
+	private int foodId;
+	private int venueId;
+	private String name;
+	private double cost;
+	private int quantity;
 
-	public Food(String name, double cost, int quantity) {
+	public Food(Integer foodId, String name, double cost, int quantity, int venueId) {
+		this.venueId = venueId;
 		this.setName(name);
 		this.setCost(cost);
 		this.setQuantity(quantity);
+		this.foodId = foodId;
 	}
+	
+	public int getVenueId() {
+		return venueId;
+	}
+	
+	public int getFoodId() {
+		return foodId;
+	}
+	
 	public String getName() {
 		return name;
 	}

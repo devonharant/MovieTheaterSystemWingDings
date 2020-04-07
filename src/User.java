@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.*;
 
 public class User extends Guest {
@@ -129,42 +130,27 @@ public class User extends Guest {
 	/**
 	 * takes in a venue and allows a regular user to create a review for that venue
 	 * @param venue
+	 * @throws SQLException 
 	 */
-	public void createVenueReview(Venue venue) {
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("How would you rate this venue from 1-5");
-		//TODO sanitize input
-		int stars = keyboard.nextInt();
-		keyboard.nextLine();
-		System.out.println("Tell us about your experience there");
-		//TODO sanitize input
-		String response =  keyboard.nextLine();
-		Review r = new Review(stars, response, this);
-		venue.addReview(intOfDoom, r);
+	public void createVenueReview(Venue venue) throws SQLException {
+		SQLServerConnection.addVenueReview(venue);
 	}
 	
 	/**
 	 * takes in a show and allow the user to create a review for that show
 	 * @param show
+	 * @throws SQLException 
 	 */
-	public void createShowReview(Show show) {
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("How would you rate this show from 1-5");
-		//TODO sanitize input
-		int stars = keyboard.nextInt();
-		keyboard.nextLine();
-		System.out.println("Tell us about your experience there");
-		//TODO sanitize input
-		String response =  keyboard.nextLine();
-		Review r = new Review(stars, response, this);
-		show.addReview(intOfDoom, r);
+	public void createShowReview(Show show) throws SQLException {
+		SQLServerConnection.addmoviereview(show);
 	}
 	
 	/**
 	 * deletes a listing
+	 * @throws SQLException 
 	 */
-	public void deleteReview() {
-
+	public void deleteReview() throws SQLException {
+		SQLServerConnection.findandremovemoviereview();
 	}
 	/**
 	 * edits a listing

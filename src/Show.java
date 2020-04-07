@@ -8,38 +8,8 @@ import java.util.Map.Entry;
 public class Show {
 	private static final double DEFAULT_PRICE = 12.00;
 	private static final int UNICODE_OFFSET= 65;
-	private class Theater {
-		private String time;
-		private boolean [][] seats;
-		
-		private Theater(int rows, int cols, String time) {
-			this.seats = new boolean[rows][cols];
-			for(int i = 0; i < rows; i++) {
-				for(int j = 0; j < cols; j++) {
-					seats[i][j]= true;
-				}
-			}
-			this.setTime(time);
-		}
-		// getters and setters
-		private String getTime() {
-			return time;
-		}
 
-		private void setTime(String time) {
-			this.time = time;
-		}
-
-		private boolean[][] getSeats() {
-			return seats;
-		}
-
-		private void setSeats(boolean[][] seats) {
-			this.seats = seats;
-		}
-		
-	}
-
+	private int showId;
 	private Venue venue;
 	private String name;
 	private String description;
@@ -49,16 +19,11 @@ public class Show {
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private double price;
 	
-	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
+	public Show(Integer movieid,String name, String description, Double price, Integer venueid) {
+		this.showId  = movieid;
 		this.setVenue(venue);
 		this.setName(name);
 		this.setDescription(description);
-		this.setRows(theaterRows);
-		this.setCol(theaterColumns);
-		for(int i = 0; i < time.length; i++) {
-			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
-			this.theaters.put(i,t);
-		}
 		this.setPrice(price);
 	}
 	/*
@@ -66,6 +31,10 @@ public class Show {
 	 * 
 	 * TODO sanitize setters.
 	 */
+	public Integer getShowID() {
+		return showId;
+	}
+	
 	public int getRows() {
 		return rows;
 	}
@@ -141,7 +110,7 @@ public class Show {
 	 */
 	public void addShowTimes(String[] time, int theaterRows, int theaterColumns) {
 		for(int i = theaters.size(); i < theaters.size() + time.length; i++) {
-			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
+			Theater t = new Theater(this.getShowID(), theaterRows, theaterColumns, time[i]);
 			this.theaters.put(i,t);
 		}
 	}
@@ -153,7 +122,7 @@ public class Show {
 	 * @param theaterColumns
 	 */
 	public void addShowTime(String time, int theaterRows, int theaterColumns) {
-		Theater t = new Theater(theaterRows, theaterColumns, time);
+		Theater t = new Theater(this.getShowID(), theaterRows, theaterColumns, time);
 		this.theaters.put(theaters.size(),t);
 	}
 
