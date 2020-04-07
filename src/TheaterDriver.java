@@ -12,6 +12,8 @@ public class TheaterDriver {
 	private static Map<Integer, Show> shows = new HashMap<>();
 	private static Map<Integer, Venue> venues = new HashMap<>();
 	private static Map<Integer, User> users = new HashMap<>();
+	public static HashMap<Integer, Food> foods = new HashMap<Integer, Food>();
+	 public static HashMap<Integer, Theater> theaters = new HashMap<Integer, Theater>();
 	private static boolean userQuit = false;
 	
 	//hardcode test variables
@@ -24,6 +26,8 @@ public class TheaterDriver {
 		venues = SQLServerConnection.venueHash(); 
 		shows = SQLServerConnection.showhash();
 		users = SQLServerConnection.printuserhash();
+		foods = SQLServerConnection.foodhash();
+		theaters = SQLServerConnection.theaterHash();
 		run();
 	}
 	
@@ -313,10 +317,12 @@ public class TheaterDriver {
 		case 1:
 			System.out.print("Created show:\n" + user.addShowListing(venue).toStringShort());
 			SQLServerConnection.showhash();
+			SQLServerConnection.theaterHash();
 			break;
 		case 2:
 			System.out.println("Removing show:\n" + user.removeShow(venue));
 			SQLServerConnection.showhash();
+			SQLServerConnection.theaterHash();
 			break;
 		case 3:
 			System.out.println("Adding food\n" +user.addFood(venue).toString());

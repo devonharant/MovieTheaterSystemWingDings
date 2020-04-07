@@ -61,7 +61,7 @@ public class SQLServerConnection  {
 		venueHash();
 	
 	}
-	public static void foodhash() throws SQLException {
+	public static HashMap<Integer, Food> foodhash() throws SQLException {
         Food f;
         stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(thing4);
@@ -82,9 +82,10 @@ public class SQLServerConnection  {
                     String location = rs2.getString("location");
 
 
-                    }
                 }
             }
+        return foodhash;
+        }
 
 	public static HashMap<Integer, Show>  showhash() throws SQLException {
 		Show s;
