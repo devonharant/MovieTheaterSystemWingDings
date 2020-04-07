@@ -190,7 +190,7 @@ public class Show {
 	}
 	
 	
-	/**Xavier
+	/**
 	 * takes a string seat array and updates the shows seat array to reserve those seats
 	 * @param reservation
 	 */
@@ -222,7 +222,7 @@ public class Show {
 		
 	}
 	
-	/**Xavier
+	/**
 	 * Takes in a seat reservation and frees up the shows seats at that area
 	 * @param reservation
 	 */
@@ -241,7 +241,7 @@ public class Show {
 		theaters.get(time).setSeats(seats);
 	}
 	
-	/**Xavier
+	/**
 	 * prints the available seats to the console using unicode character to denote column and row of the theater
 	 */
 	public void printSeats(String time) {
