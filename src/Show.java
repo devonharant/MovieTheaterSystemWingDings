@@ -19,13 +19,16 @@ public class Show {
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private double price;
 	
+
 	public Show(Integer movieid,String name, String description, Double price, Integer venueid) {
 		this.showId  = movieid;
 		this.setVenue(venue);
 		this.setName(name);
 		this.setDescription(description);
 		this.setPrice(price);
+
 	}
+	
 	/*
 	 * getters and setters, no sanitization is done her
 	 * 
@@ -239,7 +242,7 @@ public class Show {
 	
 	
 	public String toStringShort() {
-		return "Name: " + name +  "\nTimes: " + showTimes();
+		return "ID:" + showId + "Name: " + name +  "\nTimes: " + showTimes() + " \n";
 	}
 	
 	public String toString() {

@@ -17,14 +17,15 @@ public class TheaterDriver {
 	//hardcode test variables
 	private static User testUser = new User();
 	
-	private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
-	private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
-	private static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
-	private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
-	private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
-	private static Review testReview = new Review(5, "Test", testUser);
-	*/
-	
+
+	//private static Venue venue1 = new Cineplex("Nickelodeon", "Main Street");
+	//private static Venue venue2 = new ConcertHall("Koger", "Assembly Street");
+	//private static Venue venue3 = new PlayHouse("PlaysRUs", "Somewhere Street");
+	//private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
+	//private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
+	//private static Review testReview = new Review(5, "Test", testUser);
+	//*/
+
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -41,9 +42,11 @@ public class TheaterDriver {
 		System.out.println("***WELCOME TO PORTIA'S PICS & FLICKS***\n\n" +
 						   "Are you a registered user with us? Sign in! (1)\n\n" +
 						   "Do you wish to continue as a guest? (2)\n\n" +
-						   "Admin login (3)\n");
+						   "Admin login (3)\n\n" +
+						    "create an account (4)");
 		numberResponse = key.nextInt();
-		while((numberResponse < 0 || numberResponse > 3)) {
+		key.nextLine();
+		while((numberResponse < 0 || numberResponse > 4)) {
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 		}
@@ -60,6 +63,11 @@ public class TheaterDriver {
 		case 3:
 			adminSignIn();
 			System.out.println("Thank you for using PORTIA'S PICS & FLICKS!");
+			break;
+		case 4:
+			SQLServerConnection.addUser();
+			System.out.println("you have been added");
+			run();
 			break;
 		default:
 			System.out.println("Invalid choice, try again");
@@ -81,10 +89,12 @@ public class TheaterDriver {
 		key.nextLine();
 		System.out.println("Password: ");
 		password = key.next();
+
 		key.nextLine();
-		
-		user = loginCheck(username, password);
+		user= testUser;
+		//user = loginCheck(username, password);
 		if(user != null) {
+
 			while(userQuit == false) {
 				userLandingPage();
 			}
@@ -141,8 +151,10 @@ public class TheaterDriver {
 	 * contains the logic for the admin page, will eventually need to extend to regular user unless we wish to do further splits
 	 * @throws SQLException 
 	 */
+
 	private static void adminSignIn() throws SQLException {
-		Admin user;
+		Admin user = new Admin(1, "hello", response, response, response, response, response, 1, true);
+
 		String username;
 		String password;
 		System.out.println("Admin");
@@ -153,16 +165,19 @@ public class TheaterDriver {
 		System.out.println("Password: ");
 		password = key.next();
 		key.nextLine();
-		user = (Admin) loginCheck(username, password);
+		//user = (Admin) loginCheck(username, password);
 		if(user != null) {
+
 			while(userQuit == false) {
 				adminLandingPage(user);
 			}
 		}
 	}
 	
-	private static void adminLandingPage(Admin user) {
-		//Admin user = admin;
+
+	private static void adminLandingPage(Admin user) throws SQLException {
+		//Admin use1r = new Admin(numberResponse, response, response, response, response, response, response, numberResponse, userQuit);
+
 		System.out.println("Welcome " + user.getName() + "!\n");
 		System.out.println("What would you like to do?\n" + 
 						   "Add show (1)\n" + 
@@ -171,10 +186,13 @@ public class TheaterDriver {
 						   "Remove food (4)\n" +
 						   "Quit (5)");
 		numberResponse = key.nextInt();
+		key.nextLine();
 		while(numberResponse < 0 || numberResponse > 5) {
+			
 			System.out.println("Invalid input, try again");
 			numberResponse = key.nextInt();
 		}
+		adminFunctions(numberResponse, user);
 	}
 	
 	private static User loginCheck(String username, String password) throws SQLException {
@@ -194,12 +212,15 @@ public class TheaterDriver {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
+
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
 				if(v.getValue().getType()=="Cineplex");
 				System.out.println(v.getValue().name);
 				v.getValue().printShows();
 			}
-			String show = key.nextLine();
+			int show = key.nextInt();
+			key.nextLine();
+
 			Show tempShow = shows.get(show);
 			user.createTicket(tempShow);
 			user.purchaseTicket();
@@ -234,6 +255,7 @@ public class TheaterDriver {
 	private static void reviewCheck(User user) {
 		System.out.println("What would you like to leave a review for? \nVenue (1) \nShow (2)");
 		int reviewchoice = key.nextInt();
+		key.nextLine();
 		switch(reviewchoice) {
 		case 1:
 			System.out.println("Which venue would you like to leave a review for?\n");
@@ -242,6 +264,7 @@ public class TheaterDriver {
 			//Review testReview = new Review(5, "Test", testUser);
 			System.out.println("Please enter the star rating for the venue (1-5)\n");
 			int stars = key.nextInt();
+			key.nextLine();
 			System.out.println("Please enter any comments for the venue\n");
 			String review = key.nextLine();
 			Review venueReview = new Review(stars, review, user);
@@ -254,6 +277,7 @@ public class TheaterDriver {
 			//Review testReview = new Review(5, "Test", testUser);
 			System.out.println("Please enter the star rating for the show (1-5)\n");
 			int showstars = key.nextInt();
+			key.nextLine();
 			System.out.println("Please enter any comments for the show\n");
 			String showreview = key.nextLine();
 			Review showReview = new Review(showstars, showreview, user);

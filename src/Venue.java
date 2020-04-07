@@ -53,8 +53,9 @@ public class Venue{
 	}
 	
 	public void printShows() {
+
 		for(Map.Entry<Integer, Show> entry : shows.entrySet()) {
-			System.out.println(entry.getValue().toString());
+			System.out.println(entry.getValue().toStringShort());
 		}
 	}
 	
