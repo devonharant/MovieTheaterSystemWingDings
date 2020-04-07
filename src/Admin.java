@@ -25,7 +25,6 @@ public class Admin extends User {
 
 		int count = 0;
 		while (count < numOfTimes) {
-			
 			SQLServerConnection.addtheater(show);
 			count++;
 			}
