@@ -43,6 +43,7 @@ public class SQLServerConnection  {
 	static String newthing = "select * from venuereview where venue_id=?";
 	static String newthing2 = "select * from moviereview where movie_id=?";
 	static String thing4 = "select * from food";
+	static String thing5 = "select * from theater";
 	static String finduser="select * from user where User_Name=?";
 	static String findpassword = "select * from user where Password =?";
 	static Scanner keyboard;
@@ -50,16 +51,15 @@ public class SQLServerConnection  {
 	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
 	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
 	 public static HashMap<Integer, Food> foodhash = new HashMap<Integer, Food>();
-	 public static HashMap<Integer, >
+	 public static HashMap<Integer, Theater> theaterhash = new HashMap<Integer, Theater>();
 	public static void start() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
 
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("would you like to truncate or print table press 1 to truncate 2 to print");
+		venueHash();
 	
-	venueHash();
-		
 	}
 	public static void foodhash() throws SQLException {
         Food f;
@@ -73,7 +73,7 @@ public class SQLServerConnection  {
                 Integer venueid = rs.getInt("venueid");
                 f = new Food(foodid,name,price,quantity, venueid);
                 foodhash.put(foodid,f);
-                PreparedStatement ps = connection.prepareStatement(newthing2);
+                PreparedStatement ps = connection.prepareStatement(newthing);
                 ps.setInt(1,venueid);
                 ResultSet rs2 = ps.executeQuery();
                 while(rs2.next()) {
@@ -116,6 +116,32 @@ public class SQLServerConnection  {
 		}
 		return moviehash;
 	}
+	
+	public static HashMap<Integer, Theater> theaterHash() throws SQLException{
+		Theater t;
+		stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(thing5);
+		while(rs.next()) {
+			Integer theaterid = rs.getInt("theaterid");
+			Integer movieid = rs.getInt("movieid");
+			int r= rs.getInt("r");
+			int c= rs.getInt("c");
+			String time = rs.getString("t");
+			String seats = rs.getString("seats");
+			
+			t = new Theater(theaterid,movieid,r,c,time,seats); 
+
+			theaterhash.put(movieid, t);
+		
+		for(Entry<Integer, Show> s: moviehash.entrySet()) {
+			if(s.getValue().getShowID() == t.getShowID()) {
+				s.getValue().theaters.put(theaterid, t);
+				}
+			}
+		}
+		return theaterhash;
+	}
+	
 public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		Venue v;
 		stmt = connection.createStatement();
@@ -313,13 +339,10 @@ public static void truncatemovietable() throws SQLException {
 		ps.setDouble(2, cost);
 		ps.setInt(3, quantity);
 		ps.setInt(4, venueid);
-<<<<<<< Updated upstream
 		int status = ps.executeUpdate();
 		return new Food(status, name, cost, quantity, venueid);
-=======
-int status = ps.executeUpdate();
-return null;
->>>>>>> Stashed changes
+
+
 	}
 		
 		
@@ -343,12 +366,7 @@ return null;
 		ps.setDouble(3, price);
 		ps.setInt(4, venueid);
 		int status = ps.executeUpdate();
-<<<<<<< Updated upstream
 		return new Show(status, name, description, price, venueid);
-=======
-		
-		return new Show(status,name,description,price,venueid);
->>>>>>> Stashed changes
 	}
 
 	public static Theater addtheater(Show show) throws SQLException {
@@ -377,7 +395,7 @@ return null;
 		ps.setString(4, t);
 		ps.setString(5,seats);
 		int status = ps.executeUpdate();
-		return new Theater(status, r, c, t, seats);
+		return new Theater(status, movieid, r, c, t, seats);
 		}
 
 		
