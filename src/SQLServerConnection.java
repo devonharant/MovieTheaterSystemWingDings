@@ -30,7 +30,11 @@ public class SQLServerConnection  {
 	static String truncate = "truncate table user";
 	static String deleterow = "delete from user where email=?";//?denotes user input or a preparedstatement 
 	static String deletevenue = "delete from venue where name =?";
+<<<<<<< Updated upstream
 	static String deletemovie = "delete from movie where movieid=?";
+=======
+	static String deletemovie = "delete from movie where venueid,name=?,?";
+>>>>>>> Stashed changes
 	static String deletemoviereview = "delete from moviereview where Mreview_id=?";
 	static String venuejoins = " select venuereview.review, venuereview.rating, venue.name, from venuereview inner join venue on venuereview.venue_id=venue.venueid";//todo finish this stupid ass join test if works
 	static String sortasc = "select * from moviereview order by rating asc";
@@ -67,10 +71,12 @@ public class SQLServerConnection  {
 			String name = rs.getString("name");
 			String description = rs.getString("description");
 			double price = rs.getDouble("price");
-			String moviedate = rs.getString("moviedate");
-			String movietime = rs.getString("movietime");
 			Integer venueid = rs.getInt("venueid");
+<<<<<<< Updated upstream
 			s = new Show(movieid,name,description,price,moviedate,movietime,venueid);
+=======
+			s = new Show(movieid,name,description,price,venueid); 
+>>>>>>> Stashed changes
 			moviehash.put(movieid, s);
 			PreparedStatement ps = connection.prepareStatement(newthing2);
 			ps.setInt(1, movieid);
@@ -104,10 +110,12 @@ public static void venueHash() throws SQLException {
 				int id = rs2.getInt("review_id");
 				v.addingreview(id,review, rating);
 			}
+<<<<<<< Updated upstream
 			for(Integer i : Venue.Review.keySet()) {
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
+=======
+>>>>>>> Stashed changes
 			
-			}
 		}
 	}
 		public static void printuserhash() throws SQLException {
@@ -155,6 +163,7 @@ public static void venueHash() throws SQLException {
 		String password = keyboard.nextLine();
 		System.out.println("please enter your age");
 		int age = keyboard.nextInt();
+		keyboard.nextLine();
 		if(age <= 0) {
 			System.out.println("youre not even alive yet");
 		}
@@ -280,8 +289,13 @@ int status = ps.executeUpdate();
 	
 	public static void addmovie() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
+<<<<<<< Updated upstream
 		String query = "insert into movie(name,description,price,moviedate,movietime,venueid)" + " values (?,?,?,?,?,?)";
 		System.out.println("enter in your name name");
+=======
+		String query = "insert into movie(name,description,price,venueid)" + " values (?,?,?,?)";
+		System.out.println("enter in your shows name");
+>>>>>>> Stashed changes
 		String name = keyboard.nextLine();
 		System.out.println("enter in the movies description");
 		String description = keyboard.nextLine();
@@ -303,6 +317,38 @@ int status = ps.executeUpdate();
 		ps.setInt(6, venueid);
 		int status = ps.executeUpdate();
 	}
+<<<<<<< Updated upstream
+=======
+	
+	public static Theater addtheater(Show show) throws SQLException {
+		Scanner keyboard = new Scanner(System.in);
+		String query = "insert into theater(movieid,r,c,t,seats)" + " values (?,?,?,?,?)";
+		int movieid= show.getShowID();
+		keyboard.nextLine();
+		System.out.println("enter in the number of rows in the theater");
+		int r= keyboard.nextInt();
+		keyboard.nextLine();
+		System.out.println("enter in the number of seats per row");
+		int c= keyboard.nextInt();
+		keyboard.nextLine();
+		//seats to SQL logic
+		String seats = "";
+		for(int i = 0; i < r; i++) 
+			for(int j = 0; j < c; j++) 
+				seats = seats + "Y";
+		
+		System.out.println("What are the show times in format mm/dd 00:00am, enter them one at time");
+		String t = keyboard.nextLine();
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1,movieid);
+		ps.setInt(2, r);
+		ps.setInt(3, c);
+		ps.setString(4, t);
+		ps.setString(5,seats);
+		int status = ps.executeUpdate();
+		return new Theater(status, r, c, t, seats);
+		}
+>>>>>>> Stashed changes
 		
 		
 	
@@ -351,6 +397,7 @@ int status = ps.executeUpdate();
 	      }
 	     
 	}
+<<<<<<< Updated upstream
 	public static void findusername() throws SQLException {
 		System.out.println("enter in a username to find");
 		String username = keyboard.nextLine();
@@ -358,6 +405,20 @@ int status = ps.executeUpdate();
 		stmt.setString(1, username);
 		stmt.executeUpdate();
 		
+=======
+	public static ResultSet findUsername(String username) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement(finduser);
+		stmt.setString(1, username);
+		ResultSet id = stmt.executeQuery();
+		return id;
+	}
+	
+	public static ResultSet findPassword(String password) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement(findpassword);
+		stmt.setString(1, password);
+		ResultSet id = stmt.executeQuery();
+		return id;
+>>>>>>> Stashed changes
 	}
 
 public static void findandremove() throws SQLException {
@@ -374,18 +435,33 @@ public static void findandremovevenue() throws SQLException {
 	String vdelete = keyboard.nextLine();
 	PreparedStatement stmt = connection.prepareStatement(deletevenue);
 	stmt.setString(1, vdelete);
+	stmt.executeUpdate();
 }
+<<<<<<< Updated upstream
 public static void findandremovemovie() throws SQLException {
 	System.out.println("enter in a movie id to get rid of");
 	int movieid = keyboard.nextInt();
 	PreparedStatement stmt = connection.prepareStatement(deletemovie);
 	stmt.setInt(1, movieid);
+=======
+public static String findandremovemovie(Venue venue) throws SQLException {
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("enter in the name of a movie to get rid of");
+	String movieName = keyboard.nextLine();
+	int venueid = venue.getID();
+	PreparedStatement stmt = connection.prepareStatement(deletemovie);
+	stmt.setString(1, movieName);
+	stmt.setInt(2, venueid);
+	stmt.executeUpdate();
+	return movieName;
+>>>>>>> Stashed changes
 }
 public static void findandremovemoviereview() throws SQLException {
 	System.out.println("enter a moviereview id to delete");
 	int reviewid = keyboard.nextInt();
 	PreparedStatement stmt = connection.prepareStatement(deletemoviereview);
 	stmt.setInt(1, reviewid);
+	stmt.executeUpdate();
 }
 public static void sortmoviereviewasc() throws SQLException {
 	stmt = connection.createStatement();

@@ -49,6 +49,7 @@ public class Show {
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private double price;
 	
+<<<<<<< Updated upstream
 	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
 		this.setVenue(venue);
 		this.setName(name);
@@ -60,7 +61,17 @@ public class Show {
 			this.theaters.put(i,t);
 		}
 		this.setPrice(price);
+=======
+	public Show(Integer movieid,String name, String description, double price, Integer venueid) {
+		this.showId  = movieid;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.venueid = venueid;
+		
+>>>>>>> Stashed changes
 	}
+	
 	/*
 	 * getters and setters, no sanitization is done her
 	 * 
@@ -272,7 +283,7 @@ public class Show {
 	
 	
 	public String toStringShort() {
-		return "Name: " + name +  "\nTimes: " + showTimes();
+		return "ID:" + showId + "Name: " + name +  "\nTimes: " + showTimes() + " \n";
 	}
 	
 	public String toString() {
