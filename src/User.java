@@ -5,7 +5,8 @@ public class User extends Guest {
 	protected int points;
 	protected HashMap<String, Ticket> purchaseHistory = new HashMap<>();
 	protected HashMap<String, Review> reviewHistory = new HashMap<>();
-	protected String name;
+	protected String firstName;
+	protected String lastName;
 	protected String dateOfBirth;
 	protected String email;
 	protected String userName;
@@ -13,7 +14,8 @@ public class User extends Guest {
 	protected int age;
 	
 	public User() {
-		this.name = "annon";
+		this.firstName = "annon";
+		this.lastName = "mouse";
 		this.dateOfBirth = "09/09/1999";
 		this.email = "no email yet";
 		this.userName = "Guest";
@@ -24,25 +26,38 @@ public class User extends Guest {
 		this.reviewHistory = new HashMap<>();
 	}
 	
-	public User(Integer userID, String name, String dateOfBirth, String email, String userName, String password, int age) {
+	public User(Integer userID, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age) {
 		super();
 		this.id = userID;
-		this.setName(name);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 		this.setDateOfBirth(dateOfBirth);
 		this.setEmail(email);
-		this.setUserName(userName);
+		this.setUsername(userName);
 		this.setPassword(password);
 		this.setAge(age);
 		this.purchaseHistory = new HashMap<>();
 		this.reviewHistory = new HashMap<>();
 	}
 	
-	public String getName() {
-		return name;
+	public Integer getID() {
+		return id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String name) {
+		this.firstName = name;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String name) {
+		this.lastName = name;
 	}
 
 	public String getDateOfBirth() {
@@ -61,11 +76,11 @@ public class User extends Guest {
 		this.email = email;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
+	public void setUsername(String userName) {
 		this.userName = userName;
 	}
 
@@ -122,7 +137,7 @@ public class User extends Guest {
 		//TODO sanitize input
 		String response =  keyboard.nextLine();
 		Review r = new Review(stars, response, this);
-		venue.addReview(this.getUserName(), r);
+		venue.addReview(intOfDoom, r);
 	}
 	
 	/**
@@ -139,7 +154,7 @@ public class User extends Guest {
 		//TODO sanitize input
 		String response =  keyboard.nextLine();
 		Review r = new Review(stars, response, this);
-		show.addReview(this.getUserName(), r);
+		show.addReview(intOfDoom, r);
 	}
 	
 	/**
@@ -160,7 +175,7 @@ public class User extends Guest {
 	 * create a string representation of the object
 	 */
 	public String toString () {
-		return "Name: " +name + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
+		return "First Name: " +firstName + "\nLast Name: " +lastName + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
 	password + "\nAge: " +age;
 	}
 }
