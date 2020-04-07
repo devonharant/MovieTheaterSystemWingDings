@@ -15,7 +15,7 @@ public class Venue{
 	protected String name;
 	protected String location;
 	protected String type;
-	protected Map<Integer, Show> shows = new HashMap<Integer, Show>();
+	public Map<Integer, Show> shows = new HashMap<Integer, Show>();
 	protected Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private Map<Integer, Food> Food = new HashMap<Integer, Food>();
 	protected ShowFactory factory;
@@ -67,12 +67,13 @@ public class Venue{
 	}
 	
 	public void addingReview( int id,String review, int rating) {
-		reviews.put(id,new Review(rating, review, null));
+		User user = null;
+		reviews.put(id,new Review(rating, review, user));
 	}
 	
 	
-	public String getVenueReview(String review) {
-		return review;
+	public Review getVenueReview(int id) {
+		return reviews.get(id);
 	}
 	/**
 	 * adds a Review to the venue

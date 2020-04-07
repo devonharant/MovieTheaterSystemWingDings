@@ -102,7 +102,7 @@ public static void venueHash() throws SQLException {
 				String review = rs2.getString("review");
 				int rating = rs2.getInt("rating");
 				int id = rs2.getInt("review_id");
-				v.addingreview(id,review, rating);
+				v.addingReview(id,review, rating);
 			}
 			for(Integer i : Venue.reviews.keySet()) {
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
@@ -123,7 +123,7 @@ public static void venueHash() throws SQLException {
 				String dateofbirth = rs.getString("dateofbirth");
 				String username = rs.getString("User_name");
 				String Password = rs.getString("Password");
-				u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
+				u = new User(UserID,first_name, last_name, email,dateofbirth,username,Password,age);
 				map.put(UserID, u);
 			}
 			for(Integer i : map.keySet()) {
@@ -278,7 +278,7 @@ int status = ps.executeUpdate();
 		
 		
 	
-	public static void addmovie() throws SQLException {
+	public static void addmovie(Venue venue) throws SQLException {
 
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into movie(name,description,price,moviedate,movietime,venueid)" + " values (?,?,?,?,?,?)";
