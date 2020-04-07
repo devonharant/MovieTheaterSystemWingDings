@@ -214,14 +214,13 @@ public class TheaterDriver {
 		switch(choice) {
 		
 		case 1:
-			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
+			System.out.println("Here are the available movies!\nSelect by ID a movie to see the venues and showtimes!");
 
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
 				if(v.getValue().getType()=="cineplex") {
-									System.out.println(v.getValue().toString());
-			}
-				v.getValue().printShows();
-				
+					System.out.println(v.getValue().toString());
+					v.getValue().printShows();
+				}
 			}
 			show = key.nextInt();
 			key.nextLine();
@@ -230,10 +229,12 @@ public class TheaterDriver {
 			user.purchaseTicket();
 			break;
 		case 2:
-			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
+			System.out.println("Here are the available plays!\nSelect by ID a play to see the venues and showtimes!");
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="PlayHouse");
-				v.getValue().printShows();
+				if(v.getValue().getType()=="playhouse") {
+					System.out.println(v.getValue().toString());
+					v.getValue().printShows();
+				}
 			}
 			show = key.nextInt();
 			key.nextLine();
@@ -242,10 +243,12 @@ public class TheaterDriver {
 			user.purchaseTicket();
 			break;
 		case 3:
-			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
+			System.out.println("Here are the available concerts!\nSelect by ID a concert to see the venues and showtimes!");
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="ConcertHall");
-				v.getValue().printShows();
+				if(v.getValue().getType()=="concerthall") {
+					System.out.println(v.getValue().toString());
+					v.getValue().printShows();
+				}
 			}
 			show = key.nextInt();
 			key.nextLine();
