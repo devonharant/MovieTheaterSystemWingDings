@@ -1,3 +1,4 @@
+
 import java.sql.*;
 
 import java.sql.Connection;
@@ -41,16 +42,20 @@ public class SQLServerConnection  {
 	static String newthing2 = "select * from moviereview where movie_id=?";
 	static String thing4 = "select * from food";
 	static String finduser="select * from user where User_Name=?";
-	static String findpassword="select * from user where Password=?";
+	static String findpassword = "select * from user where Password =?";
 	static Scanner keyboard;
 	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
-	public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
-	public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
+	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
+	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
 	public static void start() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		Scanner keyboard = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
-		venueHash();
+
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("would you like to truncate or print table press 1 to truncate 2 to print");
+	
+	venueHash();
+		
 	}
 	public static void foodhash() throws SQLException {
 		Food f;
@@ -101,12 +106,10 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 				int id = rs2.getInt("review_id");
 				v.addingReview(id,review, rating);
 			}
+		}
 
 			for(Integer i : Venue.Review.keySet()) {
-
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
-
-			
 		}
 		return venuehash;
 	}
@@ -196,12 +199,13 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			}
 		}
 	
-	public static void addVenueReview(Venue venue) throws SQLException {
+	public static void addVenuereview() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into venuereview(review,rating,venue_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		int venueid = venue.getID();
+		System.out.println("enter in your venues id");
+		int venueid = keyboard.nextInt();
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
@@ -237,15 +241,16 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 	        System.out.println("");  //todo load into a hashmap
 	      }
 	}
-	public static void addmoviereview(Show show) throws SQLException {
+	public static void addmoviereview() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into moviereview(review,rating,movie_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		int movieid = show.getShowID();
+		System.out.println("enter in your venues id");
+		int movieid = keyboard.nextInt();
+		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
-		keyboard.nextLine();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, review);
 		ps.setInt(2, rating);
@@ -255,8 +260,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			System.out.println("database was connected correctly");
 			}
 	}
-
-	public static Food addfood(Venue venue) throws SQLException {
+	public static void addfood() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into food(name,cost,quantity,venueid)" + " values (?,?,?,?)";
 		System.out.println("enter the foods name");
@@ -267,41 +271,46 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		System.out.println("enter in the quantity of the food");
 		int quantity = keyboard.nextInt();
 		keyboard.hasNextLine();
-		int venueid = venue.getID();
+		System.out.println("enter in the venue id this will go to");
+		int venueid = keyboard.nextInt();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, name);
 		ps.setDouble(2, cost);
 		ps.setInt(3, quantity);
 		ps.setInt(4, venueid);
-		int status = ps.executeUpdate();
-		return new Food (status, name, cost, quantity, venueid);
+int status = ps.executeUpdate();
 	}
 		
 		
 	
-	public static Show addmovie(Venue venue) throws SQLException {
-
+	public static void addmovie() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 
 		String query = "insert into movie(name,description,price,venueid)" + " values (?,?,?,?)";
 		System.out.println("enter in your shows name");
+
 		String name = keyboard.nextLine();
-		System.out.println("enter in the shows description");
+		System.out.println("enter in the movies description");
 		String description = keyboard.nextLine();
-		System.out.println("enter in your shows price");
+		System.out.println("enter in your movies date");
+		String date = keyboard.nextLine();
+		System.out.println("enter in your movies time");
+		String time = keyboard.nextLine();
+		System.out.println("enter in your movies price");
 		double price = keyboard.nextDouble();
 		keyboard.nextLine();
-		int venueid = venue.getID();
+		System.out.println("enter in your venues id");
+		int venueid = keyboard.nextInt();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1,name);
 		ps.setString(2, description);
-		ps.setDouble(3, price);
-		ps.setInt(4, venueid);
+		ps.setString(3, date);
+		ps.setString(3, time);
+		ps.setDouble(5, price);
+		ps.setInt(6, venueid);
 		int status = ps.executeUpdate();
-		return new Show(status,name, description, price, venueid );
 	}
 
-	
 	public static Theater addtheater(Show show) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into theater(movieid,r,c,t,seats)" + " values (?,?,?,?,?)";
@@ -330,6 +339,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		int status = ps.executeUpdate();
 		return new Theater(status, r, c, t, seats);
 		}
+
 		
 		
 	
@@ -379,29 +389,31 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 	     
 	}
 
+	//this logic is wrong
 	public static ResultSet findUsername(String username) throws SQLException {
 		PreparedStatement stmt = connection.prepareStatement(finduser);
 		stmt.setString(1, username);
 		ResultSet id = stmt.executeQuery();
 		return id;
 	}
-	
+	//this logic is wrong
 	public static ResultSet findPassword(String password) throws SQLException {
 		PreparedStatement stmt = connection.prepareStatement(findpassword);
 		stmt.setString(1, password);
 		ResultSet id = stmt.executeQuery();
 		return id;
+
 	}
 
 public static void findandremove() throws SQLException {
 	System.out.println("please enter your email in");
 	String email = keyboard.nextLine();
-
 	PreparedStatement stmt = connection.prepareStatement(deleterow);//stmt is a statement and this is creating a connection that will let me create a statement
 	stmt.setString(1,email );
 	stmt.executeUpdate();
 	System.out.println(" has been deleted");
 	}
+
 public static void findandremovevenue() throws SQLException {
 	System.out.println("enter in a venue name you want deleted");
 	String vdelete = keyboard.nextLine();

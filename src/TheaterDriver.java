@@ -13,7 +13,7 @@ public class TheaterDriver {
 	private static Map<Integer, Venue> venues = new HashMap<>();
 	private static Map<Integer, User> users = new HashMap<>();
 	private static boolean userQuit = false;
-	/*
+	
 	//hardcode test variables
 	private static User testUser = new User();
 	
@@ -24,7 +24,7 @@ public class TheaterDriver {
 	//private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
 	//private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
 	//private static Review testReview = new Review(5, "Test", testUser);
-	//*/
+	
 
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -209,7 +209,10 @@ public class TheaterDriver {
 	 * @param user the user profile making this choice, passed through for ticket generation reasons
 	 */
 	private static void showCheck(int choice, Guest user) {
+		int show = 0;
+		Show tempShow = null;
 		switch(choice) {
+		
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
 
@@ -218,10 +221,9 @@ public class TheaterDriver {
 				System.out.println(v.getValue().name);
 				v.getValue().printShows();
 			}
-			int show = key.nextInt();
+			show = key.nextInt();
 			key.nextLine();
-
-			Show tempShow = shows.get(show);
+			tempShow = shows.get(show);
 			user.createTicket(tempShow);
 			user.purchaseTicket();
 			break;
@@ -231,6 +233,11 @@ public class TheaterDriver {
 				if(v.getValue().getType()=="PlayHouse");
 				v.getValue().printShows();
 			}
+			show = key.nextInt();
+			key.nextLine();
+			tempShow = shows.get(show);
+			user.createTicket(tempShow);
+			user.purchaseTicket();
 			break;
 		case 3:
 			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
@@ -238,6 +245,11 @@ public class TheaterDriver {
 				if(v.getValue().getType()=="ConcertHall");
 				v.getValue().printShows();
 			}
+			show = key.nextInt();
+			key.nextLine();
+			tempShow = shows.get(show);
+			user.createTicket(tempShow);
+			user.purchaseTicket();
 			break;
 		case 5:
 			userQuit = true;

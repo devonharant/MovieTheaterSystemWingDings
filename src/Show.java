@@ -22,10 +22,10 @@ public class Show {
 
 	public Show(Integer movieid,String name, String description, Double price, Integer venueid) {
 		this.showId  = movieid;
-		this.setVenue(venue);
-		this.setName(name);
-		this.setDescription(description);
-		this.setPrice(price);
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.venueid = venueid;
 
 	}
 	
