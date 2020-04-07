@@ -91,7 +91,7 @@ public class TheaterDriver {
 		password = key.next();
 
 		key.nextLine();
-		user= testUser;
+		user = testUser;
 		//user = loginCheck(username, password);
 		if(user != null) {
 
