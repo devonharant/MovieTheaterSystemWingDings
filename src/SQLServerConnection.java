@@ -1,5 +1,6 @@
-import java.sql.Connection;
+import java.sql.*;
 
+import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,8 +12,10 @@ import com.mysql.cj.xdevapi.Statement;
 
 
 
+
 import java.sql.*;
 public class SQLServerConnection  {
+
 
 	static Connection connection = null;
 	static String databaseName = "movietest";
@@ -27,7 +30,7 @@ public class SQLServerConnection  {
 	static String truncate = "truncate table user";
 	static String deleterow = "delete from user where email=?";//?denotes user input or a preparedstatement 
 	static String deletevenue = "delete from venue where name =?";
-	static String deletemovie = "delete from movie where name=?";
+	static String deletemovie = "delete from movie where movieid=?";
 	static String deletemoviereview = "delete from moviereview where Mreview_id=?";
 	static String venuejoins = " select venuereview.review, venuereview.rating, venue.name, from venuereview inner join venue on venuereview.venue_id=venue.venueid";//todo finish this stupid ass join test if works
 	static String sortasc = "select * from moviereview order by rating asc";
@@ -36,18 +39,26 @@ public class SQLServerConnection  {
 	static String sortvenuedsc = "select * from venuereview order by rating desc";
 	static String newthing = "select * from venuereview where venue_id=?";
 	static String newthing2 = "select * from moviereview where movie_id=?";
+	static String thing4 = "select * from food";
+	static String finduser="select * from user where User_Name=?";
 	static Scanner keyboard;
-	public static HashMap<Integer,User> map = new HashMap<Integer, User>();
-	public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
-	public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
-	public static void start() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
+	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
+	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
-		System.out.println("hello");
-		//venueHash();
+
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("would you like to truncate or print table press 1 to truncate 2 to print");
+	
+	venueHash();
 		
 	}
-	public static HashMap<Integer, Show> showHash() throws SQLException {
+	public static void foodhash() throws SQLException {
+		Food f;
+	}
+	public static void showhash() throws SQLException {
 		Show s;
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(thing1);
@@ -70,9 +81,10 @@ public class SQLServerConnection  {
 				int id = rs2.getInt("Mreview_id");
 				s.addingReview(id,review,rating);
 			}
+
 		}
 	}
-public static HashMap<Integer, Venue> venueHash() throws SQLException {
+public static void venueHash() throws SQLException {
 		Venue v;
 		stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(thing2);
@@ -90,14 +102,13 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 				String review = rs2.getString("review");
 				int rating = rs2.getInt("rating");
 				int id = rs2.getInt("review_id");
-				v.addingReview(id,review, rating);
+				v.addingreview(id,review, rating);
 			}
 			for(Integer i : Venue.Review.keySet()) {
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
 			
 			}
 		}
-		return venuehash;
 	}
 		public static void printuserhash() throws SQLException {
 			User u;
@@ -112,12 +123,12 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 				String dateofbirth = rs.getString("dateofbirth");
 				String username = rs.getString("User_name");
 				String Password = rs.getString("Password");
-				u = new User(UserID, first_name, last_name, email, dateofbirth, username, Password, age);
+				u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
 				map.put(UserID, u);
 			}
 			for(Integer i : map.keySet()) {
 				User us = map.get(i);
-				System.out.println(us.getID() + " "+ us.getFirstName() +" " + us.getLastName() + " " + us.getEmail() + " " + us.getAge() + " " + us.getDateOfBirth()  + " " + us.getUsername()  + " " + us.getPassword());
+				System.out.println(us.getID() + " "+ us.getFirst_name() +" " + us.getLast_name() + " " + us.getEmail() + " " + us.getAge() + " " + us.getDateofbirth()  + " " + us.getUsername()  + " " + us.getPassword());
 			}
 		}
 		
@@ -244,6 +255,29 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			System.out.println("database was connected correctly");
 			}
 	}
+	public static void addfood() throws SQLException {
+		Scanner keyboard = new Scanner(System.in);
+		String query = "insert into food(name,cost,quantity,venueid)" + " values (?,?,?,?)";
+		System.out.println("enter the foods name");
+		String name = keyboard.nextLine();
+		System.out.println("enter in the cost of the food");
+		double cost = keyboard.nextDouble();
+		keyboard.nextLine();
+		System.out.println("enter in the quantity of the food");
+		int quantity = keyboard.nextInt();
+		keyboard.hasNextLine();
+		System.out.println("enter in the venue id this will go to");
+		int venueid = keyboard.nextInt();
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, name);
+		ps.setDouble(2, cost);
+		ps.setInt(3, quantity);
+		ps.setInt(4, venueid);
+int status = ps.executeUpdate();
+	}
+		
+		
+	
 	public static void addmovie() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into movie(name,description,price,moviedate,movietime,venueid)" + " values (?,?,?,?,?,?)";
@@ -268,11 +302,9 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		ps.setDouble(5, price);
 		ps.setInt(6, venueid);
 		int status = ps.executeUpdate();
+	}
 		
-		if(status != 0) {
-			System.out.println("database was connected correctly");
-			}
-		}
+		
 	
 	public static void printvenues() throws SQLException {
 		stmt = connection.createStatement();//stmt is a statement and this is creating a connection that will let me create a statement
@@ -319,9 +351,19 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 	      }
 	     
 	}
+	public static void findusername() throws SQLException {
+		System.out.println("enter in a username to find");
+		String username = keyboard.nextLine();
+		PreparedStatement stmt = connection.prepareStatement(finduser);
+		stmt.setString(1, username);
+		stmt.executeUpdate();
+		
+	}
+
 public static void findandremove() throws SQLException {
 	System.out.println("please enter your email in");
 	String email = keyboard.nextLine();
+
 	PreparedStatement stmt = connection.prepareStatement(deleterow);//stmt is a statement and this is creating a connection that will let me create a statement
 	stmt.setString(1,email );
 	stmt.executeUpdate();
@@ -334,10 +376,10 @@ public static void findandremovevenue() throws SQLException {
 	stmt.setString(1, vdelete);
 }
 public static void findandremovemovie() throws SQLException {
-	System.out.println("enter in a movie to get rid of");
-	String name = keyboard.nextLine();
+	System.out.println("enter in a movie id to get rid of");
+	int movieid = keyboard.nextInt();
 	PreparedStatement stmt = connection.prepareStatement(deletemovie);
-	stmt.setString(1, name);
+	stmt.setInt(1, movieid);
 }
 public static void findandremovemoviereview() throws SQLException {
 	System.out.println("enter a moviereview id to delete");
@@ -385,6 +427,7 @@ public static void sortvenuereviewasc() throws SQLException {
 public static void sortvenuereviewdsc() throws SQLException {
 	stmt = connection.createStatement();
 	ResultSet rs = stmt.executeQuery(sortvenuedsc);
+
 		while(rs.next()) {
 			Integer reviewid = rs.getInt("review_id");
 			String review = rs.getString("review");
@@ -392,8 +435,8 @@ public static void sortvenuereviewdsc() throws SQLException {
 		System.out.print("ID: " +rating);
 		System.out.print(", review: " + review);
 		System.out.println(", rating: " + rating);
-	}
-	
-	
+		}
 	}
 }
+
+
