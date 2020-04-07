@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Map.Entry;
+
 import com.mysql.cj.xdevapi.Statement;
-import com.sun.org.glassfish.external.statistics.Stats;
+
 
 import java.sql.*;
 public class SQLServerConnection  {
@@ -27,9 +29,11 @@ public class SQLServerConnection  {
 	static String thing2 = "select * from  venue";
 	static String thing3 = "select * from  venuereview";
 	static String truncate = "truncate table user";
+	static String truncate2 = "truncate table venue";
+	static String truncate3 = "truncate table movie";
 	static String deleterow = "delete from user where email=?";//?denotes user input or a preparedstatement 
 	static String deletevenue = "delete from venue where name =?";
-	static String deletemovie = "delete from movie where venueid,name=?,?";
+	static String deletemovie = "delete from movie where name=?";
 	static String deletemoviereview = "delete from moviereview where Mreview_id=?";
 	static String venuejoins = " select venuereview.review, venuereview.rating, venue.name, from venuereview inner join venue on venuereview.venue_id=venue.venueid";//todo finish this stupid ass join test if works
 	static String sortasc = "select * from moviereview order by rating asc";
@@ -45,6 +49,8 @@ public class SQLServerConnection  {
 	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
 	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
 	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
+	 public static HashMap<Integer, Food> foodhash = new HashMap<Integer, Food>();
+	 public static HashMap<Integer, >
 	public static void start() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
@@ -56,8 +62,30 @@ public class SQLServerConnection  {
 		
 	}
 	public static void foodhash() throws SQLException {
-		Food f;
-	}
+        Food f;
+        stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(thing4);
+        while(rs.next()) {
+                Integer foodid = rs.getInt("foodid");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                Integer quantity = rs.getInt("quantity");
+                Integer venueid = rs.getInt("venueid");
+                f = new Food(foodid,name,price,quantity, venueid);
+                foodhash.put(foodid,f);
+                PreparedStatement ps = connection.prepareStatement(newthing2);
+                ps.setInt(1,venueid);
+                ResultSet rs2 = ps.executeQuery();
+                while(rs2.next()) {
+                    String name2 = rs2.getString("name");
+                    String type = rs2.getString("type");
+                    String location = rs2.getString("location");
+
+
+                    }
+                }
+            }
+
 	public static HashMap<Integer, Show>  showhash() throws SQLException {
 		Show s;
 		stmt = connection.createStatement();
@@ -80,7 +108,11 @@ public class SQLServerConnection  {
 				int id = rs2.getInt("Mreview_id");
 				s.addingReview(id,review,rating);
 			}
-
+			for(Entry<Integer, Venue> v: venuehash.entrySet()) {
+				if(v.getValue().getID() == s.getVenueID()) {
+					v.getValue().shows.put(movieid, s);
+				}
+			}
 		}
 		return moviehash;
 	}
@@ -106,9 +138,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			}
 		}
 
-			for(Integer i : Venue.Review.keySet()) {
-			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
-		}
+		
 		return venuehash;
 	}
 		public static HashMap<Integer,User> printuserhash() throws SQLException {
@@ -133,8 +163,15 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			}*/
 			return map;
 		}
+		public static void truncatevenuetable() throws SQLException {
+			stmt = connection.createStatement();
+			int status = stmt.executeUpdate(truncate3);
+			}
 		
-
+public static void truncatemovietable() throws SQLException {
+	stmt = connection.createStatement();
+	int status = stmt.executeUpdate(truncate2);
+	}
 	public static void truncateUsertable() throws SQLException {
 		stmt = connection.createStatement();
 		int status = stmt.executeUpdate(truncate);
@@ -276,8 +313,13 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		ps.setDouble(2, cost);
 		ps.setInt(3, quantity);
 		ps.setInt(4, venueid);
+<<<<<<< Updated upstream
 		int status = ps.executeUpdate();
 		return new Food(status, name, cost, quantity, venueid);
+=======
+int status = ps.executeUpdate();
+return null;
+>>>>>>> Stashed changes
 	}
 		
 		
@@ -291,14 +333,9 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		String name = keyboard.nextLine();
 		System.out.println("enter in the movies description");
 		String description = keyboard.nextLine();
-		System.out.println("enter in your movies date");
-		String date = keyboard.nextLine();
-		System.out.println("enter in your movies time");
-		String time = keyboard.nextLine();
 		System.out.println("enter in your movies price");
 		double price = keyboard.nextDouble();
 		keyboard.nextLine();
-		
 		int venueid = venue.getID();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1,name);
@@ -306,7 +343,12 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		ps.setDouble(3, price);
 		ps.setInt(4, venueid);
 		int status = ps.executeUpdate();
+<<<<<<< Updated upstream
 		return new Show(status, name, description, price, venueid);
+=======
+		
+		return new Show(status,name,description,price,venueid);
+>>>>>>> Stashed changes
 	}
 
 	public static Theater addtheater(Show show) throws SQLException {
@@ -427,7 +469,7 @@ public static String findandremovemovie(Venue venue) throws SQLException {
 	int venueid = venue.getID();
 	PreparedStatement stmt = connection.prepareStatement(deletemovie);
 	stmt.setString(1, movieName);
-	stmt.setInt(2, venueid);
+	//stmt.setInt(2, venueid);
 	stmt.executeUpdate();
 	return movieName;
 }

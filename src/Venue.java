@@ -53,9 +53,9 @@ public class Venue{
 	}
 	
 	public void printShows() {
-
 		for(Map.Entry<Integer, Show> entry : shows.entrySet()) {
 			System.out.println(entry.getValue().toStringShort());
+	
 		}
 	}
 	
@@ -84,6 +84,6 @@ public class Venue{
 	
 
 	public String toString() {
-		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getReviews();
+		return "\n" + "ID:" + venueid + "\nName: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getReviews(); 
   }
 }

@@ -134,6 +134,7 @@ public class User extends Guest {
 	 */
 	public void createVenueReview(Venue venue) throws SQLException {
 		SQLServerConnection.addVenuereview(venue);
+		
 	}
 	
 	/**
