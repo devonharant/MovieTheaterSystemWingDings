@@ -1,19 +1,20 @@
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Admin extends User {
 	private Venue venue;
 	
-	public Admin(Integer id, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age, Venue venue) {
-		super(id, firstName, lastName, dateOfBirth, email, userName, password, age);
-		this.venue = venue;
+	public Admin(Integer id, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age, boolean admin) {
+		super(id, firstName, lastName, dateOfBirth, email, userName, password, age, admin);
+		this.admin = true;
 	}
 	
 	/**
 	 * adds a show to the show iterator of a venue after querying the user for the information, takes in
 	 * multiple showtimes to create a list of the same show at different times.
 	 */
-	public Show addShowListing() {
+	public Show addShowListing(Venue venue) {
 		//user input data.
 		Scanner keyboard = new Scanner(System.in);
 		System.out.println("Whats the show name");
@@ -61,16 +62,17 @@ public class Admin extends User {
 		 * adds a new show to the show iterator for each entered time
 		 */
 		Show newShow = venue.factory.createShow(this.venue, name, description, times, review, theaterRows, theaterColumns, price);
-		venue.shows.addShow(newShow);
+		venue.shows.put(venue.shows.size(),newShow);
 		return newShow;
 	}
 	
 	/**
 	 * 
 	 * @param show
+	 * @throws SQLException 
 	 */
-	public void removeShow(String show) {
-		//TODO
+	public void removeShow(String show) throws SQLException {
+		SQLServerConnection.findandremovemovie();
 	}
 	
 	/**

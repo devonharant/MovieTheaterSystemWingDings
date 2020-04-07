@@ -12,6 +12,7 @@ public class User extends Guest {
 	protected String userName;
 	protected String password;
 	protected int age;
+	protected boolean admin;
 	
 	public User() {
 		super();
@@ -27,7 +28,7 @@ public class User extends Guest {
 		this.reviewHistory = new HashMap<>();
 	}
 	
-	public User(Integer userID, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age) {
+	public User(Integer userID, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age, boolean admin) {
 		super();
 		this.id = userID;
 		this.setFirstName(firstName);
@@ -39,6 +40,7 @@ public class User extends Guest {
 		this.setAge(age);
 		this.purchaseHistory = new HashMap<>();
 		this.reviewHistory = new HashMap<>();
+		this.admin = false;
 	}
 	
 	public Integer getID() {

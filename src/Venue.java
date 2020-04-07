@@ -15,9 +15,9 @@ public class Venue{
 	protected String name;
 	protected String location;
 	protected String type;
-	protected ShowIterator shows;
-	protected FoodIterator food;
-	private HashMap<Integer, Review> reviews = new HashMap<Integer, Review>();
+	public Map<Integer, Show> shows = new HashMap<Integer, Show>();
+	protected Map<Integer, Review> reviews = new HashMap<Integer, Review>();
+	private Map<Integer, Food> Food = new HashMap<Integer, Food>();
 	protected ShowFactory factory;
 	
 	public Venue(Integer venueid,String name, String type, String location) {
@@ -25,6 +25,10 @@ public class Venue{
 		this.name = name;
 		this.location = location;
 		this.type = type;
+	}
+	
+	public Integer getID() {
+		return venueid;
 	}
 	
 	public String getType() {
@@ -49,11 +53,13 @@ public class Venue{
 	}
 	
 	public void printShows() {
-		shows.printShows();
+		for(Map.Entry<Integer, Show> entry : shows.entrySet()) {
+			System.out.println(entry.getValue().toString());
+		}
 	}
 	
 	public void printShow(Show show) {
-		
+		System.out.println(show.toStringShort());
 	}
 	
 	public void printFood() {
@@ -61,12 +67,13 @@ public class Venue{
 	}
 	
 	public void addingReview( int id,String review, int rating) {
-		reviews.put(id,new Review(rating, review, null));
+		User user = null;
+		reviews.put(id,new Review(rating, review, user));
 	}
 	
 	
-	public String getVenueReview(String review) {
-		return review;
+	public Review getVenueReview(int id) {
+		return reviews.get(id);
 	}
 	/**
 	 * adds a Review to the venue

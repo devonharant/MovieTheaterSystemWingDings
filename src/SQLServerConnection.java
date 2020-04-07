@@ -102,9 +102,9 @@ public static void venueHash() throws SQLException {
 				String review = rs2.getString("review");
 				int rating = rs2.getInt("rating");
 				int id = rs2.getInt("review_id");
-				v.addingreview(id,review, rating);
+				v.addingReview(id,review, rating);
 			}
-			for(Integer i : Venue.Review.keySet()) {
+			for(Integer i : Venue.reviews.keySet()) {
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
 			
 			}
@@ -123,7 +123,7 @@ public static void venueHash() throws SQLException {
 				String dateofbirth = rs.getString("dateofbirth");
 				String username = rs.getString("User_name");
 				String Password = rs.getString("Password");
-				u = new RegularUser(UserID,first_name, last_name, email,age,dateofbirth,username,Password);
+				u = new User(UserID,first_name, last_name, email,dateofbirth,username,Password,age);
 				map.put(UserID, u);
 			}
 			for(Integer i : map.keySet()) {
@@ -194,13 +194,12 @@ public static void venueHash() throws SQLException {
 			}
 		}
 	
-	public static void addVenuereview() throws SQLException {
+	public static void addVenuereview(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into venuereview(review,rating,venue_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int venueid = keyboard.nextInt();
+		int venueid = venue.getID();
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
@@ -236,13 +235,13 @@ public static void venueHash() throws SQLException {
 	        System.out.println("");  //todo load into a hashmap
 	      }
 	}
-	public static void addmoviereview() throws SQLException {
+	public static void addmoviereview(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into moviereview(review,rating,movie_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int movieid = keyboard.nextInt();
+		
+		int movieid = venue.getID();
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
@@ -255,6 +254,7 @@ public static void venueHash() throws SQLException {
 			System.out.println("database was connected correctly");
 			}
 	}
+
 	public static void addfood() throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into food(name,cost,quantity,venueid)" + " values (?,?,?,?)";
@@ -278,7 +278,8 @@ int status = ps.executeUpdate();
 		
 		
 	
-	public static void addmovie() throws SQLException {
+	public static void addmovie(Venue venue) throws SQLException {
+
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into movie(name,description,price,moviedate,movietime,venueid)" + " values (?,?,?,?,?,?)";
 		System.out.println("enter in your name name");
@@ -292,8 +293,7 @@ int status = ps.executeUpdate();
 		System.out.println("enter in your movies price");
 		double price = keyboard.nextDouble();
 		keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int venueid = keyboard.nextInt();
+		int venueid = venue.getID();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1,name);
 		ps.setString(2, description);
