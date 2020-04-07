@@ -12,8 +12,8 @@ import com.mysql.cj.xdevapi.Statement;
 
 
 
-import java.sql.*;
-public class sql  {
+
+public class  SQLServerConnection   {
 
 
 	static Connection connection = null;
@@ -82,7 +82,7 @@ public class sql  {
 				String review = rs2.getString("review");
 				int rating = rs2.getInt("rating");
 				int id = rs2.getInt("Mreview_id");
-				s.addingreview(id,review,rating);
+				s.addingReview(id,review,rating);
 			}
 
 		}
@@ -105,7 +105,7 @@ public static void venueHash() throws SQLException {
 				String review = rs2.getString("review");
 				int rating = rs2.getInt("rating");
 				int id = rs2.getInt("review_id");
-				v.addingreview(id,review, rating);
+				v.addingReview(id,review, rating);
 			}
 			for(Integer i : Venue.Review.keySet()) {
 			Venue vs= Review.getVenueReview(i);//make get venue review method in venue
