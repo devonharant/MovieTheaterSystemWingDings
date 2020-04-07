@@ -251,6 +251,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
+		keyboard.nextLine();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, review);
 		ps.setInt(2, rating);
@@ -260,7 +261,7 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			System.out.println("database was connected correctly");
 			}
 	}
-	public static void addfood() throws SQLException {
+	public static void addfood(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into food(name,cost,quantity,venueid)" + " values (?,?,?,?)";
 		System.out.println("enter the foods name");
@@ -270,9 +271,8 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 		keyboard.nextLine();
 		System.out.println("enter in the quantity of the food");
 		int quantity = keyboard.nextInt();
-		keyboard.hasNextLine();
-		System.out.println("enter in the venue id this will go to");
-		int venueid = keyboard.nextInt();
+		keyboard.nextLine();
+		int venueid = venue.getID();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, name);
 		ps.setDouble(2, cost);
@@ -283,7 +283,7 @@ int status = ps.executeUpdate();
 		
 		
 	
-	public static void addmovie() throws SQLException {
+	public static void addmovie(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 
 		String query = "insert into movie(name,description,price,venueid)" + " values (?,?,?,?)";
@@ -299,8 +299,8 @@ int status = ps.executeUpdate();
 		System.out.println("enter in your movies price");
 		double price = keyboard.nextDouble();
 		keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int venueid = keyboard.nextInt();
+		
+		int venueid = venue.getID();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1,name);
 		ps.setString(2, description);
@@ -434,8 +434,10 @@ public static String findandremovemovie(Venue venue) throws SQLException {
 	return movieName;
 }
 public static void findandremovemoviereview() throws SQLException {
+	Scanner keyboard = new Scanner(System.in);
 	System.out.println("enter a moviereview id to delete");
 	int reviewid = keyboard.nextInt();
+	keyboard.nextLine();
 	PreparedStatement stmt = connection.prepareStatement(deletemoviereview);
 	stmt.setInt(1, reviewid);
 	stmt.executeUpdate();
