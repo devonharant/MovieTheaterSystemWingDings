@@ -1,3 +1,5 @@
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -7,9 +9,9 @@ public class TheaterDriver {
 	private static Scanner key = new Scanner(System.in);
 	private static String response;
 	private static int numberResponse;
-	private static Map<String, Show> shows = new HashMap<>();
-	private static Map<String, Venue> venue = new HashMap<>();
-	private static Map<String, User> users = new HashMap<>();
+	private static Map<Integer, Show> shows = new HashMap<>();
+	private static Map<Integer, Venue> venue = new HashMap<>();
+	private static Map<Integer, User> users = new HashMap<>();
 	private static boolean userQuit = false;
 	
 	//hardcode test variables
@@ -21,19 +23,16 @@ public class TheaterDriver {
 	private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
 	private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
 	private static Review testReview = new Review(5, "Test", testUser);
-	private static Admin admin = new Admin(numberResponse, "devon", "11/16/1998", "devharant@gmail.com", "garth", "nuts", response, 21, venue3);
 	
 	
-	public static void main(String[] args) {
-		venue.put("Nickelodeon", venue1);
-		venue.put("Koger", venue2);
-		venue.put("PlaysRUs", venue3);
-		Show show1 = new Show(venue1, "Frozen 2", "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.", times1 , testReview, 10, 20, 12.99);
-		Show show2 = new Show(venue2, "Dead and Company", "Sit back and relax to the tunes of the Dead with Bob Weir and John Mayer", times2, testReview, 10, 10, 60.00);
-		venue1.shows.addShow(show1);
-		venue2.shows.addShow(show2);
-		shows.put("Frozen 2", show1);
-		shows.put("Dead and Company", show2);
+	
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		SQLServerConnection server = new SQLServerConnection();
+		SQLServerConnection.start();
+		venue = SQLServerConnection.venueHash(); 
+		shows = SQLServerConnection.showHash();
+		users = 
 		
 		run();
 	}

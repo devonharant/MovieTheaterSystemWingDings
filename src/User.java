@@ -14,6 +14,7 @@ public class User extends Guest {
 	protected int age;
 	
 	public User() {
+		super();
 		this.firstName = "annon";
 		this.lastName = "mouse";
 		this.dateOfBirth = "09/09/1999";
