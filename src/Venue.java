@@ -76,6 +76,6 @@ public class Venue{
 	
 
 	public String toString() {
-		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getAllReviews();
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getReviews();
   }
 }
