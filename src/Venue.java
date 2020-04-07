@@ -9,26 +9,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class Venue{
+public class Venue{
 	
-  protected int venueid;
+	protected int venueid;
 	protected String name;
 	protected String location;
 	protected String type;
 	protected ShowIterator shows;
 	protected FoodIterator food;
-	private HashMap<String, Review> reviews = new HashMap<String, Review>();
+	private HashMap<Integer, Review> reviews = new HashMap<Integer, Review>();
 	protected ShowFactory factory;
 	
-	public Venue(String name, String location) {
+	public Venue(Integer venueid,String name, String type, String location) {
+		this.venueid = venueid;
 		this.name = name;
 		this.location = location;
-		type = "";
-		shows = new ShowIterator();
-		factory = new ShowFactory();
+		this.type = type;
 	}
 	
-	public abstract String getType();
+	public String getType() {
+		return type;
+	}
 	
 	public String getName() {
 		return name;
@@ -58,10 +59,13 @@ public abstract class Venue{
 	public void printFood() {
 		
 	}
-	public void addingreview( int id,String review, int rating) {
-		Review.put(id,new Review(rating, review, null));
+	
+	public void addingReview( int id,String review, int rating) {
+		reviews.put(id,new Review(rating, review, null));
 	}
-	public String getvenueReveiew(String review) {
+	
+	
+	public String getVenueReview(String review) {
 		return review;
 	}
 	/**
@@ -72,6 +76,6 @@ public abstract class Venue{
 	
 
 	public String toString() {
-		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getAllReviews();
+		return "Name: " + name + "\nType: " + type + "\nLocation: " + location + "\nReviews:\n" + this.getReviews();
   }
 }

@@ -1,150 +1,183 @@
-
-import java.io.*;
 import java.util.*;
 
-public class User {
-		
-		protected Ticket ticket;
+public class User extends Guest {
+	protected Integer id;
+	protected int points;
+	protected HashMap<String, Ticket> purchaseHistory = new HashMap<>();
+	protected HashMap<String, Review> reviewHistory = new HashMap<>();
+	protected String firstName;
+	protected String lastName;
+	protected String dateOfBirth;
+	protected String email;
+	protected String userName;
+	protected String password;
+	protected int age;
+	
+	public User() {
+		super();
+		this.firstName = "annon";
+		this.lastName = "mouse";
+		this.dateOfBirth = "09/09/1999";
+		this.email = "no email yet";
+		this.userName = "Guest";
+		this.password = "null";
+		this.age = 12;
+		this.points = 0;
+		this.purchaseHistory = new HashMap<>();
+		this.reviewHistory = new HashMap<>();
+	}
+	
+	public User(Integer userID, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age) {
+		super();
+		this.id = userID;
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setDateOfBirth(dateOfBirth);
+		this.setEmail(email);
+		this.setUsername(userName);
+		this.setPassword(password);
+		this.setAge(age);
+		this.purchaseHistory = new HashMap<>();
+		this.reviewHistory = new HashMap<>();
+	}
+	
+	public Integer getID() {
+		return id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
 
-		public User() {
-			
-			this.ticket = null;
+	public void setFirstName(String name) {
+		this.firstName = name;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String name) {
+		this.lastName = name;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return userName;
+	}
+
+	public void setUsername(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		if(age <0) {
+			System.out.println("invalid age");
 		}
-
-		/**
-		 * creates a ticket based on the show
-		 * @param show
-		 */
-		public void createTicket(Show show) {
-			Scanner keyboard = new Scanner(System.in);
-			System.out.println("what time would you like see?\n" + show.showTimes());
-			boolean q = false;
-			String time = "";
-			while(!q) {
-				q =true;
-				time = keyboard.nextLine();
-				if(time.length()!=13) {
-					System.out.println("Please enter a time that is in mm/dd 00:00am format");
-					q = false;
-				}
-				else {
-					if(show.showTimes().contains(time.toUpperCase())){
-						
-					}
-					else {
-						System.out.println("Please enter an avaliable show time");
-						System.out.println(show.showTimes());
-					}
-				}
-			}
-			System.out.println("what seats would you like to reserve?");
-			show.printSeats(time);
-
-			System.out.println("Enter seats in AA AB AC format");
-			q = false;
-			String[] seats = null;
-			while(!q) {
-				String seatString = keyboard.nextLine().toUpperCase();
-				seats = seatString.split(" ");
-				q = true;
-				//checks if the string is formatted correctly else returns user to enter the seats correctly
-				boolean formatted = false;
-				for(int i=0; i < seats.length; i++) {
-					if(seats[i].length()!=2) {
-					System.out.println("Make sure its in AA BB CC format with no space after the last seat");
-					q = false;
-					break;
-					}
-					if( i == seats.length - 1)
-						formatted = true;
-				}
-				//if formatted correctly and the seats arent reseverd, reserves the seats, else returns user to reenter unreserved seats
-				if(formatted&&!show.reserveSeats(time, seats)) {
-					q = false;
-					System.out.println("Some of those seats are already reserved, please enter a new batch of seats that are unreserved.");
-				}
-			}
-			double price = seats.length*show.getPrice();//price of ticket logic
-			
-			/*
-			System.out.println("Would you like to pre buy popcorn or other food from this venue");
-			String response = keyboard.nextLine();
-			Food[] food = null;
-			//TODO response logic
-			if(response.contains("y")) {
-				System.out.println("Foods available at " +show.getVenue().getName()+ " are:");
-				show.getVenue().printFood();
-				//TODO finish ability to add food to ticket
-				Ticket t = new Ticket(show,time,seats,food,price);
-				this.ticket = t;			}
-			else { */  //food to ticket logic commented out till food implemented
-				Ticket t = new Ticket(show,time,seats,price);
-				this.ticket = t;
-			//}
+		else {
+			this.age = age;
 		}
+	}
+	
+	/**@Overrides user purchase ticket
+	 * Xavier
+	 * Purchases the ticket currently in the user ticket space, applies points, uploads the ticket to user ticket history for refund use,
+	 * sets current ticket to null
+	 */
+	public void purchaseTicket() {
+		//super call to User purchase ticket function
+		super.purchaseTicket();
+	}
+	
+	/**
+	 * spends the accumulated points on ticket price
+	 * meant to be a helper function
+	 */
+	public void spendPoints() {
+		//TODO enable points to be used to cheapen ticket
+	}
+	
+	/**
+	 * takes in a venue and allows a regular user to create a review for that venue
+	 * @param venue
+	 */
+	public void createVenueReview(Venue venue) {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("How would you rate this venue from 1-5");
+		//TODO sanitize input
+		int stars = keyboard.nextInt();
+		keyboard.nextLine();
+		System.out.println("Tell us about your experience there");
+		//TODO sanitize input
+		String response =  keyboard.nextLine();
+		Review r = new Review(stars, response, this);
+		venue.addReview(intOfDoom, r);
+	}
+	
+	/**
+	 * takes in a show and allow the user to create a review for that show
+	 * @param show
+	 */
+	public void createShowReview(Show show) {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("How would you rate this show from 1-5");
+		//TODO sanitize input
+		int stars = keyboard.nextInt();
+		keyboard.nextLine();
+		System.out.println("Tell us about your experience there");
+		//TODO sanitize input
+		String response =  keyboard.nextLine();
+		Review r = new Review(stars, response, this);
+		show.addReview(intOfDoom, r);
+	}
+	
+	/**
+	 * deletes a listing
+	 */
+	public void deleteReview() {
 
-		/**
-		 * Purchases the ticket currently in the user ticket space and prints it
-		 */
-		public void purchaseTicket() {
-			//null check
-			if(this.ticket == null) {
-				System.out.println("There is nothing in your ticket, please find a show you would like to watch to begin purchasing tickets.");
-			}
-			
-			/*
-			 * TODO grab the driver function that creates a regular user and upgrade guest user to regular user
-			 * 
-			 * 
-			 * SUPER IMPORTANT TODO
-			 * 
-			 */
-			
-			this.printTicket();
-		}
-
-		/**
-		 * calls the toString of the ticket saved to the user
-		 * generates the ticket and writes it to a text file
-		 */
-		public void printTicket() {
-			try {
-				FileWriter writer = new FileWriter("Ticket.txt");
-				if(ticket.getFood() == null) {
-					writer.write("*************************************\n");
-					writer.write(ticket.toStringWithFood());
-					writer.write("*************************************");
-					writer.close();
-				}
-				else {
-					writer.write("*************************************\n");
-					writer.write(ticket.toString());
-					writer.write("*************************************");
-					writer.close();
-				}
-				System.out.println("Your ticket has been generated!");
-			}catch(IOException e) {
-				System.out.println("an error occurred");
-				e.printStackTrace();
-			}
-		}
-
-
-		public void generateETicket(Ticket ticket) {
-			System.out.println(this.ticket.toString());
-		}
-
-		/**
-		 * Xavier
-		 * removes a generated ticket from the user and frees up the reserved seats
-		 */
-		public void CancelTicket() {
-			//null check
-			if(this.ticket == null) {
-				System.out.println("There is nothing in your ticket.");
-				return;
-			}
-			this.ticket.show.cancelSeatReservation(ticket.time, ticket.seats);
-			this.ticket = null;
-		}
+	}
+	/**
+	 * edits a listing
+	 * @return
+	 */
+	public String editReview() {
+		return null;
+	}
+	
+	/**
+	 * create a string representation of the object
+	 */
+	public String toString () {
+		return "First Name: " +firstName + "\nLast Name: " +lastName + "\nDate of Birth: " + dateOfBirth + "\nEmail: " +email + "\nUsername: " + userName + "\nPassword: " + 
+	password + "\nAge: " +age;
+	}
 }
+

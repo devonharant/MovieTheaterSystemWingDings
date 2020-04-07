@@ -12,7 +12,7 @@ import com.mysql.cj.xdevapi.Statement;
 
 
 import java.sql.*;
-public class sql  {
+public class sql {
 
 	static Connection connection = null;
 	static String databaseName = "movietest";

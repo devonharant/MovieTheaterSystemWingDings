@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -42,10 +43,10 @@ public class Show {
 	private Venue venue;
 	private String name;
 	private String description;
-	private Map<String, Theater> theaters = new HashMap<String, Theater>();
+	private Map<Integer, Theater> theaters = new HashMap<Integer, Theater>();
 	private int rows;
 	private int cols;
-	private Map<String, Review> reviews = new HashMap<String, Review>();
+	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	private double price;
 	
 	public Show(Venue venue, String name, String description, String[] time, Review review, int theaterRows, int theaterColumns, double price) {
@@ -56,7 +57,7 @@ public class Show {
 		this.setCol(theaterColumns);
 		for(int i = 0; i < time.length; i++) {
 			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
-			this.theaters.put(t.getTime(),t);
+			this.theaters.put(i,t);
 		}
 		this.setPrice(price);
 	}
@@ -124,7 +125,7 @@ public class Show {
 	}
   
   public void addingReview( int id,String review, int rating) {
-		MReview.put(id,new Review(rating, review, null));
+		reviews.put(id,new Review(rating, review, null));
   }
 	
 	public Review getReview() {
@@ -139,9 +140,9 @@ public class Show {
 	 * @param theaterColumns
 	 */
 	public void addShowTimes(String[] time, int theaterRows, int theaterColumns) {
-		for(int i = 0; i < time.length; i++) {
+		for(int i = theaters.size(); i < theaters.size() + time.length; i++) {
 			Theater t = new Theater(theaterRows, theaterColumns, time[i]);
-			this.theaters.put(t.getTime(),t);
+			this.theaters.put(i,t);
 		}
 	}
 	
@@ -153,7 +154,7 @@ public class Show {
 	 */
 	public void addShowTime(String time, int theaterRows, int theaterColumns) {
 		Theater t = new Theater(theaterRows, theaterColumns, time);
-		this.theaters.put(time,t);
+		this.theaters.put(theaters.size(),t);
 	}
 
 	/**
@@ -162,7 +163,7 @@ public class Show {
 	 * @param review, review itself
 	 */
 	public void addReview(String userName, Review review) {
-		this.reviews.put(userName, review);
+		this.reviews.put(reviews.size(), review);
 	}
 	
 	/**
@@ -170,7 +171,7 @@ public class Show {
 	 */
 	public String getAllReviews() {
 		String ret = "";
-		for(Entry<String, Review> r:reviews.entrySet()) {
+		for(Entry<Integer, Review> r:reviews.entrySet()) {
 			 ret = ret + r.getValue().toString() +"\n\n";
 		}
 		return ret;
@@ -182,14 +183,14 @@ public class Show {
 	 */
 	public String showTimes() {
 		String ret = "";
-		for(Entry<String, Theater> t:theaters.entrySet()) {
+		for(Entry<Integer, Theater> t:theaters.entrySet()) {
 			ret = ret + t.getKey() + ". ";
 		}
 		return ret;
 	}
 	
 	
-	/**Xavier
+	/**
 	 * takes a string seat array and updates the shows seat array to reserve those seats
 	 * @param reservation
 	 */
@@ -221,7 +222,7 @@ public class Show {
 		
 	}
 	
-	/**Xavier
+	/**
 	 * Takes in a seat reservation and frees up the shows seats at that area
 	 * @param reservation
 	 */
@@ -240,7 +241,7 @@ public class Show {
 		theaters.get(time).setSeats(seats);
 	}
 	
-	/**Xavier
+	/**
 	 * prints the available seats to the console using unicode character to denote column and row of the theater
 	 */
 	public void printSeats(String time) {
