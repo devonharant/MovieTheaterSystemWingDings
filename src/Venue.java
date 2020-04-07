@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 
 public class Venue{
 	
-  protected int venueid;
+	protected int venueid;
 	protected String name;
 	protected String location;
 	protected String type;
@@ -20,12 +20,11 @@ public class Venue{
 	private HashMap<Integer, Review> reviews = new HashMap<Integer, Review>();
 	protected ShowFactory factory;
 	
-	public Venue(String name, String location) {
+	public Venue(Integer venueid,String name, String type, String location) {
+		this.venueid = venueid;
 		this.name = name;
 		this.location = location;
-		type = "";
-		shows = new ShowIterator();
-		factory = new ShowFactory();
+		this.type = type;
 	}
 	
 	public String getType() {
@@ -60,9 +59,12 @@ public class Venue{
 	public void printFood() {
 		
 	}
-	public void addReview( int id,String review, int rating, User user) {
-		reviews.put(id,new Review(rating, review, user));
+	
+	public void addingReview( int id,String review, int rating) {
+		reviews.put(id,new Review(rating, review, null));
 	}
+	
+	
 	public String getVenueReview(String review) {
 		return review;
 	}
