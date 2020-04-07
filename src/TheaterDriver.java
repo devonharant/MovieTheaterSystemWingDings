@@ -10,10 +10,10 @@ public class TheaterDriver {
 	private static String response;
 	private static int numberResponse;
 	private static Map<Integer, Show> shows = new HashMap<>();
-	private static Map<Integer, Venue> venue = new HashMap<>();
+	private static Map<Integer, Venue> venues = new HashMap<>();
 	private static Map<Integer, User> users = new HashMap<>();
 	private static boolean userQuit = false;
-	
+	/*
 	//hardcode test variables
 	private static User testUser = new User();
 	
@@ -23,19 +23,20 @@ public class TheaterDriver {
 	private static String[] times1 = {"12/12 12:00PM", "12/12 03:00PM", "12/12 06:00PM"};
 	private static String[] times2 = {"12/13 05:00PM", "12/14 05:00PM"};
 	private static Review testReview = new Review(5, "Test", testUser);
-	
+	*/
 	
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		SQLServerConnection server = new SQLServerConnection();
 		SQLServerConnection.start();
-		venue = SQLServerConnection.venueHash(); 
-		shows = SQLServerConnection.showHash();
+		venues = SQLServerConnection.venueHash(); 
+		shows = SQLServerConnection.showhash();
+		users = SQLServerConnection.printuserhash();
 		run();
 	}
 	
-	private static void run() {
+	private static void run() throws SQLException {
 		
 		System.out.println("***WELCOME TO PORTIA'S PICS & FLICKS***\n\n" +
 						   "Are you a registered user with us? Sign in! (1)\n\n" +
@@ -68,17 +69,22 @@ public class TheaterDriver {
 	
 	/**
 	 * contains the user splash page with choices for printing show types for purchasing purposes or leaving a review
+	 * @throws SQLException 
 	 */
-	private static void userSignIn() {
+	private static void userSignIn() throws SQLException {
 		String username;
 		String password;
 		System.out.println("Registered User");
 		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
 		username = key.next();
+		key.nextLine();
 		System.out.println("Password: ");
 		password = key.next();
-		if(true /*loginCheck(username, password)*/) {
+		key.nextLine();
+		
+		user = loginCheck(username, password);
+		if(user != null) {
 			while(userQuit == false) {
 				userLandingPage();
 			}
@@ -133,17 +139,21 @@ public class TheaterDriver {
 	
 	/**
 	 * contains the logic for the admin page, will eventually need to extend to regular user unless we wish to do further splits
+	 * @throws SQLException 
 	 */
-	private static void adminSignIn() {
-		Admin user = null;
+	private static void adminSignIn() throws SQLException {
+		Admin user;
 		String username;
 		String password;
 		System.out.println("Admin");
 		System.out.println("Please sign in (enter anything for now)\n" +
 						   "Username: ");
 		username = key.next();
+		key.nextLine();
 		System.out.println("Password: ");
 		password = key.next();
+		key.nextLine();
+		user = (Admin) loginCheck(username, password);
 		if(user != null) {
 			while(userQuit == false) {
 				adminLandingPage(user);
@@ -152,7 +162,6 @@ public class TheaterDriver {
 	}
 	
 	private static void adminLandingPage(Admin user) {
-		Venue venue = new Cineplex("george", "george"); //test stuff
 		//Admin user = admin;
 		System.out.println("Welcome " + user.getName() + "!\n");
 		System.out.println("What would you like to do?\n" + 
@@ -168,11 +177,9 @@ public class TheaterDriver {
 		}
 	}
 	
-	private static User loginCheck(String username, String password) {
-		String userCheck;
-		String passCheck;
-		if(username.equalsIgnoreCase(userCheck) && password.equalsIgnoreCase(passCheck)) {
-			return user;
+	private static User loginCheck(String username, String password) throws SQLException {
+		if(SQLServerConnection.findUsername(username)==SQLServerConnection.findPassword(password)) {
+			return users.get(SQLServerConnection.findUsername(username));
 		}
 		return null;
 	}
@@ -187,7 +194,7 @@ public class TheaterDriver {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
-			for(Entry<Integer, Venue> v: venue.entrySet()) {
+			for(Entry<Integer, Venue> v: venues.entrySet()) {
 				if(v.getValue().getType()=="Cineplex");
 				System.out.println(v.getValue().name);
 				v.getValue().printShows();
@@ -199,14 +206,14 @@ public class TheaterDriver {
 			break;
 		case 2:
 			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
-			for(Entry<Integer, Venue> v: venue.entrySet()) {
+			for(Entry<Integer, Venue> v: venues.entrySet()) {
 				if(v.getValue().getType()=="PlayHouse");
 				v.getValue().printShows();
 			}
 			break;
 		case 3:
 			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
-			for(Entry<Integer, Venue> v: venue.entrySet()) {
+			for(Entry<Integer, Venue> v: venues.entrySet()) {
 				if(v.getValue().getType()=="ConcertHall");
 				v.getValue().printShows();
 			}
@@ -230,14 +237,14 @@ public class TheaterDriver {
 		switch(reviewchoice) {
 		case 1:
 			System.out.println("Which venue would you like to leave a review for?\n");
-			System.out.println(Arrays.asList(venue)); 
+			System.out.println(Arrays.asList(venues)); 
 			String venuechoice = key.nextLine();
 			//Review testReview = new Review(5, "Test", testUser);
 			System.out.println("Please enter the star rating for the venue (1-5)\n");
 			int stars = key.nextInt();
 			System.out.println("Please enter any comments for the venue\n");
 			String review = key.nextLine();
-			Review venueReview = new Review(stars, review, testUser);
+			Review venueReview = new Review(stars, review, user);
 
 			break;
 		case 2:
@@ -249,7 +256,7 @@ public class TheaterDriver {
 			int showstars = key.nextInt();
 			System.out.println("Please enter any comments for the show\n");
 			String showreview = key.nextLine();
-			Review showReview = new Review(showstars, showreview, testUser);
+			Review showReview = new Review(showstars, showreview, user);
 			break;
 		default:
 			System.out.println("Please enter a proper choice");
@@ -262,20 +269,28 @@ public class TheaterDriver {
 	 * contains the logic for admin functions
 	 * @param choice, int representing what the admin would like to do add a show(1) remove a show(2) add food (3) remove food (4)
 	 * @param user, the admin making the changes
+	 * @throws SQLException 
 	 */
-	private static void adminFunctions(int choice, Admin user) {
+	private static void adminFunctions(int choice, Admin user) throws SQLException {
+		
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("please choose a venue to work in");
+		SQLServerConnection.printvenues();
+		System.out.println("please enter the venue id that you want to work in");
+		Integer vChoice = keyboard.nextInt();
+		Venue venue = venues.get(vChoice);
 		switch(choice) {
 		case 1:
-			System.out.print("Created show:\n" + user.addShowListing().toStringShort());
+			System.out.print("Created show:\n" + user.addShowListing(venue).toStringShort());
 			break;
 		case 2:
-			System.out.println("Removing show");
+			System.out.println("Removing show:\n" + user.removeShow(venue));
 			break;
 		case 3:
-			System.out.println("Adding food");
+			System.out.println("Adding food\n" +user.addFood(venue).toString());
 			break;
 		case 4:
-			System.out.println("Removing food");
+			System.out.println("Removing food\n" + user.removeFood(venue));
 			break;
 		case 5:
 			userQuit = true;
