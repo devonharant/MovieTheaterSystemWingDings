@@ -1,4 +1,5 @@
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Admin extends User {
@@ -68,9 +69,10 @@ public class Admin extends User {
 	/**
 	 * 
 	 * @param show
+	 * @throws SQLException 
 	 */
-	public void removeShow(String show) {
-		//TODO
+	public void removeShow(String show) throws SQLException {
+		SQLServerConnection.findandremovemovie();
 	}
 	
 	/**

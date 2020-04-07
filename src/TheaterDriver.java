@@ -32,8 +32,6 @@ public class TheaterDriver {
 		SQLServerConnection.start();
 		venue = SQLServerConnection.venueHash(); 
 		shows = SQLServerConnection.showHash();
-		users = 
-		
 		run();
 	}
 	
@@ -116,7 +114,7 @@ public class TheaterDriver {
 	 * contains logic for just printing show types and purchasing ticket, base user purchase will prompt the guest to create a profile
 	 */
 	private static void guestPage() {
-		user = new GuestUser();
+		user = new Guest();
 		System.out.println("Welcome Guest!");
 		System.out.println("What kind of shows would you like to see?\n" + 
 						   "Movies (1)\n" +
@@ -137,6 +135,7 @@ public class TheaterDriver {
 	 * contains the logic for the admin page, will eventually need to extend to regular user unless we wish to do further splits
 	 */
 	private static void adminSignIn() {
+		Admin user = null;
 		String username;
 		String password;
 		System.out.println("Admin");
@@ -145,16 +144,16 @@ public class TheaterDriver {
 		username = key.next();
 		System.out.println("Password: ");
 		password = key.next();
-		if(true /*loginCheck(username, password)*/) {
+		if(user != null) {
 			while(userQuit == false) {
-				adminLandingPage();
+				adminLandingPage(user);
 			}
 		}
 	}
 	
-	private static void adminLandingPage() {
+	private static void adminLandingPage(Admin user) {
 		Venue venue = new Cineplex("george", "george"); //test stuff
-		Admin user = admin;
+		//Admin user = admin;
 		System.out.println("Welcome " + user.getName() + "!\n");
 		System.out.println("What would you like to do?\n" + 
 						   "Add show (1)\n" + 
@@ -169,14 +168,14 @@ public class TheaterDriver {
 		}
 	}
 	
-	/*private static boolean loginCheck(String username, String password) {
+	private static User loginCheck(String username, String password) {
 		String userCheck;
 		String passCheck;
 		if(username.equalsIgnoreCase(userCheck) && password.equalsIgnoreCase(passCheck)) {
-			return true;
+			return user;
 		}
-		return false;
-	}*/
+		return null;
+	}
 	
 	
 	/**
@@ -188,7 +187,11 @@ public class TheaterDriver {
 		switch(choice) {
 		case 1:
 			System.out.println("Here are the available movies!\nSelect a movie to see the venues and showtimes!");
-			venue1.shows.printShows();
+			for(Entry<Integer, Venue> v: venue.entrySet()) {
+				if(v.getValue().getType()=="Cineplex");
+				System.out.println(v.getValue().name);
+				v.getValue().printShows();
+			}
 			String show = key.nextLine();
 			Show tempShow = shows.get(show);
 			user.createTicket(tempShow);
@@ -196,9 +199,17 @@ public class TheaterDriver {
 			break;
 		case 2:
 			System.out.println("Here are the available plays!\nSelect a play to see the venues and showtimes!");
+			for(Entry<Integer, Venue> v: venue.entrySet()) {
+				if(v.getValue().getType()=="PlayHouse");
+				v.getValue().printShows();
+			}
 			break;
 		case 3:
 			System.out.println("Here are the available concerts!\nSelect a concert to see the venues and showtimes!");
+			for(Entry<Integer, Venue> v: venue.entrySet()) {
+				if(v.getValue().getType()=="ConcertHall");
+				v.getValue().printShows();
+			}
 			break;
 		case 5:
 			userQuit = true;
@@ -218,7 +229,6 @@ public class TheaterDriver {
 		int reviewchoice = key.nextInt();
 		switch(reviewchoice) {
 		case 1:
-			/*
 			System.out.println("Which venue would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(venue)); 
 			String venuechoice = key.nextLine();
@@ -228,11 +238,9 @@ public class TheaterDriver {
 			System.out.println("Please enter any comments for the venue\n");
 			String review = key.nextLine();
 			Review venueReview = new Review(stars, review, testUser);
-			*/
-			User.createVenueReview(venue);
+
 			break;
 		case 2:
-			/*
 			System.out.println("Which show would you like to leave a review for?\n");
 			System.out.println(Arrays.asList(shows)); 
 			String showchoice = key.nextLine();
@@ -242,8 +250,7 @@ public class TheaterDriver {
 			System.out.println("Please enter any comments for the show\n");
 			String showreview = key.nextLine();
 			Review showReview = new Review(showstars, showreview, testUser);
-			break;*/
-			User.createShowReview(shows);
+			break;
 		default:
 			System.out.println("Please enter a proper choice");
 			break;
