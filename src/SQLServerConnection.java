@@ -199,16 +199,17 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 			}
 		}
 	
-	public static void addVenuereview() throws SQLException {
+	public static void addVenuereview(Venue venue) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into venuereview(review,rating,venue_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int venueid = keyboard.nextInt();
+		
+		int venueid = venue.getID();
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
+		keyboard.nextLine();
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, review);
 		ps.setInt(2, rating);
@@ -241,13 +242,12 @@ public static HashMap<Integer, Venue> venueHash() throws SQLException {
 	        System.out.println("");  //todo load into a hashmap
 	      }
 	}
-	public static void addmoviereview() throws SQLException {
+	public static void addmoviereview(Show show) throws SQLException {
 		Scanner keyboard = new Scanner(System.in);
 		String query = "insert into moviereview(review,rating,movie_id)" + "values (?,?,?)";
 		System.out.println("enter in your review");
 		String review = keyboard.nextLine();
-		System.out.println("enter in your venues id");
-		int movieid = keyboard.nextInt();
+		int movieid = show.getShowID();
 		keyboard.nextLine();
 		System.out.println("enter in your rating");
 		int rating = keyboard.nextInt();
