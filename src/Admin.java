@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Admin extends User {
 	private Venue venue;
 	
-	public Admin(Integer id, String name, String dateOfBirth, String email, String userName, String password, int age, Venue venue) {
-		super(id, name,dateOfBirth,email,userName,password,age);
+	public Admin(Integer id, String firstName, String lastName, String dateOfBirth, String email, String userName, String password, int age, Venue venue) {
+		super(id, firstName, lastName, dateOfBirth, email, userName, password, age);
 		this.venue = venue;
 	}
 	
@@ -89,7 +89,7 @@ public class Admin extends User {
 	}
 	
 	public String getName() {
-		return name;
+		return firstName + " " + lastName;
 	}
 }
 

@@ -89,7 +89,7 @@ public class Review {
 	}
 	
 	public String toString() {
-		return "Stars: " + stars + "\nReviewer: " + reviewer.getUserName() +"\nReview: " + review; 
+		return "Stars: " + stars + "\nReviewer: " + reviewer.getUsername() +"\nReview: " + review; 
 
 	}
 }
