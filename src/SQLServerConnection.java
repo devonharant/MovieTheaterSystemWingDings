@@ -68,7 +68,7 @@ public class SQLServerConnection  {
         while(rs.next()) {
                 Integer foodid = rs.getInt("foodid");
                 String name = rs.getString("name");
-                double price = rs.getDouble("price");
+                double price = rs.getDouble("cost");
                 Integer quantity = rs.getInt("quantity");
                 Integer venueid = rs.getInt("venueid");
                 f = new Food(foodid,name,price,quantity, venueid);
