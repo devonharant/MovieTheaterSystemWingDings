@@ -18,7 +18,7 @@ public class Theater {
 			this.seats = new boolean[rows][cols];
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < cols; j++) 
-					if(seats.charAt((i+1)*j)==('Y')) {
+					if(seats.charAt((i+1)*j)==('N')) {
 					this.seats[i][j]= false;
 					}
 					else
@@ -36,7 +36,7 @@ public class Theater {
 			this.seats = new boolean[rows][cols];
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < cols; j++) 
-					this.seats[i][j]= false;
+					this.seats[i][j]= true;
 			}
 			this.setTime(time);
 		}

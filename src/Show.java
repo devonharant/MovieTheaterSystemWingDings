@@ -229,31 +229,11 @@ public class Show {
 	public void printSeats(String time) {
 		for(Entry<Integer, Theater> t:theaters.entrySet()) {
 			if(time.contains(t.getValue().getTime())) {
-				boolean seats[][] = t.getValue().getSeats();
-				//preps the column to be a name space
-				System.out.print("  ");
-				//prints the row names
-				for(int i = 0; i < cols; i++ ) {
-					char c =  (char) (i+UNICODE_OFFSET);
-					System.out.print(c+" ");
-				}
-				//prints the seats as (O)pen or (x)occupied, prints the row label first.
-				System.out.println();
-				for(int i = 0; i < rows; i++) {
-					char c =  (char) (i+UNICODE_OFFSET);
-					System.out.print(c+ " ");
-					for (int j = 0; j < cols; j++) {
-						if(seats[i][j]==true)
-							System.out.print("O ");
-						else
-							System.out.print("X ");
-					}
-					System.out.println();
+				t.getValue().printSeats();
 				}
 			}
 		}
 		
-	}
 	
 	
 	

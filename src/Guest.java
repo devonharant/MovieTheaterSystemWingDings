@@ -32,10 +32,10 @@ public class Guest {
 						
 					}
 					else {
-						System.out.println("Please enter an avaliable show time");
-						System.out.println(show.showTimes());
-					}
-				}
+						//System.out.println("Please enter an avaliable show time");
+						//System.out.println(show.showTimes());
+					//}
+				//}
 			}
 			System.out.println("what seats would you like to reserve?");
 			show.printSeats(time);
