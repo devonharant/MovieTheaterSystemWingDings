@@ -55,9 +55,6 @@ public class SQLServerConnection  {
 	public static void start() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
-
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("would you like to truncate or print table press 1 to truncate 2 to print");
 		venueHash();
 	
 	}
@@ -68,7 +65,7 @@ public class SQLServerConnection  {
         while(rs.next()) {
                 Integer foodid = rs.getInt("foodid");
                 String name = rs.getString("name");
-                double price = rs.getDouble("price");
+                double price = rs.getDouble("cost");
                 Integer quantity = rs.getInt("quantity");
                 Integer venueid = rs.getInt("venueid");
                 f = new Food(foodid,name,price,quantity, venueid);

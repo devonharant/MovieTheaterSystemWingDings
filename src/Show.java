@@ -258,7 +258,7 @@ public class Show {
 	
 	
 	public String toStringShort() {
-		return "ID:" + venueid + "Name: " + name +  "\nTimes: " + showTimes() + " \n";
+		return "ID:" + venueid + "Name: " + name;
 	}
 	
 	public String toString() {

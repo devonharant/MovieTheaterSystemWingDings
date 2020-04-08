@@ -28,7 +28,12 @@ public class TheaterDriver {
 		users = SQLServerConnection.printuserhash();
 		foods = SQLServerConnection.foodhash();
 		theaters = SQLServerConnection.theaterHash();
+		for(Entry<Integer, Theater> t: theaters.entrySet()) {
+          System.out.println(  t.getValue().getTime());
+            t.getValue().printSeats();
+        }
 		run();
+		
 	}
 	
 	private static void run() throws SQLException {

@@ -28,13 +28,13 @@ public class Guest {
 					q = false;
 				}
 				else {
-					if(show.showTimes().contains(time.toUpperCase())){
+				//	if(show.showTimes().contains(time.toUpperCase())){
 						
-					}
-					else {
-						System.out.println("Please enter an avaliable show time");
-						System.out.println(show.showTimes());
-					}
+				//	}
+					//else {
+				//		System.out.println("Please enter an avaliable show time");
+				//		System.out.println(show.showTimes());
+					//}
 				}
 			}
 			System.out.println("what seats would you like to reserve?");
