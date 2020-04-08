@@ -18,35 +18,35 @@ import java.sql.*;
 public class SQLServerConnection  {
 
 
-	static Connection connection = null;
-	static String databaseName = "movietest";
-	static String url = "jdbc:mysql://localhost:3306/movietest";
-	static java.sql.Statement stmt;
-	static String username = "root";
-	static String password = "password";
-	static String thing = "select * from  user";
-	static String thing1 = "select * from  movie";
-	static String thing2 = "select * from  venue";
-	static String thing3 = "select * from  venuereview";
-	static String truncate = "truncate table user";
-	static String truncate2 = "truncate table venue";
-	static String truncate3 = "truncate table movie";
-	static String deleterow = "delete from user where email=?";//?denotes user input or a preparedstatement 
-	static String deletevenue = "delete from venue where name =?";
-	static String deletemovie = "delete from movie where name=?";
-	static String deletemoviereview = "delete from moviereview where Mreview_id=?";
-	static String venuejoins = " select venuereview.review, venuereview.rating, venue.name, from venuereview inner join venue on venuereview.venue_id=venue.venueid";//todo finish this stupid ass join test if works
-	static String sortasc = "select * from moviereview order by rating asc";
-	static String sortdsc = "select * from moviereview order by rating desc";
-	static String sortvenueasc = "select * from venuereview order by rating asc";
-	static String sortvenuedsc = "select * from venuereview order by rating desc";
-	static String newthing = "select * from venuereview where venue_id=?";
-	static String newthing2 = "select * from moviereview where movie_id=?";
-	static String thing4 = "select * from food";
-	static String thing5 = "select * from theater";
-	static String finduser="select * from user where User_Name=?";
-	static String findpassword = "select * from user where Password =?";
-	static Scanner keyboard;
+	private static Connection connection = null;
+	private static String databaseName = "movietest";
+	private static String url = "jdbc:mysql://localhost:3306/movietest";
+	private static java.sql.Statement stmt;
+	private static String username = "root";
+	private static String password = "password";
+	private static String thing = "select * from  user";
+	private static String thing1 = "select * from  movie";
+	private static String thing2 = "select * from  venue";
+	private static String thing3 = "select * from  venuereview";
+	private static String truncate = "truncate table user";
+	private static String truncate2 = "truncate table venue";
+	private static String truncate3 = "truncate table movie";
+	private static String deleterow = "delete from user where email=?";//?denotes user input or a preparedstatement 
+	private static String deletevenue = "delete from venue where name =?";
+	private static String deletemovie = "delete from movie where name=?";
+	private static String deletemoviereview = "delete from moviereview where Mreview_id=?";
+	private static String venuejoins = " select venuereview.review, venuereview.rating, venue.name, from venuereview inner join venue on venuereview.venue_id=venue.venueid";//todo finish this stupid ass join test if works
+	private static String sortasc = "select * from moviereview order by rating asc";
+	private static String sortdsc = "select * from moviereview order by rating desc";
+	private static String sortvenueasc = "select * from venuereview order by rating asc";
+	private static String sortvenuedsc = "select * from venuereview order by rating desc";
+	private static String newthing = "select * from venuereview where venue_id=?";
+	private static String newthing2 = "select * from moviereview where movie_id=?";
+	private static String thing4 = "select * from food";
+	private static String thing5 = "select * from theater";
+	private static String finduser="select * from user where User_Name=?";
+	private static String findpassword = "select * from user where Password =?";
+	private static Scanner keyboard;
 	 public static HashMap<Integer,User> map = new HashMap<Integer, User>();
 	 public static HashMap<Integer, Show> moviehash = new HashMap<Integer, Show>();
 	 public static HashMap<Integer, Venue> venuehash = new HashMap<Integer, Venue>();
