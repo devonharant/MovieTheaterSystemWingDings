@@ -169,8 +169,8 @@ public class Show {
 	public boolean reserveSeats(String time, String[] reservation) {
 		//retrieves the current seat reservation
 		for(Entry<Integer, Theater> t:theaters.entrySet()) {
-			if(time == t.getValue().getTime()) {
-				boolean seats[][] = theaters.get(time).getSeats();
+			if(time.contains(t.getValue().getTime())) {
+				boolean seats[][] = t.getValue().getSeats();
 				for(String string:reservation) {
 				//splits String of AA into r and c
 					char charR = string.charAt(0);
@@ -206,8 +206,8 @@ public class Show {
 	public void cancelSeatReservation(String time, String [] reservation) {
 		//retrieves the current seat reservations
 		for(Entry<Integer, Theater> t:theaters.entrySet()) {
-			if(time == t.getValue().getTime()) {
-				boolean seats[][] = theaters.get(time).getSeats();
+			if(time.contains(t.getValue().getTime())) {
+				boolean seats[][] = t.getValue().getSeats();
 				for(String string:reservation) {
 					//splits String of AA into r and c
 					char charR = string.charAt(0);
@@ -228,8 +228,8 @@ public class Show {
 	 */
 	public void printSeats(String time) {
 		for(Entry<Integer, Theater> t:theaters.entrySet()) {
-			if(time == t.getValue().getTime()) {
-				boolean seats[][] = theaters.get(time).getSeats();
+			if(time.contains(t.getValue().getTime())) {
+				boolean seats[][] = t.getValue().getSeats();
 				//preps the column to be a name space
 				System.out.print("  ");
 				//prints the row names

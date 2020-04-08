@@ -217,7 +217,7 @@ public class TheaterDriver {
 			System.out.println("Here are the available movies!\nSelect by ID a movie to see the venues and showtimes!");
 
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="cineplex") {
+				if(v.getValue().getType().contains("cineplex")) {
 					System.out.println(v.getValue().toString());
 					v.getValue().printShows();
 				}
@@ -231,7 +231,7 @@ public class TheaterDriver {
 		case 2:
 			System.out.println("Here are the available plays!\nSelect by ID a play to see the venues and showtimes!");
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="playhouse") {
+				if(v.getValue().getType().contains("playhouse")) {
 					System.out.println(v.getValue().toString());
 					v.getValue().printShows();
 				}
@@ -245,7 +245,7 @@ public class TheaterDriver {
 		case 3:
 			System.out.println("Here are the available concerts!\nSelect by ID a concert to see the venues and showtimes!");
 			for(Entry<Integer, Venue> v: venues.entrySet()) {
-				if(v.getValue().getType()=="concerthall") {
+				if(v.getValue().getType().contains("concerthall")) {
 					System.out.println(v.getValue().toString());
 					v.getValue().printShows();
 				}
