@@ -1,14 +1,12 @@
 package src;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import junit.framework.TestCase;
 
-public class CineplexTest {
+public class CineplexTest extends TestCase{
 	
 	Venue cineplex = new Cineplex("Test Plex", "USC");
 	
@@ -27,7 +25,9 @@ public class CineplexTest {
 	
 	@Test
 	public void testGetType() {
-		
+		String type = "Cineplex";
+		String produced = cineplex.getType();
+		assertEquals(type, produced);	
 	}
 	
 }

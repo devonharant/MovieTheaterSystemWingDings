@@ -7,8 +7,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import junit.framework.TestCase;
 
-class ConcertHallTest extends TestCase{
-	Venue concerthall = new ConcertHall("Concert Hall Test", "USC");
+public class DisabledTest extends TestCase{
+	
+	User testUser = new User();
+	UserDecorator disabletest = new Disabled(testUser);
+	
 	@BeforeEach
 	public void setUp() throws Exception {
 	}
@@ -23,9 +26,9 @@ class ConcertHallTest extends TestCase{
 	}
 	
 	@Test
-	public void testGetType() {
-		String type = "Concert Hall";
-		String produced = concerthall.getType();
-		assertEquals(type, produced);
+	public void testGetDiscount() {
+		double disc = 6;
+		double produced = disabletest.getDiscount();
+		assertEquals(disc, produced);
 	}
 }

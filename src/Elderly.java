@@ -1,9 +1,13 @@
 
 public class Elderly extends UserDecorator{
-	protected double discount;
+	
+	public Elderly(User user) {
+		this.user = user;
+	}
 	
 	public void addDiscount() {
-		
+		//for test purposes
+		discount = 8;
 	}
 	
 	public double getDiscount() {
