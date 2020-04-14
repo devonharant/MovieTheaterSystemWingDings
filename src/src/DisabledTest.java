@@ -31,4 +31,12 @@ public class DisabledTest extends TestCase{
 		double produced = disabletest.getDiscount();
 		assertEquals(disc, produced);
 	}
+	
+	@Test
+	public void testSetDiscount() {
+		double disc = 6;
+		disabletest.setDiscount(disc);
+		double produced = disabletest.getDiscount();
+		assertEquals(disc, produced);
+	}
 }

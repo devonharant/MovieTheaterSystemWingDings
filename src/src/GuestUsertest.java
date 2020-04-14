@@ -1,4 +1,4 @@
-package src.src;
+package src;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,5 +28,12 @@ public class GuestUsertest extends TestCase{
 		double testDiscount = testGuestUser.getDiscount();
 		double expected = 7.99;
 		assertEquals(testDiscount, expected);
+	}
+	
+	public void testSetDiscount() {
+		testGuestUser.setDiscount(5.99);
+		double test = testGuestUser.getDiscount();
+		double expected = 5.99;
+		assertEquals(test, expected);
 	}
 }

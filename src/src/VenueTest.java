@@ -1,4 +1,4 @@
-package src.src;
+package src;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,5 +16,23 @@ class VenueTest {
 		String nametest = "Place";
 		String produced = venue.getName();
 		assertEquals(nametest, produced);
+	}
+	
+	public void testGetID() {
+		Integer test = venue.getID();
+		Integer expected = 9;
+		assertEquals(test, expected);
+	}
+	
+	public void testGetType() {
+		String test = venue.getType();
+		String expected = "Concert Hall";
+		assertEquals(test, expected);
+	}
+	
+	public void testGetLocation() {
+		String test = venue.getLocation();
+		String expected = "Columbia";
+		assertEquals(test, expected);
 	}
 }

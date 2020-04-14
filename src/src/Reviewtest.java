@@ -1,4 +1,4 @@
-package src.src;
+package src;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,5 +27,12 @@ public class Reviewtest {
 		int testStars = testReview.getStars();
 		int expected = 5;
 		assertEquals(testStars, expected);
+	}
+	
+	public void testSetStars() {
+		testReview.setStars(4);
+		int test = testReview.getStars();
+		int expected = 4;
+		assertEquals(test, expected);
 	}
 }

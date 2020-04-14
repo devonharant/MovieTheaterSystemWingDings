@@ -31,4 +31,12 @@ class ElderlyTest extends TestCase{
 		double produced = elderlytest.getDiscount();
 		assertEquals(disc, produced);
 	}
+	
+	@Test
+	public void testSetDiscount() {
+		double disc = 6;
+		elderlytest.setDiscount(disc);
+		double produced = elderlytest.getDiscount();
+		assertEquals(disc, produced);
+	}
 }

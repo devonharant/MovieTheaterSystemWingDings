@@ -15,6 +15,6 @@ public class Elderly extends UserDecorator{
 	}
 	
 	public void setDiscount(double disc) {
-		
+		discount = disc;
 	}
 }

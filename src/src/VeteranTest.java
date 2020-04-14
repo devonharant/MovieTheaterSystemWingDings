@@ -1,4 +1,4 @@
-package src.src;
+package src;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,9 +11,17 @@ class VeteranTest extends TestCase{
 	void test() {
 		fail("Not yet implemented");
 	}
+	
 	public void testGetDiscount() {
 		double disc = 10;
 		double produced = veterantest.getDiscount();
 		assertEquals(disc, produced);
+	}
+	
+	public void testSetDiscount() {
+		veterantest.setDiscount(12);
+		double test = veterantest.getDiscount();
+		double expected = 12;
+		assertEquals(test, expected);
 	}
 }

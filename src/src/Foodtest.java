@@ -1,4 +1,4 @@
-package src.src;
+package src;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,5 +27,50 @@ public class Foodtest extends TestCase{
 		double testCost = testFood.getCost();
 		double expected = 20.99;
 		assertEquals(testCost, expected);
+	}
+	
+	public void getFoodID() {
+		int test = testFood.getFoodId();
+		int expected = 1;
+		assertEquals(test, expected);
+	}
+	
+	public void getVenueID() {
+		int test = testFood.getVenueId();
+		int expected = 1;
+		assertEquals(test, expected);
+	}
+	
+	public void testGetName() {
+		String test = testFood.getName();
+		String expected = "Test Food";
+		assertEquals(test, expected);
+	}
+	
+	public void testGetQuantity() {
+		int test = testFood.getQUantity();
+		int expected = 1;
+		assertEquals(test, expected);
+	}
+	
+	public void testSetName() {
+		testFood.setName("Food");
+		String test = testFood.getName();
+		String expected = "Food";
+		assertEquals(test, expected);
+	}
+	
+	public void testSetCost() {
+		testFood.setCost(15.99);
+		double test = testFood.getCost();
+		double expected = 15.99;
+		assertEquals(test, expected);
+	}
+	
+	public void testSetQuantity() {
+		testFood.setQuantity(2);
+		int test = testFood.getQuantity();
+		int expected = 2;
+		assertEquals(test, expected);
 	}
 }
